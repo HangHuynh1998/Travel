@@ -8,6 +8,7 @@ const TourSchema = new Schema({
     price: { type: Number, required: true },
     content: { type: String, required: true },
     image : { type: String, required: true },
+    contactInformation: { type: String },
     startDate: { type: Date },
     endDate: { type: Date },
     description: { type: String, required: true },
