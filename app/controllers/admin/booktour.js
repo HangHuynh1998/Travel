@@ -32,7 +32,6 @@ viewDetailBooktour = async (req, res) => {
   try {
     let { id } = req.params;
     let booktour = await Booktour.findById(id).exec();
-
     let _data = {
       titlePage: "Detail",
       moment: moment,
@@ -95,4 +94,5 @@ module.exports = {
   deleteBooktour,
   deleteBooktourRecords,
   updateBooktour
+
 };
