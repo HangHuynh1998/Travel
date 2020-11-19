@@ -3,7 +3,8 @@ const Schema = mongoose.Schema;
 
 const TourSchema = new Schema({
     company_id: { type: Schema.Types.ObjectId, ref: 'Companie', required: true },
-    category_id: { type: Schema.Types.ObjectId, ref: 'Categorie', required: true },
+    category_id: { type: Schema.Types.ObjectId, ref: 'Categorie', required: true }, 
+    place:{type:String,require:true},
     title: { type: String, required: true },
     price: { type: Number, required: true },
     content: { type: String, required: true },

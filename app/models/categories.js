@@ -13,14 +13,6 @@ const CategorySchema = new Schema(
 
 const dataMigrate = [
     {
-        name: "Trong nước",
-        description: "Du lịch trong nước"
-    },
-    {
-        name: "Nước ngoài",
-        description: "Du lịch nước ngoài"
-    },
-    {
       name: "Du lịch tham quan",
       description: "Tham quan di tích lịch sử, thắng cảnh"
     }, 
