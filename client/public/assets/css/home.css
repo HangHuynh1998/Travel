@@ -1,0 +1,119 @@
+
+.iw-search-form.iwj-form .iwj-field i{
+  font-size:13px;
+  top:0
+}
+.iw-search-form.iwj-form .field-item-submit{
+  float:right;
+  width:70px;
+  height:75px;
+  border-radius:5px;
+  -webkit-border-radius:5px;
+  position:relative
+}
+.iw-search-form.iwj-form .field-item-submit button{
+  position:absolute;
+  width:100%;
+  height:100%;
+  top:0;
+  left:0;
+  -webkit-box-shadow:0 3px 15px 0 rgba(0,0,0,0.25);
+  box-shadow:0 3px 15px 0 rgba(0,0,0,0.25);
+  -webkit-border-radius:5px;
+  border-radius:5px;
+  border:none;
+  color:#fff;
+  font-size:20px
+}
+.iw-contact-form-7.contact-map{
+  background:#fff;
+  padding:50px 50px 30px;
+  -webkit-border-radius:5px;
+  border-radius:5px;
+  -webkit-box-shadow:10px 10px 5px 0px rgba(0,0,0,0.75);
+  -moz-box-shadow:0 5px 25px rgba(41,128,185,.3);
+  box-shadow:0 5px 25px rgba(41,128,185,.3);
+  margin-left: 20px;
+  margin-top: 50px;
+  height: 700px;
+}
+.iw-contact-form-7.contact-map .title{
+  font-size:24px;
+  color:#333;
+  text-transform:uppercase;
+  text-align:center;
+  margin-bottom:30px
+}
+.iw-contact-form-7.contact-map .title h3{
+  font-weight:600
+}
+.iw-contact-form-7.contact-map .field{
+  border:1px solid #eee;
+  padding:15px 28px 20px;
+  margin-bottom:30px;
+  -webkit-border-radius:5px;
+  border-radius:5px
+}
+.iw-contact-form-7.contact-map .field label{
+  display:block;
+  font-size:11px;
+  font-weight:600;
+  text-transform:uppercase;
+  color:#2980b9
+}
+.iw-contact-form-7.contact-map .field .iw-input{
+  position:relative;
+  padding-left:40px
+}
+.iw-contact-form-7.contact-map .field i{
+  color:#2980b9;
+  font-size:16px;
+  position:absolute;
+  left:0;
+  top:5px
+}
+.iw-contact-form-7.contact-map input, .iw-contact-form-7.contact-map textarea{
+  border:none;
+  width:100%
+}
+.wpcf7-form-control-wrap input, .wpcf7-form-control-wrap textarea{
+  background-color: white;
+}
+.iw-contact-form-7.contact-map .submit-button{
+  text-align:center
+}
+.iw-contact-form-7.contact-map .submit-button .ajax-loader{
+  margin:0
+}
+.iw-contact-form-7.contact-map .submit-button input{
+  font-size:18px;
+  font-weight:600;
+  color:#fff;
+  text-transform:uppercase;
+  -webkit-border-radius:5px;
+  border-radius:5px;
+  padding:17px 25px
+}
+.iw-contact-form-7.contact-map .wpcf7-validation-errors{
+  background:red;
+  color:#fff;
+  border:none
+}
+h1, h2, h3, h4, h5, h6 {
+  font-family: Montserrat;
+}
+.mt-20{
+  margin-top: 20px;
+}
+.mt-20 p{
+  font-size: 20px;
+}
+.mt-20 strong{
+  font-size: 25px;
+}
+.shortcode-content h2{
+  font-size:45px;
+}
+.ml-30{
+  margin-left: 30px;
+}
