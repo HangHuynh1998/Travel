@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import NavBar from '../Component/NavBar';
 
-class BookTour extends Component {
+class AddReview extends Component {
     render() {
         return (
             <div>
@@ -17,60 +17,37 @@ class BookTour extends Component {
                 style={{ background: "white" }}
               >
                     <span className="login100-form-title p-b-43">
-                      Tên Tour
+                     Thêm đánh giá
                     </span>
                     <div className="form-group">
-                  <label>Họ tên</label>
+                  <label>Tên</label>
                   <input
                     type="text"
                     className="form-control"
                     id="name"
                     aria-describedby="name"
-                    placeholder="Nhập họ tên"
+                    placeholder="Nhập tên"
                     //onChange={(e) => this.handleChange(e)}
                   />
                 </div>
-                <div className="form-group">
-                  <label>Email</label>
-                  <input
-                    type="email"
-                    className="form-control"
-                    id="email"
-                    aria-describedby="email"
-                    placeholder="Email"
-                    //onChange={(e) => this.handleChange(e)}
-                  />
-                </div>
-                    <div className="form-group">
-                      <label>Địa chỉ </label>
+                <div class="form-group">
+                      <label for="exampleFormControlFile1" style = {{marginBottom:"5px"}}>
+                        Chọn hình ảnh
+                      </label>
                       <input
-                        type="text"
-                        className="form-control"
-                        id="address"
-                        aria-describedby="address"
-                        placeholder="Nhập địa chỉ"
-                        //onChange={(e) => this.handleChange(e)}
+                        type="file"
+                        class="form-control-file"
+                        id="exampleFormControlFile1"
                       />
                     </div>
                     <div className="form-group">
-                      <label>Điện thoại</label>
-                      <input
-                        type="text"
-                        className="form-control"
-                        id="phone"
-                        aria-describedby="phone"
-                        placeholder="Số điện thoại"
-                        //onChange={(e) => this.handleChange(e)}
-                      />
-                    </div>
-                    <div className="form-group">
-                      <label >Yêu cầu thêm</label>
+                      <label >Đánh giá</label>
                       <textarea
                         type="text"
                         className="form-control"
                         id="required"
                         aria-describedby="required"
-                        placeholder="Yêu cầu thêm"
+                        placeholder="Thêm đánh giá"
                         //onChange={(e) => this.handleChange(e)}
                       />
                     </div>
@@ -79,16 +56,16 @@ class BookTour extends Component {
                   style={{ marginTop: "40px" }}
                 >
                   <button type="button" className="login100-form-btn">
-                    Đăt tour
+                    Thêm đánh giá
                   </button>
                 </div>
               </form>
             </div>
           </div>
         </div>
-      </div>
+            </div>
         );
     }
 }
 
-export default BookTour;
+export default AddReview;

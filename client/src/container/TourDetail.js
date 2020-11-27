@@ -69,31 +69,44 @@ class TourDetail extends Component {
                 </div>
                 <div
                   className="container-login100-form-btn"
-                  style={{ display: "flex" }}
+                  style={{ display: "flex",marginTop:"10px" }}
                 >
                   <button
                     className="login100-form-btn"
-                    style={{ width: "150px", marginRight: "10px" }}
+                    style={{ width: "100px", marginRight: "20px" }}
                     type="button"
                   >
                     <NavLink
-                      to="/register?role = customer"
+                      to="/"
                       style={{ color: "white" }}
                     >
-                      Khách hàng
+                      Lưu
                     </NavLink>
                   </button>
                   <button
                     className="login100-form-btn"
-                    style={{ width: "150px" }}
+                    style={{ width: "100px", marginRight: "20px"}}
                     type="button"
                   >
                     {" "}
                     <NavLink
-                      to="/register?role = company"
+                      to="/booktour/1"
                       style={{ color: "white" }}
                     >
-                      Nhà cung cấp
+                      Đặt tour
+                    </NavLink>
+                    </button>
+                    <button
+                    className="login100-form-btn"
+                    style={{ width: "120px" }}
+                    type="button"
+                  >
+                    {" "}
+                    <NavLink
+                      to="/companyDetail/1"
+                      style={{ color: "white" }}
+                    >
+                      Xem Công ty
                     </NavLink>
                   </button>
                 </div>

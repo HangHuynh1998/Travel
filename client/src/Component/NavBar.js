@@ -2,6 +2,14 @@ import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 
 class NavBar extends Component {
+	constructor(){
+	  super()
+	  this.state={
+		  isCustomer:false,
+		  isCompany:false,
+		  isAuthenticated:true
+	  }
+	}
     render() {
         return (
             <div className="navbar-wrapper">
@@ -28,7 +36,21 @@ class NavBar extends Component {
 
 							<li><NavLink to ="/review">Đánh giá</NavLink></li>
 							<li><NavLink to = "/about">Giới thiệu</NavLink></li>
-							<li><NavLink to ="/login"> Đăng nhập</NavLink></li>
+							{this.state.isAuthenticated && <li><NavLink to = "/profile">Quản lý thông tin</NavLink></li>}
+							{!this.state.isCustomer &&<li><NavLink to = "/">
+								Đặt tour
+																
+								<i class="fa fa-shopping-cart" style = {{marginLeft:"2px"}}></i>
+							</NavLink></li>}
+							{this.state.isCompany &&<li><NavLink to = "/">
+								Quản lý tour
+							</NavLink></li>}
+							{this.state.isAuthenticated && <li><NavLink to = "/">
+								Thông báo
+								<i class="fa fa-circle" style = {{position:"absolute",top:"22px",color:"red",fontSize:"10px"}}></i>
+							</NavLink></li>}
+							
+							{!this.state.isAuthenticated ? <li><NavLink to ="/login"> Đăng nhập</NavLink></li>:<li><NavLink to = "/logOut">Đăng xuất</NavLink></li>}
 						</ul>
 					</nav>
 				</div>

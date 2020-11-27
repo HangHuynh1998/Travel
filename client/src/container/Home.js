@@ -69,7 +69,7 @@ class Home extends Component {
       },
       isShow: true,
       index: 0,
-      showdate:false
+      showdate: false,
     };
   }
   beforeChange = (current, next) => {
@@ -147,7 +147,10 @@ class Home extends Component {
                       </label>
                       <input type="text" id="destination" className="field-input" />
                     </div> */}
-                    <div className="form-field field-date" style = {{width:"40%"}}>
+                    <div
+                      className="form-field field-date"
+                      style={{ width: "40%" }}
+                    >
                       <input
                         type="text"
                         className="field-input hasDatepicker"
@@ -164,8 +167,11 @@ class Home extends Component {
                         id="number"
                       />
                     </div>
-                    <div className="form-field field-date" style = {{width:"16%"}}>
-                    <input
+                    <div
+                      className="form-field field-date"
+                      style={{ width: "16%" }}
+                    >
+                      <input
                         type="date"
                         className="field-input hasDatepicker"
                         placeholder="Ngày khởi hành"
@@ -173,7 +179,7 @@ class Home extends Component {
                       />
                     </div>
                     <div className="form-field field-date">
-                    <input
+                      <input
                         type="text"
                         className="field-input hasDatepicker"
                         placeholder="Số lượng người"
@@ -203,10 +209,12 @@ class Home extends Component {
             <div className="container">
               <div className="travel-title float-left">
                 <h2>
-                  Những tour được giảm giá: <span>Đà Nẵng, Ninh Bình, Phú Quốc, ...</span>
+                  Những tour được giảm giá:{" "}
+                  <span>Đà Nẵng, Ninh Bình, Phú Quốc, ...</span>
                 </h2>
               </div>
-              <NavLink to ="/travel?sale"
+              <NavLink
+                to="/travel?sale"
                 className="awe-btn awe-btn-5 awe-btn-lager arrow-right text-uppercase float-right"
               >
                 Xem tất cả
@@ -219,7 +227,7 @@ class Home extends Component {
             <div className="sales-cn">
               <div className="row">
                 {/* <!-- HostSales Item --> */}
-                <div className="col-xs-6 col-md-3">
+                <NavLink className="col-xs-6 col-md-3" to="/tourDetail/1">
                   <div className="sales-item">
                     <figure className="home-sales-img">
                       <a href="#void" title="">
@@ -256,10 +264,10 @@ class Home extends Component {
                       </div>
                     </div>
                   </div>
-                </div>
+                </NavLink>
                 {/* <!-- End HostSales Item -->
                         <!-- HostSales Item --> */}
-                <div className="col-xs-6 col-md-3">
+                <NavLink className="col-xs-6 col-md-3" to="/tourDetail/1">
                   <div className="sales-item">
                     <figure className="home-sales-img">
                       <a href="#void" title="">
@@ -298,10 +306,10 @@ class Home extends Component {
                       </div>
                     </div>
                   </div>
-                </div>
+                </NavLink>
                 {/* <!-- End HostSales Item -->
                         <!-- HostSales Item --> */}
-                <div className="col-md-6">
+                <NavLink className="col-md-6" to="/tourDetail/1">
                   <div className="sales-item ">
                     <figure className="home-sales-img">
                       <a href="#void" title="">
@@ -339,10 +347,10 @@ class Home extends Component {
                       </div>
                     </div>
                   </div>
-                </div>
+                </NavLink>
                 {/* <!-- End HostSales Item -->
                         <!-- HostSales Item --> */}
-                <div className="col-md-6">
+                <NavLink className="col-md-6" to="/tourDetail/1">
                   <div className="sales-item">
                     <figure className="home-sales-img">
                       <a href="#void" title="">
@@ -380,10 +388,10 @@ class Home extends Component {
                       </div>
                     </div>
                   </div>
-                </div>
+                </NavLink>
                 {/* <!-- End HostSales Item -->
                         <!-- HostSales Item --> */}
-                <div className="col-xs-6 col-md-3">
+                <NavLink className="col-xs-6 col-md-3" to="/tourDetail/1">
                   <div className="sales-item">
                     <figure className="home-sales-img">
                       <a href="#void" title="">
@@ -421,10 +429,10 @@ class Home extends Component {
                       </div>
                     </div>
                   </div>
-                </div>
+                </NavLink>
                 {/* <!-- End HostSales Item -->
                         <!-- HostSales Item --> */}
-                <div className="col-xs-6 col-md-3">
+                <NavLink className="col-xs-6 col-md-3" to="/tourDetail/1">
                   <div className="sales-item">
                     <figure className="home-sales-img">
                       <a href="#void" title="">
@@ -462,7 +470,7 @@ class Home extends Component {
                       </div>
                     </div>
                   </div>
-                </div>
+                </NavLink>
                 {/* <!-- End HostSales Item --> */}
               </div>
             </div>
@@ -505,7 +513,8 @@ class Home extends Component {
                     <ul className="filter">
                       <li className="active">
                         <a data-toggle="tab" href="#void">
-                          <i className="fa fa-map-marker"></i> Những gợi ý cho bạn
+                          <i className="fa fa-map-marker"></i> Những gợi ý cho
+                          bạn
                         </a>
                       </li>
                       <li>
@@ -514,29 +523,29 @@ class Home extends Component {
                         </NavLink>
                       </li>
                       <li>
-                      <NavLink to="/travel?cultural">
+                        <NavLink to="/travel?cultural">
                           <i className="fa fa-map-marker"></i> Du lịch văn hóa
                         </NavLink>
                       </li>
                       <li>
-                      <NavLink to="/travel?cuisine">
+                        <NavLink to="/travel?cuisine">
                           <i className="fa fa-map-marker"></i> Du lịch ẩm thực
-                       </NavLink>
+                        </NavLink>
                       </li>
                       <li>
-                      <NavLink to="/travel?green">
+                        <NavLink to="/travel?green">
                           <i className="fa fa-map-marker"></i> Du lịch xanh
-                          </NavLink>
+                        </NavLink>
                       </li>
                       <li>
-                      <NavLink to="/travel?mice">
+                        <NavLink to="/travel?mice">
                           <i className="fa fa-map-marker"></i> Du lịch MICE
-                       </NavLink>
+                        </NavLink>
                       </li>
                       <li>
-                      <NavLink to="/travel?building">
+                        <NavLink to="/travel?building">
                           <i className="fa fa-map-marker"></i> Team building
-                       </NavLink>
+                        </NavLink>
                       </li>
                     </ul>
                   </div>
@@ -551,7 +560,10 @@ class Home extends Component {
                       className="clearfix tab-pane fade active in "
                     >
                       {/* <!-- Destinations Item --> */}
-                      <div className="col-xs-6 col-sm-4 col-md-6 col-lg-4">
+                      <NavLink
+                        className="col-xs-6 col-sm-4 col-md-6 col-lg-4"
+                        to="/tourDetail/1"
+                      >
                         <div className="destinations-item ">
                           <div className="destinations-text">
                             <div className="destinations-name">
@@ -569,10 +581,13 @@ class Home extends Component {
                             </a>
                           </figure>
                         </div>
-                      </div>
+                      </NavLink>
                       {/* <!-- End Destinations Item -->
                                     <!-- Destinations Item --> */}
-                      <div className="col-xs-6 col-sm-4 col-md-6 col-lg-4">
+                      <NavLink
+                        className="col-xs-6 col-sm-4 col-md-6 col-lg-4"
+                        to="/tourDetail/1"
+                      >
                         <div className="destinations-item">
                           <div className="destinations-text">
                             <div className="destinations-name">
@@ -580,7 +595,9 @@ class Home extends Component {
                                 Paris - France
                               </a>
                             </div>
-                            <span className="properties-nb">239 properties</span>
+                            <span className="properties-nb">
+                              239 properties
+                            </span>
                           </div>
                           <figure className="destinations-img">
                             <a href="#void" title="">
@@ -588,10 +605,13 @@ class Home extends Component {
                             </a>
                           </figure>
                         </div>
-                      </div>
+                      </NavLink>
                       {/* <!-- End Destinations Item -->
                                     <!-- Destinations Item --> */}
-                      <div className="col-xs-6 col-sm-4 col-md-6 col-lg-4">
+                      <NavLink
+                        className="col-xs-6 col-sm-4 col-md-6 col-lg-4"
+                        to="/tourDetail/1"
+                      >
                         <div className="destinations-item">
                           <div className="destinations-text">
                             <div className="destinations-name">
@@ -599,7 +619,9 @@ class Home extends Component {
                                 Rome - Italy
                               </a>
                             </div>
-                            <span className="properties-nb">478 properties</span>
+                            <span className="properties-nb">
+                              478 properties
+                            </span>
                           </div>
                           <figure className="destinations-img">
                             <a href="#void" title="">
@@ -610,10 +632,13 @@ class Home extends Component {
                             </a>
                           </figure>
                         </div>
-                      </div>
+                      </NavLink>
                       {/* <!-- End Destinations Item -->
                                     <!-- Destinations Item --> */}
-                      <div className="col-xs-6 col-sm-4 col-md-6 col-lg-4">
+                      <NavLink
+                        className="col-xs-6 col-sm-4 col-md-6 col-lg-4"
+                        to="/tourDetail/1"
+                      >
                         <div className="destinations-item">
                           <div className="destinations-text">
                             <div className="destinations-name">
@@ -621,7 +646,9 @@ class Home extends Component {
                                 Barcelona - Spain
                               </a>
                             </div>
-                            <span className="properties-nb">452 properties</span>
+                            <span className="properties-nb">
+                              452 properties
+                            </span>
                           </div>
                           <figure className="destinations-img">
                             <a href="#void" title="">
@@ -632,10 +659,13 @@ class Home extends Component {
                             </a>
                           </figure>
                         </div>
-                      </div>
+                      </NavLink>
                       {/* <!-- End Destinations Item -->
                                     <!-- Destinations Item --> */}
-                      <div className="col-xs-6 col-sm-4 col-md-6 col-lg-4">
+                      <NavLink
+                        className="col-xs-6 col-sm-4 col-md-6 col-lg-4"
+                        to="/tourDetail/1"
+                      >
                         <div className="destinations-item">
                           <div className="destinations-text">
                             <div className="destinations-name">
@@ -643,7 +673,9 @@ class Home extends Component {
                                 Madrid - Spain
                               </a>
                             </div>
-                            <span className="properties-nb">794 properties</span>
+                            <span className="properties-nb">
+                              794 properties
+                            </span>
                           </div>
                           <figure className="destinations-img">
                             <a href="#void" title="">
@@ -654,10 +686,13 @@ class Home extends Component {
                             </a>
                           </figure>
                         </div>
-                      </div>
+                      </NavLink>
                       {/* <!-- End Destinations Item -->
                                     <!-- Destinations Item --> */}
-                      <div className="col-xs-6 col-sm-4 col-md-6 col-lg-4">
+                      <NavLink
+                        className="col-xs-6 col-sm-4 col-md-6 col-lg-4"
+                        to="/tourDetail/1"
+                      >
                         <div className="destinations-item">
                           <div className="destinations-text">
                             <div className="destinations-name">
@@ -665,7 +700,9 @@ class Home extends Component {
                                 Vienna - Austria
                               </a>
                             </div>
-                            <span className="properties-nb">1289 properties</span>
+                            <span className="properties-nb">
+                              1289 properties
+                            </span>
                           </div>
                           <figure className="destinations-img">
                             <a href="#void" title="">
@@ -673,14 +710,17 @@ class Home extends Component {
                             </a>
                           </figure>
                         </div>
-                      </div>
+                      </NavLink>
                       {/* <!-- End Destinations Item --> */}
                     </div>
                     {/* <!-- End Tab One -->
                                 <!-- Tab Two --> */}
                     <div id="destinations-2" className="clearfix tab-pane fade">
                       {/* <!-- Destinations Item --> */}
-                      <div className="col-xs-6 col-sm-4 col-md-6 col-lg-4">
+                      <NavLink
+                        className="col-xs-6 col-sm-4 col-md-6 col-lg-4"
+                        to="/tourDetail/1"
+                      >
                         <div className="destinations-item ">
                           <div className="destinations-text">
                             <div className="destinations-name">
@@ -701,10 +741,13 @@ class Home extends Component {
                             </a>
                           </figure>
                         </div>
-                      </div>
+                      </NavLink>
                       {/* <!-- End Destinations Item -->
                                     <!-- Destinations Item --> */}
-                      <div className="col-xs-6 col-sm-4 col-md-6 col-lg-4">
+                      <NavLink
+                        className="col-xs-6 col-sm-4 col-md-6 col-lg-4"
+                        to="/tourDetail/1"
+                      >
                         <div className="destinations-item">
                           <div className="destinations-text">
                             <div className="destinations-name">
@@ -712,7 +755,9 @@ class Home extends Component {
                                 Paris - France
                               </a>
                             </div>
-                            <span className="properties-nb">239 properties</span>
+                            <span className="properties-nb">
+                              239 properties
+                            </span>
                           </div>
                           <figure className="destinations-img">
                             <a href="#void" title="">
@@ -720,10 +765,13 @@ class Home extends Component {
                             </a>
                           </figure>
                         </div>
-                      </div>
+                      </NavLink>
                       {/* <!-- End Destinations Item -->
                                     <!-- Destinations Item --> */}
-                      <div className="col-xs-6 col-sm-4 col-md-6 col-lg-4">
+                      <NavLink
+                        className="col-xs-6 col-sm-4 col-md-6 col-lg-4"
+                        to="/tourDetail/1"
+                      >
                         <div className="destinations-item">
                           <div className="destinations-text">
                             <div className="destinations-name">
@@ -731,7 +779,9 @@ class Home extends Component {
                                 Rome - Italy
                               </a>
                             </div>
-                            <span className="properties-nb">478 properties</span>
+                            <span className="properties-nb">
+                              478 properties
+                            </span>
                           </div>
                           <figure className="destinations-img">
                             <a href="#void" title="">
@@ -739,10 +789,13 @@ class Home extends Component {
                             </a>
                           </figure>
                         </div>
-                      </div>
+                      </NavLink>
                       {/* <!-- End Destinations Item -->
                                     <!-- Destinations Item --> */}
-                      <div className="col-xs-6 col-sm-4 col-md-6 col-lg-4">
+                      <NavLink
+                        className="col-xs-6 col-sm-4 col-md-6 col-lg-4"
+                        to="/tourDetail/1"
+                      >
                         <div className="destinations-item">
                           <div className="destinations-text">
                             <div className="destinations-name">
@@ -750,7 +803,9 @@ class Home extends Component {
                                 Barcelona - Spain
                               </a>
                             </div>
-                            <span className="properties-nb">452 properties</span>
+                            <span className="properties-nb">
+                              452 properties
+                            </span>
                           </div>
                           <figure className="destinations-img">
                             <a href="#void" title="">
@@ -761,10 +816,13 @@ class Home extends Component {
                             </a>
                           </figure>
                         </div>
-                      </div>
+                      </NavLink>
                       {/* <!-- End Destinations Item -->
                                     <!-- Destinations Item --> */}
-                      <div className="col-xs-6 col-sm-4 col-md-6 col-lg-4">
+                      <NavLink
+                        className="col-xs-6 col-sm-4 col-md-6 col-lg-4"
+                        to="/tourDetail/1"
+                      >
                         <div className="destinations-item">
                           <div className="destinations-text">
                             <div className="destinations-name">
@@ -772,7 +830,9 @@ class Home extends Component {
                                 Madrid - Spain
                               </a>
                             </div>
-                            <span className="properties-nb">794 properties</span>
+                            <span className="properties-nb">
+                              794 properties
+                            </span>
                           </div>
                           <figure className="destinations-img">
                             <a href="#void" title="">
@@ -783,10 +843,13 @@ class Home extends Component {
                             </a>
                           </figure>
                         </div>
-                      </div>
+                      </NavLink>
                       {/* <!-- End Destinations Item -->
                                     <!-- Destinations Item --> */}
-                      <div className="col-xs-6 col-sm-4 col-md-6 col-lg-4">
+                      <NavLink
+                        className="col-xs-6 col-sm-4 col-md-6 col-lg-4"
+                        to="/tourDetail/1"
+                      >
                         <div className="destinations-item">
                           <div className="destinations-text">
                             <div className="destinations-name">
@@ -794,7 +857,9 @@ class Home extends Component {
                                 Vienna - Austria
                               </a>
                             </div>
-                            <span className="properties-nb">1289 properties</span>
+                            <span className="properties-nb">
+                              1289 properties
+                            </span>
                           </div>
                           <figure className="destinations-img">
                             <a href="#void" title="">
@@ -802,7 +867,7 @@ class Home extends Component {
                             </a>
                           </figure>
                         </div>
-                      </div>
+                      </NavLink>
                       {/* <!-- End Destinations Item --> */}
                     </div>
                     {/* <!-- End Tab Two --> */}
@@ -823,7 +888,8 @@ class Home extends Component {
               <div className="travel-title float-left">
                 <h2>Những đánh giá</h2>
               </div>
-              <NavLink to = "/review"
+              <NavLink
+                to="/review"
                 className="awe-btn awe-btn-5 arrow-right awe-btn-lager text-uppercase float-right"
               >
                 Xem tất cả
@@ -915,7 +981,6 @@ class Home extends Component {
                               </div>
                             </div>
                           </div>
-                          
                         </div>
                       </div>
                     </div>
@@ -923,59 +988,70 @@ class Home extends Component {
                 </div>
                 {/* <!-- End Magazine Descript -->
                         <!-- Magazine Thumnail --> */}
-                <div className="col-lg-6" style = {{marginBottom:"10px"}}>
+                <div className="col-lg-6" style={{ marginBottom: "10px" }}>
                   <div className="magazine-thum" id="magazine-thum">
                     {/* <!--Thumnail Item--> */}
-                    <div className="thumnail-item clearfix">
-                      <figure className="float-left">
-                        <img src="assets/images/travel.jpg" alt="" />
-                      </figure>
-                      <div className="thumnail-text">
-                        <h4>
-                          Thailand by Train with Eastern and Oriental Express
-                        </h4>
-                        <span>03.5.2014</span>
+                    <NavLink to="/tourDetail/1">
+                      <div className="thumnail-item clearfix">
+                        <figure className="float-left">
+                          <img src="assets/images/travel.jpg" alt="" />
+                        </figure>
+                        <div className="thumnail-text">
+                          <h4>
+                            Thailand by Train with Eastern and Oriental Express
+                          </h4>
+                          <span>03.5.2014</span>
+                        </div>
                       </div>
-                    </div>
+                    </NavLink>
                     {/* <!--End Thumnail Item-->
                                 <!--Thumnail Item--> */}
-                    <div className="thumnail-item clearfix">
-                      <figure className="float-left">
-                        <img src="assets/images/traveldalat.jpg" alt="" />
-                      </figure>
-                      <div className="thumnail-text">
-                        <h4>
-                          Thailand by Train with Eastern and Oriental Express
-                        </h4>
-                        <span>03.5.2014</span>
+
+                    <NavLink to="/tourDetail/1">
+                      <div className="thumnail-item clearfix">
+                        <figure className="float-left">
+                          <img src="assets/images/traveldalat.jpg" alt="" />
+                        </figure>
+                        <div className="thumnail-text">
+                          <h4>
+                            Thailand by Train with Eastern and Oriental Express
+                          </h4>
+                          <span>03.5.2014</span>
+                        </div>
                       </div>
-                    </div>
+                    </NavLink>
                     {/* <!--End Thumnail Item-->
                                 <!--Thumnail Item--> */}
-                    <div className="thumnail-item clearfix">
-                      <figure className="float-left">
-                        <img src="assets/images/travel5.jpg" alt="" />
-                      </figure>
-                      <div className="thumnail-text">
-                        <h4>
-                          Thailand by Train with Eastern and Oriental Express
-                        </h4>
-                        <span>03.5.2014</span>
+                    <NavLink to="/tourDetail/1">
+                      <div className="thumnail-item clearfix">
+                        <figure className="float-left">
+                          <img src="assets/images/travel5.jpg" alt="" />
+                        </figure>
+                        <div className="thumnail-text">
+                          <h4>
+                            Thailand by Train with Eastern and Oriental Express
+                          </h4>
+                          <span>03.5.2014</span>
+                        </div>
                       </div>
-                    </div>
+                    </NavLink>
+
                     {/* <!--End Thumnail Item-->
                                 <!--Thumnail Item--> */}
-                    <div className="thumnail-item clearfix">
-                      <figure className="float-left">
-                        <img src="assets/images/travelhalong.jpg" alt="" />
-                      </figure>
-                      <div className="thumnail-text">
-                        <h4>
-                          Thailand by Train with Eastern and Oriental Express
-                        </h4>
-                        <span>03.5.2014</span>
+                    <NavLink to="/tourDetail/1">
+                      <div className="thumnail-item clearfix">
+                        <figure className="float-left">
+                          <img src="assets/images/travelhalong.jpg" alt="" />
+                        </figure>
+                        <div className="thumnail-text">
+                          <h4>
+                            Thailand by Train with Eastern and Oriental Express
+                          </h4>
+                          <span>03.5.2014</span>
+                        </div>
                       </div>
-                    </div>
+                    </NavLink>
+
                     {/* <!--End Thumnail Item--> */}
                   </div>
                 </div>
@@ -985,88 +1061,193 @@ class Home extends Component {
           </div>
           {/* <!-- End Magazine Content --> */}
         </section>
-         {/* <!-- End Travel Magazine --> */}
-         {/* <!-- Footer --> */}
+        {/* <!-- End Travel Magazine --> */}
+        {/* <!-- Footer --> */}
         <footer>
-            <div className="container" style = {{marginTop:"20px"}}>
-                <div className="row">
-                    {/* <!-- Logo --> */}
-                    <div className="col-md-4">
-                        <div className="logo-foter">
-                        <a href="#" className="navbar-brand" style= {{float:"none"}}><img style ={{maxHeight:"70px"}} alt="Travel!" src="assets/images/logo.png"/><span>&nbsp; Travel!</span></a>
-                        </div>
-                    </div>
-                    {/* <!-- End Logo -->
-                    <!-- Navigation Footer --> */}
-                    <div className="col-xs-6 col-sm-3 col-md-2">
-                        <div className="ul-ft">
-                            <ul>
-                                <li><a href="#void" title="">About</a></li>
-                                <li><a href="#void" title="">Blog</a></li>
-                                <li><a href="#void" title="">FQA</a></li>
-                                <li><a href="#void" title="">Carrers</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    {/* <!-- End Navigation Footer -->
-                    <!-- Navigation Footer --> */}
-                    <div className="col-xs-6 col-sm-3 col-md-2">
-                        <div className="ul-ft">
-                            <ul>
-                                <li><a href="#void" title="">Contact Us</a></li>
-                                <li><a href="#void" title="">Privacy Policy</a></li>
-                                <li><a href="#void" title="">Term of Service</a></li>
-                                <li><a href="#void" title="">Security</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    {/* <!-- End Navigation Footer -->
-                    <!-- Footer Currency, Language --> */}
-                    <div className="col-sm-6 col-md-4">
-                        {/* <!-- Language --> */}
-                        <div className="currency-lang-bottom dropdown-cn float-left">
-                            <div className="dropdown-head">English
-                                <span className="angle-down"><i className="fa fa-angle-down"></i></span>
-                            </div>
-                            <div className="dropdown-body">
-                                <ul>
-                                    <li className="current"><a href="#void" title="">English</a></li>
-                                    <li><a href="#void" title="">Bahasa Melayu</a></li>
-                                    <li><a href="#void" title="">Català</a></li>
-                                    <li><a href="#void" title="">Dansk</a></li>
-                                    <li><a href="#void" title="">Deutsch</a></li>
-                                    <li><a href="#void" title="">Francais</a></li>
-                                    <li><a href="#void" title="">Italiano</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        {/* <!-- End Language -->
-                        <!-- Currency --> */}
-                        <div className="currency-lang-bottom dropdown-cn float-left">
-                            <div className="dropdown-head">US
-                                <span className="angle-down"><i className="fa fa-angle-down"></i></span>
-                            </div>
-                            <div className="dropdown-body">
-                                <ul>
-                                    <li className="current"><a href="#void" title="">US</a></li>
-                                    <li><a href="#void" title="">ARS</a></li>
-                                    <li><a href="#void" title="">ADU</a></li>
-                                    <li><a href="#void" title="">CAD</a></li>
-                                    <li><a href="#void" title="">CHF</a></li>
-                                    <li><a href="#void" title="">CNY</a></li>
-                                    <li><a href="#void" title="">CZK</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        {/* <!-- End Currency -->
-                        <!--CopyRight--> */}
-                       
-                        {/* <!--CopyRight--> */}
-                    </div>
-                    {/* <!-- End Footer Currency, Language --> */}
+          <div className="container" style={{ marginTop: "20px" }}>
+            <div className="row">
+              {/* <!-- Logo --> */}
+              <div className="col-md-4">
+                <div className="logo-foter">
+                  <a
+                    href="#"
+                    className="navbar-brand"
+                    style={{ float: "none" }}
+                  >
+                    <img
+                      style={{ maxHeight: "70px" }}
+                      alt="Travel!"
+                      src="assets/images/logo.png"
+                    />
+                    <span>&nbsp; Travel!</span>
+                  </a>
                 </div>
+              </div>
+              {/* <!-- End Logo -->
+                    <!-- Navigation Footer --> */}
+              <div className="col-xs-6 col-sm-3 col-md-2">
+                <div className="ul-ft">
+                  <ul>
+                    <li>
+                      <a href="#void" title="">
+                        About
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#void" title="">
+                        Blog
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#void" title="">
+                        FQA
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#void" title="">
+                        Carrers
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              {/* <!-- End Navigation Footer -->
+                    <!-- Navigation Footer --> */}
+              <div className="col-xs-6 col-sm-3 col-md-2">
+                <div className="ul-ft">
+                  <ul>
+                    <li>
+                      <a href="#void" title="">
+                        Contact Us
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#void" title="">
+                        Privacy Policy
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#void" title="">
+                        Term of Service
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#void" title="">
+                        Security
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              {/* <!-- End Navigation Footer -->
+                    <!-- Footer Currency, Language --> */}
+              <div className="col-sm-6 col-md-4">
+                {/* <!-- Language --> */}
+                <div className="currency-lang-bottom dropdown-cn float-left">
+                  <div className="dropdown-head">
+                    English
+                    <span className="angle-down">
+                      <i className="fa fa-angle-down"></i>
+                    </span>
+                  </div>
+                  <div className="dropdown-body">
+                    <ul>
+                      <li className="current">
+                        <a href="#void" title="">
+                          English
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#void" title="">
+                          Bahasa Melayu
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#void" title="">
+                          Català
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#void" title="">
+                          Dansk
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#void" title="">
+                          Deutsch
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#void" title="">
+                          Francais
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#void" title="">
+                          Italiano
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                {/* <!-- End Language -->
+                        <!-- Currency --> */}
+                <div className="currency-lang-bottom dropdown-cn float-left">
+                  <div className="dropdown-head">
+                    US
+                    <span className="angle-down">
+                      <i className="fa fa-angle-down"></i>
+                    </span>
+                  </div>
+                  <div className="dropdown-body">
+                    <ul>
+                      <li className="current">
+                        <a href="#void" title="">
+                          US
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#void" title="">
+                          ARS
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#void" title="">
+                          ADU
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#void" title="">
+                          CAD
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#void" title="">
+                          CHF
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#void" title="">
+                          CNY
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#void" title="">
+                          CZK
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                {/* <!-- End Currency -->
+                        <!--CopyRight--> */}
+
+                {/* <!--CopyRight--> */}
+              </div>
+              {/* <!-- End Footer Currency, Language --> */}
             </div>
-        </footer>       
+          </div>
+        </footer>
       </div>
     );
   }

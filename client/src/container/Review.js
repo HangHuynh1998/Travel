@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import NavBar from '../Component/NavBar';
+import { NavLink } from 'react-router-dom';
 
 class Review extends Component {
     render() {
@@ -8,14 +9,13 @@ class Review extends Component {
                 <NavBar />
                 <div style = {{height:"70px",marginTop:"100px"}}>
                 <div className="container" style = {{position:"fixed",zIndex:"100"}}>
-              <a
-                href="#void"
-                title=""
+              <NavLink
                 className="awe-btn awe-btn-5 arrow-right awe-btn-lager text-uppercase float-right"
                 style = {{backgroundColor:"#25ab4b",color:"#ffffff"}}
+                to = "/addReview"
               >
-               Add Review
-              </a>
+                 Thêm đánh giá
+              </NavLink>
             </div>
                 </div>
                 

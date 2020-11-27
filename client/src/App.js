@@ -13,9 +13,9 @@ import Travel from './container/Travel';
 import AddTour from './container/AddTour';
 import TourDetail from './container/TourDetail';
 import CompanyDetail from './container/CompanyDetail';
-import CustomerProfile from './container/CustomerProfile';
-import CompanyProfile from './container/CompanyProfile';
 import LogOut from './container/LogOut';
+import AddReview from './container/AddReview';
+import Profile from './container/Profile'
 function NotFound() {
   return (
       <div>
@@ -36,17 +36,18 @@ function App() {
         <Route path="/companyDetail/:company_id" component={CompanyDetail}/>
         <Route path="/login" component={Login}/>
         <Route path="/register" component={Register}/>
+        <Route path="/booktour/:tour_id" component={BookTour} />
+        <Route path="/profile" component={Profile}/>
+        <Route path="/addtour" component={AddTour} />
+        <Route path ="/addReview" component={AddReview}/>
+        <Route path="/logout" component = {LogOut}/>
         <Route component={NotFound}/>
       </Switch>
   )
   // if(this.props.isAuthenticated){
   let routeslogin = (
       <Switch>
-        <Route path="/booktour" component={BookTour} />
-        <Route path="/customerProfile/:customer_id" component={CustomerProfile}/>
-        <Route path="/addtour" component={AddTour} />
-        <Route path="/companyProfile/:company_id" component={CompanyProfile}/>
-        <Route path="/logout" component = {LogOut}/>
+       
       </Switch>
     );
   // }
