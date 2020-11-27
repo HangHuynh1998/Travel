@@ -9,7 +9,6 @@ const BookTourSchema = new Schema({
     numberOf:{ type: Number, required: true,default: 0 },
     isHotel:{ type: Boolean, required: true },
     requirement: { type: String},
-    // cv: { type: String, required: true },
 }, {
         timestamps: true,
     })

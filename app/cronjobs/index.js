@@ -1,4 +1,4 @@
 module.exports = [
-    require('./backup.tour'),
-    require('./checkTours'),
+    require('./backup.job'),
+    require('./checkJobs'),
 ]

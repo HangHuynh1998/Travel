@@ -1,4 +1,4 @@
-const Job = require('../models/jobs');
+const Tour = require('../models/tour');
 const Company = require('../models/companies');
 const moment = require('moment');
 

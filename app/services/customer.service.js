@@ -1,223 +1,223 @@
-const Customer = require("../models/customer");
-const Booktour = require("../models/booktour");
-const Company = require("../models/companies");
-const User = require("../models/users");
-const customer = require("../models/customer");
+    const Customer = require("../models/customer");
+    const Booktour = require("../models/booktour");
+    const Company = require("../models/companies");
+    const User = require("../models/users");
+    const customer = require("../models/customer");
 
-const getCustomer = (key, value) => {
-    let query = {};
-    if (key == "user_id") {
-        query = { user_id: value }
-    } else {
-        query = { _id: value }
+    const getCustomer = (key, value) => {
+        let query = {};
+        if (key == "user_id") {
+            query = { user_id: value }
+        } else {
+            query = { _id: value }
+        }
+        return new Promise((resolve, reject) => {
+            customer.findOne(query)
+                .populate("user_id", "-password")
+                .then(doc => {
+                    if (doc == null) throw new Error("Customer not found");
+                    resolve(doc);
+                })
+                .catch(err => {
+                    reject(err);
+                })
+        })
     }
-    return new Promise((resolve, reject) => {
-        customer.findOne(query)
-            .populate("user_id", "-password")
-            .then(doc => {
-                if (doc == null) throw new Error("Customer not found");
-                resolve(doc);
-            })
-            .catch(err => {
-                reject(err);
-            })
-    })
-}
 
-const getAllCustomer = ()=>{
-    return new Promise((resolve, reject) => {
-        Customer.find()
-            .populate({
-                path: "user_id",
-                model: "User",
-            })
-            .then(doc => {
-                if (doc == null) throw new Error("Customer not found !");
-                resolve(doc);
-            })
-            .catch(err => {
-                reject(err);
-            })
-    })
-}
+    const getAllCustomer = ()=>{
+        return new Promise((resolve, reject) => {
+            Customer.find()
+                .populate({
+                    path: "user_id",
+                    model: "User",
+                })
+                .then(doc => {
+                    if (doc == null) throw new Error("Customer not found !");
+                    resolve(doc);
+                })
+                .catch(err => {
+                    reject(err);
+                })
+        })
+    }
 
 
-const getAppliedTour = (id) => {
-    return new Promise((resolve, reject) => {
-        Customer.findById(id, "applied_tours -_id")
-            .populate({
-                path: "applied_tours",
-                model: "Job",
-                populate: [
-                    {
-                        path: "company_id",
-                        model: "Companie",
-                        populate: {
-                            path: "user_id",
-                            model: "User",
-                            select: "-password"
+    const getAppliedTour = (id) => {
+        return new Promise((resolve, reject) => {
+            Customer.findById(id, "applied_tours -_id")
+                .populate({
+                    path: "applied_tours",
+                    model: "Job",
+                    populate: [
+                        {
+                            path: "company_id",
+                            model: "Companie",
+                            populate: {
+                                path: "user_id",
+                                model: "User",
+                                select: "-password"
+                            }
                         }
-                    }
-                ],
-            })
-            .then(doc => {
-                if (doc == null) throw new Error("Customer not found !");
-                resolve(doc);
-            })
-            .catch(err => {
-                reject(err);
-            })
-    })
-}
+                    ],
+                })
+                .then(doc => {
+                    if (doc == null) throw new Error("Customer not found !");
+                    resolve(doc);
+                })
+                .catch(err => {
+                    reject(err);
+                })
+        })
+    }
 
-// SAVED JOBS
+    // SAVED JOBS
 
-const getAllSavedTours = (id) => {
-    return new Promise((resolve, reject) => {
-        Customer.findById(id, "saved_tours -_id")
+    const getAllSavedTours = (id) => {
+        return new Promise((resolve, reject) => {
+            Customer.findById(id, "saved_tours -_id")
 
-            .populate({
-                path: "saved_tours",
-                model: "Tour",
-                populate: [
-                    {
-                        path: "company_id",
-                        model: "Companie",
-                        populate: {
-                            path: "user_id",
-                            model: "User",
-                            select: "-password"
+                .populate({
+                    path: "saved_tours",
+                    model: "Tour",
+                    populate: [
+                        {
+                            path: "company_id",
+                            model: "Companie",
+                            populate: {
+                                path: "user_id",
+                                model: "User",
+                                select: "-password"
+                            }
                         }
-                    }
-                ],
-            })
-            .then(doc => {
-                if (doc == null) throw new Error("Customer not found !");
-                resolve(doc.saved_jobs);
-            })
-            .catch(err => {
-                reject(err);
-            })
-    })
-}
+                    ],
+                })
+                .then(doc => {
+                    if (doc == null) throw new Error("Customer not found !");
+                    resolve(doc.saved_jobs);
+                })
+                .catch(err => {
+                    reject(err);
+                })
+        })
+    }
 
-const toggleSavedTour = (id, job_id) => {
-    return new Promise((resolve, reject) => {
-        Customer.findById(id)
-            .then(doc => {
-                if (doc == null) throw new Error("Customer not found !");
-                let i = doc.saved_jobs.indexOf(job_id);
-                if (i != -1) {
-                    doc.saved_jobs.splice(i, 1);
-                } else {
-                    doc.saved_jobs.push(job_id)
-                }
-                doc.save(err => {
-                    if (err) {
-                        reject(err);
+    const toggleSavedTour = (id, job_id) => {
+        return new Promise((resolve, reject) => {
+            Customer.findById(id)
+                .then(doc => {
+                    if (doc == null) throw new Error("Customer not found !");
+                    let i = doc.saved_jobs.indexOf(job_id);
+                    if (i != -1) {
+                        doc.saved_jobs.splice(i, 1);
                     } else {
-                        resolve(doc.saved_jobs);
+                        doc.saved_jobs.push(job_id)
                     }
-                });
-            })
-            .catch(err => {
-                reject(err);
-            })
-    })
-}
+                    doc.save(err => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(doc.saved_jobs);
+                        }
+                    });
+                })
+                .catch(err => {
+                    reject(err);
+                })
+        })
+    }
 
-const getCustomerApplications = (id) => {
-    return new Promise((resolve, reject) => {
-        Booktour.find({ customer_id: id })
-            .populate({
-                path: "tour_id",
-                model: "Tour",
-                populate: [
-                    {
-                        path: "company_id",
-                        model: "Companie",
-                        populate: {
+    const getCustomerApplications = (id) => {
+        return new Promise((resolve, reject) => {
+            Booktour.find({ customer_id: id })
+                .populate({
+                    path: "tour_id",
+                    model: "Tour",
+                    populate: [
+                        {
+                            path: "company_id",
+                            model: "Companie",
+                            populate: {
+                                path: "user_id",
+                                model: "User",
+                                select: "-password"
+                            }
+                        }
+                    ],
+                })
+                .then(doc => {
+                    if (doc == null) throw new Error("Customer not found !");
+                    resolve(doc);
+                })
+                .catch(err => {
+                    reject(err);
+                })
+        })
+    }
+
+    //Follow company
+    const getFollowedCompany = (id) => {
+        return new Promise((resolve, reject) => {
+            Jobseeker.findById(id, "followed_companies -_id")
+                .populate({
+                    path: "followed_companies",
+                    model: "Companie",
+                    populate: [
+                        {
                             path: "user_id",
                             model: "User",
                             select: "-password"
                         }
-                    }
-                ],
-            })
-            .then(doc => {
-                if (doc == null) throw new Error("Customer not found !");
-                resolve(doc);
-            })
-            .catch(err => {
-                reject(err);
-            })
-    })
-}
+                    ],
+                })
+                .then(doc => {
+                    if (doc == null) throw new Error("Jobseeker not found !");
+                    resolve(doc.followed_companies);
+                })
+                .catch(err => {
+                    reject(err);
+                })
+        })
+    }
 
-//Follow company
-const getFollowedCompany = (id) => {
-    return new Promise((resolve, reject) => {
-        Jobseeker.findById(id, "followed_companies -_id")
-            .populate({
-                path: "followed_companies",
-                model: "Companie",
-                populate: [
-                    {
-                        path: "user_id",
-                        model: "User",
-                        select: "-password"
-                    }
-                ],
-            })
-            .then(doc => {
-                if (doc == null) throw new Error("Jobseeker not found !");
-                resolve(doc.followed_companies);
-            })
-            .catch(err => {
-                reject(err);
-            })
-    })
-}
-
-const toggleFollowCompany = (id, company_id) => {
-    return new Promise((resolve, reject) => {
-        Jobseeker.findById(id)
-            .then(async doc => {
-                if (doc == null) throw new Error("Company not found !");
-                let i = doc.followed_companies.indexOf(company_id);
-                let company = await Company.findById(company_id);
-                if (i != -1) {
-                    doc.followed_companies.splice(i, 1);
-                    
-                    company.numberFollow--;
-                    
-                } else {
-                    doc.followed_companies.push(company_id)
-                    company.numberFollow++;
-                }
-                await company.save();
-                doc.save(err => {
-                    if (err) {
-                        reject(err);
+    const toggleFollowCompany = (id, company_id) => {
+        return new Promise((resolve, reject) => {
+            Jobseeker.findById(id)
+                .then(async doc => {
+                    if (doc == null) throw new Error("Company not found !");
+                    let i = doc.followed_companies.indexOf(company_id);
+                    let company = await Company.findById(company_id);
+                    if (i != -1) {
+                        doc.followed_companies.splice(i, 1);
+                        
+                        company.numberFollow--;
+                        
                     } else {
-                        resolve(doc.followed_companies);
+                        doc.followed_companies.push(company_id)
+                        company.numberFollow++;
                     }
-                });
-            })
-            .catch(err => {
-                reject(err);
-            })
-    })
-}
+                    await company.save();
+                    doc.save(err => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(doc.followed_companies);
+                        }
+                    });
+                })
+                .catch(err => {
+                    reject(err);
+                })
+        })
+    }
 
-module.exports = {
-    getCustomer,
-    getAllCustomer,
-    getAppliedTour,
-    getAllSavedTours,
-    toggleSavedTour,
-    // APPLICATIONS
-    getCustomerApplications,
-    getFollowedCompany,
-    toggleFollowCompany
-}
+    module.exports = {
+        getCustomer,
+        getAllCustomer,
+        getAppliedTour,
+        getAllSavedTours,
+        toggleSavedTour,
+        // APPLICATIONS
+        getCustomerApplications,
+        getFollowedCompany,
+        toggleFollowCompany
+    }

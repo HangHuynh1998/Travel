@@ -14,8 +14,8 @@ const UserSchema = new Schema({
     phone: { type: Number,default:0},
     birthday: { type: Date },
     address: { type: String ,default:""},
-    longitude: { type: Number },
-    latitude: { type: Number },
+    // longitude: { type: Number },kinh do
+    // latitude: { type: Number },vi do
     avatar: { type: String },
     background: { type: String },
     description: { type: String },

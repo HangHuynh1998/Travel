@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const Booktour = mongoose.model("Booktour");
+const Booktour = mongoose.model("BookTour");
 const Tour = mongoose.model("Tour");
 mongoose.Promise = global.Promise;
 const moment = require("moment");

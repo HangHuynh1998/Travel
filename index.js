@@ -3,12 +3,12 @@
 require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
-//const config = require('./config');
+const config = require('./config');
 const app = express();
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
 const cors = require('cors');
-//const jobs = require("./app/cronjobs")
+// const jobs = require("./app/cronjobs")  
 // const MONGOOSE_DB_URL = 'mongodb://root:root123@ds145486.mlab.com:45486/danangjobs';
 const MONGOOSE_DB_URL = process.env.MONGOOSE_DB_URL;
 const port = process.env.PORT || 3001;
@@ -18,15 +18,15 @@ app.use(cors());
 app.engine('ejs', require('express-ejs-extend'));
 
 // Boostrap models
-//require(config.PATH_MODELS).map(modelName => `${config.PATH_MODELS}/${modelName}`).forEach(require);
+require(config.PATH_MODELS).map(modelName => `${config.PATH_MODELS}/${modelName}`).forEach(require);
 
 // Boostrap routes
-//require("./config/express")(app);
+require("./config/express")(app);
 
 const listen = () => new Promise((resolve, reject) => {
     http.listen(port, () => {
         console.log(`App is listening on port: ${port}`);
-        // jobs().start();
+         //tour().start();
         resolve();
     });
 })
@@ -48,7 +48,7 @@ const connect = () => new Promise((resolve, reject) => {
 // const runJobs = () => {
 //     return new Promise((resolve, reject) => {
 //         try {
-//             jobs.map(job => job().start())
+//             jobs.map(job => jobs().start())
 //             resolve(jobs)
 //         } catch (err) {
 //             reject(err)

@@ -1,90 +1,144 @@
 import React, { Component } from "react";
 import NavBar from "../Component/NavBar";
-
+import { connect } from "react-redux";
+import { NavLink } from "react-router-dom";
+import * as actions from "../store/actions/index";
 class Login extends Component {
+  constructor() {
+    super();
+    this.state = {
+      email: "",
+      password: "",
+    };
+  }
+  handleChange(e) {
+    e.preventDefault();
+    this.setState({
+      [e.target.id]: e.target.value,
+    });
+  }
+  handleSubmit(e) {
+    e.preventDefault();
+    console.log("hahah");
+    //this.props.onAuth(this.state.email,this.state.password)
+  }
   render() {
     return (
       <div>
         <NavBar />
-        <div class="limiter">
-          <div class="container-login100">
-            <div class="wrap-login100">
-              <form class="login100-form validate-form">
-                <span class="login100-form-title p-b-43">
+        <div className="limiter">
+          <div className="container-login100">
+            <div className="wrap-login100">
+              <form className="login100-form validate-form">
+                <span className="login100-form-title p-b-43">
                   Login to continue
                 </span>
-                <div
-                  class="wrap-input100 validate-input"
-                  data-validate="Valid email is required: ex@abc.xyz"
-                >
-                  <input class="input100" type="text" name="email" />
-                  <span class="focus-input100"></span>
-                  <span class="label-input100">Email</span>
+                <div className="form-group">
+                  <label>Email address</label>
+                  <input
+                    type="email"
+                    className="form-control"
+                    id="email"
+                    aria-describedby="email"
+                    placeholder="Enter email"
+                    onChange={(e) => this.handleChange(e)}
+                  />
                 </div>
-                <div
-                  class="wrap-input100 validate-input"
-                  data-validate="Password is required"
-                >
-                  <input class="input100" type="password" name="pass" />
-                  <span class="focus-input100"></span>
-                  <span class="label-input100">Password</span>
+                <div className="form-group">
+                  <label>Password</label>
+                  <input
+                    type="password"
+                    className="form-control"
+                    id="password"
+                    placeholder="Password"
+                    onChange={(e) => this.handleChange(e)}
+                  />
                 </div>
-                <div class="flex-sb-m w-full p-t-3 p-b-32">
-                  <div class="contact100-form-checkbox">
+                <div className="flex-sb-m w-full p-t-3 p-b-32">
+                  <div className="contact100-form-checkbox">
                     <input
-                      class="input-checkbox100"
+                      className="input-checkbox100"
                       id="ckb1"
                       type="checkbox"
                       name="remember-me"
                     />
-                    <label class="label-checkbox100" for="ckb1">
-                      Remember me
-                    </label>
+                    <label className="label-checkbox100">Remember me</label>
                   </div>
                   <div>
-                    <a
-                      href="https://colorlib.com/etc/lf/Login_v18/index.html#"
-                      class="txt1"
-                    >
+                    <a href="#void" className="txt1">
                       Forgot Password?
                     </a>
                   </div>
                 </div>
-                <div class="container-login100-form-btn">
-                  <button class="login100-form-btn">Login</button>
-                </div>
-                <div class="text-center p-t-46 p-b-20">
-                  <span class="txt2">or sign up using</span>
-                </div>
-                <div class="login100-form-social flex-c-m">
-                  <a
-                    href="https://colorlib.com/etc/lf/Login_v18/index.html#"
-                    class="login100-form-social-item flex-c-m bg1 m-r-5"
+                <div className="container-login100-form-btn">
+                  <button
+                    type="button"
+                    className="login100-form-btn"
+                    onClick={this.handleSubmit}
                   >
-                    <i class="fa fa-facebook-f" aria-hidden="true"></i>
+                    Login
+                  </button>
+                </div>
+                <div className="text-center p-t-46 p-b-20">
+                  <span className="txt2">or sign up using</span>
+                </div>
+                <div className="login100-form-social flex-c-m">
+                  <a
+                    href="#void"
+                    className="login100-form-social-item flex-c-m bg1 m-r-5"
+                  >
+                    <i className="fa fa-facebook-f" aria-hidden="true"></i>
                   </a>
                   <a
-                    href="https://colorlib.com/etc/lf/Login_v18/index.html#"
-                    class="login100-form-social-item flex-c-m bg2 m-r-5"
+                    href="#void"
+                    className="login100-form-social-item flex-c-m bg2 m-r-5"
                   >
-                    <i class="fa fa-twitter" aria-hidden="true"></i>
+                    <i className="fa fa-google" aria-hidden="true"></i>
                   </a>
                 </div>
-                <div >
-                <span class="login100-form-title p-b-43" style = {{marginTop:"20px"}}>
-                  Sign In
-                </span>
+                <div>
+                  <span
+                    className="login100-form-title p-b-43"
+                    style={{ marginTop: "20px" }}
+                  >
+                    Sign In
+                  </span>
                 </div>
-                <div class="container-login100-form-btn" style = {{display:"flex"}}>
-                  <button class="login100-form-btn" style = {{width:"150px",marginRight:"10px"}}>Khách hàng</button>
-                   <button class="login100-form-btn" style = {{width:"150px"}}>Nhà cung cấp</button>
+                <div
+                  className="container-login100-form-btn"
+                  style={{ display: "flex" }}
+                >
+                  <button
+                    className="login100-form-btn"
+                    style={{ width: "150px", marginRight: "10px" }}
+                    type="button"
+                  >
+                    <NavLink
+                      to="/register?role = customer"
+                      style={{ color: "white" }}
+                    >
+                      Khách hàng
+                    </NavLink>
+                  </button>
+                  <button
+                    className="login100-form-btn"
+                    style={{ width: "150px" }}
+                    type="button"
+                  >
+                    {" "}
+                    <NavLink
+                      to="/register?role = company"
+                      style={{ color: "white" }}
+                    >
+                      Nhà cung cấp
+                    </NavLink>
+                  </button>
                 </div>
               </form>
               <div
-                class="login100-more"
-                style={{backgroundImage: `url('assets/images/travel5.jpg')`}}
+                className="login100-more"
+                style={{ backgroundImage: `url('assets/images/login.jpg')` }}
               ></div>
-              
             </div>
           </div>
         </div>
@@ -93,4 +147,21 @@ class Login extends Component {
   }
 }
 
-export default Login;
+// const mapStateProps = (state) => {
+//   return {
+//     loading: state.auth.loading,
+//     error: state.auth.error,
+//     isAuthenticated: state.auth.token !== null,
+//     // buildingBurger: state.burgerBuilder.building,
+//     // authRedirectPath: state.auth.authRedirectPath,
+//   };
+// };
+// const mapDispatchToProps = (dispatch) => {
+//   return {
+//     onAuth: (email, password) =>
+//     dispatch(actions.auth(email, password)),
+//     //onSetAuthRedirectPath: () => dispatch(actions.setAuthRedirectPath("/")),
+//   };
+// };
+//export default connect(mapStateProps, mapDispatchToProps)(Login);
+export default (Login);

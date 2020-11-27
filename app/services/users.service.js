@@ -1,5 +1,5 @@
 const { User, validatePass } = require("../models/users");
-const jobseekerService= require("./seekers.service");
+const customerService= require("./customer.service");
 const companyService= require("./company.service");
 const Customer = require("../models/customer");
 const Companie = require("../models/companies");

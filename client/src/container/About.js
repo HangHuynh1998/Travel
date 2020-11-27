@@ -24,9 +24,9 @@ class About extends Component {
           </div>
         </Modal>
         <div className="wrapper">
-          <div class="container" style={{ marginTop: "120px" }}>
-            <div class="row justify-content-center">
-              <div class="col-sm-6">
+          <div className="container" style={{ marginTop: "120px" }}>
+            <div className="row justify-content-center">
+              <div className="col-sm-6">
                 <div className="contents-main" id="contents-main">
                   <div className="container">
                     <div className="row">
@@ -93,7 +93,7 @@ class About extends Component {
                   </div>
                 </div>
               </div>
-              <div class="col-sm-6">
+              <div className="col-sm-6">
                 <div className="form-wrapper iw-contact-form-7 contact-map">
                   <div className="title">
                     <h3>GỬI LIÊN HỆ</h3>

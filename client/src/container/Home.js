@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import NavBar from "../Component/NavBar";
 import SliderSlick from "react-slick";
+import { NavLink } from "react-router-dom";
 class Home extends Component {
   constructor() {
     super();
@@ -68,6 +69,7 @@ class Home extends Component {
       },
       isShow: true,
       index: 0,
+      showdate:false
     };
   }
   beforeChange = (current, next) => {
@@ -86,7 +88,7 @@ class Home extends Component {
     return (
       <div>
         <NavBar />
-        <section class="banner" style={{ marginTop: "72px" }}>
+        <section className="banner" style={{ marginTop: "72px" }}>
           <div className="bg-parallax">
             <div className="">
               <SliderSlick
@@ -115,12 +117,12 @@ class Home extends Component {
             </div>
           </div>
 
-          <div class="container" style={{ marginTop: "inherit" }}>
-            <div class="banner-cn">
-              <div class="tab-content">
+          <div className="container" style={{ marginTop: "inherit" }}>
+            <div className="banner-cn">
+              <div className="tab-content">
                 {/* 
                         <!-- Search Hotel --> */}
-                <div class="form-cn form-hotel tab-pane active in">
+                <div className="form-cn form-hotel tab-pane active in">
                   <div className="content-text">
                     {this.state.index === 0 ? (
                       <h2>Where would you like to go?</h2>
@@ -138,45 +140,50 @@ class Home extends Component {
                     )}
                   </div>
 
-                  <div class="form-search clearfix">
-                    <div class="form-field field-destination">
-                      <label for="destination">
-                        <span>Điểm đến:</span> Country, City, Airport, Area,
-                        Landmark
+                  <div className="form-search clearfix">
+                    {/* <div className="form-field field-destination">
+                      <label>
+                        <span>Điểm đến:</span> 
                       </label>
-                      <input type="text" id="destination" class="field-input" />
-                    </div>
-                    <div class="form-field field-date">
+                      <input type="text" id="destination" className="field-input" />
+                    </div> */}
+                    <div className="form-field field-date" style = {{width:"40%"}}>
                       <input
                         type="text"
-                        class="field-input hasDatepicker"
-                        placeholder="Check in"
-                        id="check-in"
+                        className="field-input hasDatepicker"
+                        placeholder="Điểm đến: Huế, Đà Nẵng, Hà Nội, Đà Lạt,
+                        Sapa,..."
+                        id="number"
                       />
                     </div>
-                    <div class="form-field field-date">
+                    <div className="form-field field-date">
                       <input
                         type="text"
-                        class="field-input hasDatepicker"
-                        placeholder="Check out"
-                        id="check-out"
+                        className="field-input hasDatepicker"
+                        placeholder="Số ngày du lịch"
+                        id="number"
                       />
                     </div>
-                    <div class="form-field field-select">
-                      <div class="select">
-                        <span>Guest</span>
-                        <select>
-                          <option>Guest</option>
-                          <option>1 Guest</option>
-                          <option>2 Guest</option>
-                          <option>3 Guest</option>
-                        </select>
-                      </div>
+                    <div className="form-field field-date" style = {{width:"16%"}}>
+                    <input
+                        type="date"
+                        className="field-input hasDatepicker"
+                        placeholder="Ngày khởi hành"
+                        id="date-start"
+                      />
                     </div>
-                    <div class="form-submit">
+                    <div className="form-field field-date">
+                    <input
+                        type="text"
+                        className="field-input hasDatepicker"
+                        placeholder="Số lượng người"
+                        id="peoplenumber"
+                      />
+                    </div>
+                    <div className="form-submit">
                       <button
                         type="submit"
-                        class="awe-btn awe-btn-lager awe-search"
+                        className="awe-btn awe-btn-lager awe-search"
                       >
                         Search
                       </button>
@@ -190,33 +197,31 @@ class Home extends Component {
           </div>
         </section>
         {/* <!-- Sales --> */}
-        <section class="sales">
+        <section className="sales">
           {/* <!-- Title --> */}
-          <div class="title-wrap">
-            <div class="container">
-              <div class="travel-title float-left">
+          <div className="title-wrap">
+            <div className="container">
+              <div className="travel-title float-left">
                 <h2>
-                  Hot Sale Today: <span>Đà Nẵng, Ninh Bình, Phú Quốc, ...</span>
+                  Những tour được giảm giá: <span>Đà Nẵng, Ninh Bình, Phú Quốc, ...</span>
                 </h2>
               </div>
-              <a
-                href="#void"
-                title=""
-                class="awe-btn awe-btn-5 awe-btn-lager arrow-right text-uppercase float-right"
+              <NavLink to ="/travel?sale"
+                className="awe-btn awe-btn-5 awe-btn-lager arrow-right text-uppercase float-right"
               >
-                ALL SALES
-              </a>
+                Xem tất cả
+              </NavLink>
             </div>
           </div>
           {/* <!-- End Title -->
             <!-- Hot Sales Content --> */}
-          <div class="container">
-            <div class="sales-cn">
-              <div class="row">
+          <div className="container">
+            <div className="sales-cn">
+              <div className="row">
                 {/* <!-- HostSales Item --> */}
-                <div class="col-xs-6 col-md-3">
-                  <div class="sales-item">
-                    <figure class="home-sales-img">
+                <div className="col-xs-6 col-md-3">
+                  <div className="sales-item">
+                    <figure className="home-sales-img">
                       <a href="#void" title="">
                         <img src="assets/images/traveldalat2.jpg" alt="" />
                       </a>
@@ -224,14 +229,14 @@ class Home extends Component {
                         Save <span>30</span>%
                       </figcaption>
                     </figure>
-                    <div class="home-sales-text">
-                      <div class="home-sales-name-places">
-                        <div class="home-sales-name">
+                    <div className="home-sales-text">
+                      <div className="home-sales-name-places">
+                        <div className="home-sales-name">
                           <a href="#void" title="">
                             Copley Square Hotel
                           </a>
                         </div>
-                        <div class="home-sales-places">
+                        <div className="home-sales-places">
                           <a href="#void" title="">
                             Boston
                           </a>
@@ -240,12 +245,12 @@ class Home extends Component {
                           </a>
                         </div>
                       </div>
-                      <hr class="hr" />
-                      <div class="price-box">
-                        <span class="price old-price">
+                      <hr className="hr" />
+                      <div className="price-box">
+                        <span className="price old-price">
                           From <del>$269</del>
                         </span>
-                        <span class="price special-price">
+                        <span className="price special-price">
                           $175<small>/night</small>
                         </span>
                       </div>
@@ -254,9 +259,9 @@ class Home extends Component {
                 </div>
                 {/* <!-- End HostSales Item -->
                         <!-- HostSales Item --> */}
-                <div class="col-xs-6 col-md-3">
-                  <div class="sales-item">
-                    <figure class="home-sales-img">
+                <div className="col-xs-6 col-md-3">
+                  <div className="sales-item">
+                    <figure className="home-sales-img">
                       <a href="#void" title="">
                         <img src="assets/images/travelsapa.jpg" alt="" />
                       </a>
@@ -265,14 +270,14 @@ class Home extends Component {
                       </figcaption>
                     </figure>
 
-                    <div class="home-sales-text">
-                      <div class="home-sales-name-places">
-                        <div class="home-sales-name">
+                    <div className="home-sales-text">
+                      <div className="home-sales-name-places">
+                        <div className="home-sales-name">
                           <a href="#void" title="">
                             Grand Hotel Bagni Nuovi
                           </a>
                         </div>
-                        <div class="home-sales-places">
+                        <div className="home-sales-places">
                           <a href="#void" title="">
                             Boston
                           </a>
@@ -282,12 +287,12 @@ class Home extends Component {
                           </a>
                         </div>
                       </div>
-                      <hr class="hr" />
-                      <div class="price-box">
-                        <span class="price old-price">
+                      <hr className="hr" />
+                      <div className="price-box">
+                        <span className="price old-price">
                           From <del>$632</del>
                         </span>
-                        <span class="price special-price">
+                        <span className="price special-price">
                           $345<small>/night</small>
                         </span>
                       </div>
@@ -296,9 +301,9 @@ class Home extends Component {
                 </div>
                 {/* <!-- End HostSales Item -->
                         <!-- HostSales Item --> */}
-                <div class="col-md-6">
-                  <div class="sales-item ">
-                    <figure class="home-sales-img">
+                <div className="col-md-6">
+                  <div className="sales-item ">
+                    <figure className="home-sales-img">
                       <a href="#void" title="">
                         <img src="assets/images/traveldalat.jpg" alt="" />
                       </a>
@@ -306,14 +311,14 @@ class Home extends Component {
                         Save <span>30</span>%
                       </figcaption>
                     </figure>
-                    <div class="home-sales-text">
-                      <div class="home-sales-name-places">
-                        <div class="home-sales-name">
+                    <div className="home-sales-text">
+                      <div className="home-sales-name-places">
+                        <div className="home-sales-name">
                           <a href="#void" title="">
                             The Standard, East Village
                           </a>
                         </div>
-                        <div class="home-sales-places">
+                        <div className="home-sales-places">
                           <a href="#void" title="">
                             New York
                           </a>
@@ -323,12 +328,12 @@ class Home extends Component {
                           </a>
                         </div>
                       </div>
-                      <hr class="hr" />
-                      <div class="price-box">
-                        <span class="price old-price">
+                      <hr className="hr" />
+                      <div className="price-box">
+                        <span className="price old-price">
                           From <del>$582</del>
                         </span>
-                        <span class="price special-price">
+                        <span className="price special-price">
                           $258<small>/night</small>
                         </span>
                       </div>
@@ -337,9 +342,9 @@ class Home extends Component {
                 </div>
                 {/* <!-- End HostSales Item -->
                         <!-- HostSales Item --> */}
-                <div class="col-md-6">
-                  <div class="sales-item">
-                    <figure class="home-sales-img">
+                <div className="col-md-6">
+                  <div className="sales-item">
+                    <figure className="home-sales-img">
                       <a href="#void" title="">
                         <img src="assets/images/travelSonDoong.jpg" alt="" />
                       </a>
@@ -347,14 +352,14 @@ class Home extends Component {
                         Save <span>30</span>%
                       </figcaption>
                     </figure>
-                    <div class="home-sales-text">
-                      <div class="home-sales-name-places">
-                        <div class="home-sales-name">
+                    <div className="home-sales-text">
+                      <div className="home-sales-name-places">
+                        <div className="home-sales-name">
                           <a href="#void" title="">
                             Ganges River Cruise
                           </a>
                         </div>
-                        <div class="home-sales-places">
+                        <div className="home-sales-places">
                           <a href="#void" title="">
                             London
                           </a>
@@ -364,12 +369,12 @@ class Home extends Component {
                           </a>
                         </div>
                       </div>
-                      <hr class="hr" />
-                      <div class="price-box">
-                        <span class="price old-price">
+                      <hr className="hr" />
+                      <div className="price-box">
+                        <span className="price old-price">
                           From <del>$457</del>
                         </span>
-                        <span class="price special-price">
+                        <span className="price special-price">
                           $258<small>/night</small>
                         </span>
                       </div>
@@ -378,9 +383,9 @@ class Home extends Component {
                 </div>
                 {/* <!-- End HostSales Item -->
                         <!-- HostSales Item --> */}
-                <div class="col-xs-6 col-md-3">
-                  <div class="sales-item">
-                    <figure class="home-sales-img">
+                <div className="col-xs-6 col-md-3">
+                  <div className="sales-item">
+                    <figure className="home-sales-img">
                       <a href="#void" title="">
                         <img src="assets/images/travelHue.jpg" alt="" />
                       </a>
@@ -388,14 +393,14 @@ class Home extends Component {
                         Save <span>30</span>%
                       </figcaption>
                     </figure>
-                    <div class="home-sales-text">
-                      <div class="home-sales-name-places">
-                        <div class="home-sales-name">
+                    <div className="home-sales-text">
+                      <div className="home-sales-name-places">
+                        <div className="home-sales-name">
                           <a href="#void" title="">
                             Town Hall Hotel
                           </a>
                         </div>
-                        <div class="home-sales-places">
+                        <div className="home-sales-places">
                           <a href="#void" title="">
                             Boston
                           </a>
@@ -405,12 +410,12 @@ class Home extends Component {
                           </a>
                         </div>
                       </div>
-                      <hr class="hr" />
-                      <div class="price-box">
-                        <span class="price old-price">
+                      <hr className="hr" />
+                      <div className="price-box">
+                        <span className="price old-price">
                           From <del>$269</del>
                         </span>
-                        <span class="price special-price">
+                        <span className="price special-price">
                           $175<small>/night</small>
                         </span>
                       </div>
@@ -419,9 +424,9 @@ class Home extends Component {
                 </div>
                 {/* <!-- End HostSales Item -->
                         <!-- HostSales Item --> */}
-                <div class="col-xs-6 col-md-3">
-                  <div class="sales-item">
-                    <figure class="home-sales-img">
+                <div className="col-xs-6 col-md-3">
+                  <div className="sales-item">
+                    <figure className="home-sales-img">
                       <a href="#void" title="">
                         <img src="assets/images/TravelDanang.jpg" alt="" />
                       </a>
@@ -429,14 +434,14 @@ class Home extends Component {
                         Save <span>30</span>%
                       </figcaption>
                     </figure>
-                    <div class="home-sales-text">
-                      <div class="home-sales-name-places">
-                        <div class="home-sales-name">
+                    <div className="home-sales-text">
+                      <div className="home-sales-name-places">
+                        <div className="home-sales-name">
                           <a href="#void" title="">
                             A Hidden NYC Mystery Hotel
                           </a>
                         </div>
-                        <div class="home-sales-places">
+                        <div className="home-sales-places">
                           <a href="#void" title="">
                             Boston
                           </a>
@@ -446,12 +451,12 @@ class Home extends Component {
                           </a>
                         </div>
                       </div>
-                      <hr class="hr" />
-                      <div class="price-box">
-                        <span class="price old-price">
+                      <hr className="hr" />
+                      <div className="price-box">
+                        <span className="price old-price">
                           From <del>$354</del>
                         </span>
-                        <span class="price special-price">
+                        <span className="price special-price">
                           $255<small>/night</small>
                         </span>
                       </div>
@@ -465,97 +470,100 @@ class Home extends Component {
           {/* <!-- End Hot Sales Content --> */}
         </section>
         {/* <!-- Travel Destinations --> */}
-        <section class="destinations">
+        <section className="destinations">
           {/* <!-- Title --> */}
-          <div class="title-wrap">
-            <div class="container">
-              <div class="travel-title float-left">
-                <h2>Top Travel Destinations</h2>
+          <div className="title-wrap">
+            <div className="container">
+              <div className="travel-title float-left">
+                <h2>Những tour được yêu thích</h2>
               </div>
               <a
                 href="#void"
                 title=""
-                class="awe-btn awe-btn-5 arrow-right awe-btn-lager text-uppercase float-right"
+                className="awe-btn awe-btn-5 arrow-right awe-btn-lager text-uppercase float-right"
               >
-                view all
+                Xem tất cả
               </a>
             </div>
           </div>
           {/* <!-- End Title -->
 
             <!-- Destinations Content --> */}
-          <div class="destinations-cn">
+          <div className="destinations-cn">
             {/* <!-- Background --> */}
             <div
-              class="bg-parallax bg-2"
+              className="bg-parallax bg-2"
               style={{ backgroundPosition: "50% 62px" }}
             ></div>
             {/* <!-- End Background --> */}
 
-            <div class="container">
-              <div class="row">
+            <div className="container">
+              <div className="row">
                 {/* <!-- Destinations Filter --> */}
-                <div class="col-md-4 col-lg-3">
-                  <div class="intro-filter">
-                    <ul class="filter">
-                      <li class="active">
+                <div className="col-md-4 col-lg-3">
+                  <div className="intro-filter">
+                    <ul className="filter">
+                      <li className="active">
                         <a data-toggle="tab" href="#void">
-                          <i class="fa fa-map-marker"></i> Recommendation for
-                          you
+                          <i className="fa fa-map-marker"></i> Những gợi ý cho bạn
                         </a>
                       </li>
                       <li>
-                        <a data-toggle="tab" href="#void">
-                          <i class="fa fa-map-marker"></i> Australia &amp;
-                          Oceania
-                        </a>
+                        <NavLink to="/travel?sightseeing">
+                          <i className="fa fa-map-marker"></i> Du lịch tham quan
+                        </NavLink>
                       </li>
                       <li>
-                        <a data-toggle="tab" href="#void">
-                          <i class="fa fa-map-marker"></i> Asia
-                        </a>
+                      <NavLink to="/travel?cultural">
+                          <i className="fa fa-map-marker"></i> Du lịch văn hóa
+                        </NavLink>
                       </li>
                       <li>
-                        <a data-toggle="tab" href="#void">
-                          <i class="fa fa-map-marker"></i> Europe
-                        </a>
+                      <NavLink to="/travel?cuisine">
+                          <i className="fa fa-map-marker"></i> Du lịch ẩm thực
+                       </NavLink>
                       </li>
                       <li>
-                        <a data-toggle="tab" href="#void">
-                          <i class="fa fa-map-marker"></i> USA &amp; Canada
-                        </a>
+                      <NavLink to="/travel?green">
+                          <i className="fa fa-map-marker"></i> Du lịch xanh
+                          </NavLink>
                       </li>
                       <li>
-                        <a data-toggle="tab" href="void">
-                          <i class="fa fa-map-marker"></i> The rest of the world
-                        </a>
+                      <NavLink to="/travel?mice">
+                          <i className="fa fa-map-marker"></i> Du lịch MICE
+                       </NavLink>
+                      </li>
+                      <li>
+                      <NavLink to="/travel?building">
+                          <i className="fa fa-map-marker"></i> Team building
+                       </NavLink>
                       </li>
                     </ul>
                   </div>
                 </div>
                 {/* <!-- End Destinations Filter -->
                         <!-- Destinations Grid --> */}
-                <div class="col-md-8 col-lg-9">
-                  <div class="tab-content destinations-grid">
+                <div className="col-md-8 col-lg-9">
+                  <div className="tab-content destinations-grid">
                     {/* <!-- Tab One --> */}
                     <div
                       id="destinations-1"
-                      class="clearfix tab-pane fade active in "
+                      className="clearfix tab-pane fade active in "
                     >
                       {/* <!-- Destinations Item --> */}
-                      <div class="col-xs-6 col-sm-4 col-md-6 col-lg-4">
-                        <div class="destinations-item ">
-                          <div class="destinations-text">
-                            <div class="destinations-name">
+                      <div className="col-xs-6 col-sm-4 col-md-6 col-lg-4">
+                        <div className="destinations-item ">
+                          <div className="destinations-text">
+                            <div className="destinations-name">
                               <a href="#void" title="">
                                 London - UK
                               </a>
                             </div>
-                            <span class="properties-nb">
+                            <span className="properties-nb">
                               <ins>1289</ins> properties
                             </span>
                           </div>
-                          <figure class="destinations-img">
+                          <figure className="destinations-img">
                             <a href="#void" title="">
                               <img src="assets/images/travel.jpg" alt="" />
                             </a>
@@ -564,17 +572,17 @@ class Home extends Component {
                       </div>
                       {/* <!-- End Destinations Item -->
                                     <!-- Destinations Item --> */}
-                      <div class="col-xs-6 col-sm-4 col-md-6 col-lg-4">
-                        <div class="destinations-item">
-                          <div class="destinations-text">
-                            <div class="destinations-name">
+                      <div className="col-xs-6 col-sm-4 col-md-6 col-lg-4">
+                        <div className="destinations-item">
+                          <div className="destinations-text">
+                            <div className="destinations-name">
                               <a href="#void" title="">
                                 Paris - France
                               </a>
                             </div>
-                            <span class="properties-nb">239 properties</span>
+                            <span className="properties-nb">239 properties</span>
                           </div>
-                          <figure class="destinations-img">
+                          <figure className="destinations-img">
                             <a href="#void" title="">
                               <img src="assets/images/travelsapa.jpg" alt="" />
                             </a>
@@ -583,17 +591,17 @@ class Home extends Component {
                       </div>
                       {/* <!-- End Destinations Item -->
                                     <!-- Destinations Item --> */}
-                      <div class="col-xs-6 col-sm-4 col-md-6 col-lg-4">
-                        <div class="destinations-item">
-                          <div class="destinations-text">
-                            <div class="destinations-name">
+                      <div className="col-xs-6 col-sm-4 col-md-6 col-lg-4">
+                        <div className="destinations-item">
+                          <div className="destinations-text">
+                            <div className="destinations-name">
                               <a href="#void" title="">
                                 Rome - Italy
                               </a>
                             </div>
-                            <span class="properties-nb">478 properties</span>
+                            <span className="properties-nb">478 properties</span>
                           </div>
-                          <figure class="destinations-img">
+                          <figure className="destinations-img">
                             <a href="#void" title="">
                               <img
                                 src="assets/images/travelSonDoong.jpg"
@@ -605,17 +613,17 @@ class Home extends Component {
                       </div>
                       {/* <!-- End Destinations Item -->
                                     <!-- Destinations Item --> */}
-                      <div class="col-xs-6 col-sm-4 col-md-6 col-lg-4">
-                        <div class="destinations-item">
-                          <div class="destinations-text">
-                            <div class="destinations-name">
+                      <div className="col-xs-6 col-sm-4 col-md-6 col-lg-4">
+                        <div className="destinations-item">
+                          <div className="destinations-text">
+                            <div className="destinations-name">
                               <a href="#void" title="">
                                 Barcelona - Spain
                               </a>
                             </div>
-                            <span class="properties-nb">452 properties</span>
+                            <span className="properties-nb">452 properties</span>
                           </div>
-                          <figure class="destinations-img">
+                          <figure className="destinations-img">
                             <a href="#void" title="">
                               <img
                                 src="assets/images/TravelDanang.jpg"
@@ -627,17 +635,17 @@ class Home extends Component {
                       </div>
                       {/* <!-- End Destinations Item -->
                                     <!-- Destinations Item --> */}
-                      <div class="col-xs-6 col-sm-4 col-md-6 col-lg-4">
-                        <div class="destinations-item">
-                          <div class="destinations-text">
-                            <div class="destinations-name">
+                      <div className="col-xs-6 col-sm-4 col-md-6 col-lg-4">
+                        <div className="destinations-item">
+                          <div className="destinations-text">
+                            <div className="destinations-name">
                               <a href="#void" title="">
                                 Madrid - Spain
                               </a>
                             </div>
-                            <span class="properties-nb">794 properties</span>
+                            <span className="properties-nb">794 properties</span>
                           </div>
-                          <figure class="destinations-img">
+                          <figure className="destinations-img">
                             <a href="#void" title="">
                               <img
                                 src="assets/images/traveldalat2.jpg"
@@ -649,17 +657,17 @@ class Home extends Component {
                       </div>
                       {/* <!-- End Destinations Item -->
                                     <!-- Destinations Item --> */}
-                      <div class="col-xs-6 col-sm-4 col-md-6 col-lg-4">
-                        <div class="destinations-item">
-                          <div class="destinations-text">
-                            <div class="destinations-name">
+                      <div className="col-xs-6 col-sm-4 col-md-6 col-lg-4">
+                        <div className="destinations-item">
+                          <div className="destinations-text">
+                            <div className="destinations-name">
                               <a href="#void" title="">
                                 Vienna - Austria
                               </a>
                             </div>
-                            <span class="properties-nb">1289 properties</span>
+                            <span className="properties-nb">1289 properties</span>
                           </div>
-                          <figure class="destinations-img">
+                          <figure className="destinations-img">
                             <a href="#void" title="">
                               <img src="assets/images/travel5.jpg" alt="" />
                             </a>
@@ -670,21 +678,21 @@ class Home extends Component {
                     </div>
                     {/* <!-- End Tab One -->
                                 <!-- Tab Two --> */}
-                    <div id="destinations-2" class="clearfix tab-pane fade">
+                    <div id="destinations-2" className="clearfix tab-pane fade">
                       {/* <!-- Destinations Item --> */}
-                      <div class="col-xs-6 col-sm-4 col-md-6 col-lg-4">
-                        <div class="destinations-item ">
-                          <div class="destinations-text">
-                            <div class="destinations-name">
+                      <div className="col-xs-6 col-sm-4 col-md-6 col-lg-4">
+                        <div className="destinations-item ">
+                          <div className="destinations-text">
+                            <div className="destinations-name">
                               <a href="#void" title="">
                                 London - UK
                               </a>
                             </div>
-                            <span class="properties-nb">
+                            <span className="properties-nb">
                               <ins>1289</ins> properties
                             </span>
                           </div>
-                          <figure class="destinations-img">
+                          <figure className="destinations-img">
                             <a href="#void" title="">
                               <img
                                 src="assets/images/travelhalong.jpg"
@@ -696,17 +704,17 @@ class Home extends Component {
                       </div>
                       {/* <!-- End Destinations Item -->
                                     <!-- Destinations Item --> */}
-                      <div class="col-xs-6 col-sm-4 col-md-6 col-lg-4">
-                        <div class="destinations-item">
-                          <div class="destinations-text">
-                            <div class="destinations-name">
+                      <div className="col-xs-6 col-sm-4 col-md-6 col-lg-4">
+                        <div className="destinations-item">
+                          <div className="destinations-text">
+                            <div className="destinations-name">
                               <a href="#void" title="">
                                 Paris - France
                               </a>
                             </div>
-                            <span class="properties-nb">239 properties</span>
+                            <span className="properties-nb">239 properties</span>
                           </div>
-                          <figure class="destinations-img">
+                          <figure className="destinations-img">
                             <a href="#void" title="">
                               <img src="assets/images/travelHue.jpg" alt="" />
                             </a>
@@ -715,17 +723,17 @@ class Home extends Component {
                       </div>
                       {/* <!-- End Destinations Item -->
                                     <!-- Destinations Item --> */}
-                      <div class="col-xs-6 col-sm-4 col-md-6 col-lg-4">
-                        <div class="destinations-item">
-                          <div class="destinations-text">
-                            <div class="destinations-name">
+                      <div className="col-xs-6 col-sm-4 col-md-6 col-lg-4">
+                        <div className="destinations-item">
+                          <div className="destinations-text">
+                            <div className="destinations-name">
                               <a href="#void" title="">
                                 Rome - Italy
                               </a>
                             </div>
-                            <span class="properties-nb">478 properties</span>
+                            <span className="properties-nb">478 properties</span>
                           </div>
-                          <figure class="destinations-img">
+                          <figure className="destinations-img">
                             <a href="#void" title="">
                               <img src="assets/images/travel.jpg" alt="" />
                             </a>
@@ -734,17 +742,17 @@ class Home extends Component {
                       </div>
                       {/* <!-- End Destinations Item -->
                                     <!-- Destinations Item --> */}
-                      <div class="col-xs-6 col-sm-4 col-md-6 col-lg-4">
-                        <div class="destinations-item">
-                          <div class="destinations-text">
-                            <div class="destinations-name">
+                      <div className="col-xs-6 col-sm-4 col-md-6 col-lg-4">
+                        <div className="destinations-item">
+                          <div className="destinations-text">
+                            <div className="destinations-name">
                               <a href="#void" title="">
                                 Barcelona - Spain
                               </a>
                             </div>
-                            <span class="properties-nb">452 properties</span>
+                            <span className="properties-nb">452 properties</span>
                           </div>
-                          <figure class="destinations-img">
+                          <figure className="destinations-img">
                             <a href="#void" title="">
                               <img
                                 src="assets/images/travelDanang.jpg"
@@ -756,17 +764,17 @@ class Home extends Component {
                       </div>
                       {/* <!-- End Destinations Item -->
                                     <!-- Destinations Item --> */}
-                      <div class="col-xs-6 col-sm-4 col-md-6 col-lg-4">
-                        <div class="destinations-item">
-                          <div class="destinations-text">
-                            <div class="destinations-name">
+                      <div className="col-xs-6 col-sm-4 col-md-6 col-lg-4">
+                        <div className="destinations-item">
+                          <div className="destinations-text">
+                            <div className="destinations-name">
                               <a href="#void" title="">
                                 Madrid - Spain
                               </a>
                             </div>
-                            <span class="properties-nb">794 properties</span>
+                            <span className="properties-nb">794 properties</span>
                           </div>
-                          <figure class="destinations-img">
+                          <figure className="destinations-img">
                             <a href="#void" title="">
                               <img
                                 src="assets/images/traveldalat2.jpg"
@@ -778,17 +786,17 @@ class Home extends Component {
                       </div>
                       {/* <!-- End Destinations Item -->
                                     <!-- Destinations Item --> */}
-                      <div class="col-xs-6 col-sm-4 col-md-6 col-lg-4">
-                        <div class="destinations-item">
-                          <div class="destinations-text">
-                            <div class="destinations-name">
+                      <div className="col-xs-6 col-sm-4 col-md-6 col-lg-4">
+                        <div className="destinations-item">
+                          <div className="destinations-text">
+                            <div className="destinations-name">
                               <a href="#void" title="">
                                 Vienna - Austria
                               </a>
                             </div>
-                            <span class="properties-nb">1289 properties</span>
+                            <span className="properties-nb">1289 properties</span>
                           </div>
-                          <figure class="destinations-img">
+                          <figure className="destinations-img">
                             <a href="#void" title="">
                               <img src="assets/images/travel5.jpg" alt="" />
                             </a>
@@ -808,38 +816,36 @@ class Home extends Component {
         </section>
         {/* <!-- End Travel Destinations --> */}
         {/* <!-- Magazine Content --> */}
-        <section class="magazine">
+        <section className="magazine">
           {/* <!-- Title --> */}
-          <div class="title-wrap">
-            <div class="container">
-              <div class="travel-title float-left">
-                <h2>Travel Magazine</h2>
+          <div className="title-wrap">
+            <div className="container">
+              <div className="travel-title float-left">
+                <h2>Những đánh giá</h2>
               </div>
-              <a
-                href="#void"
-                title=""
-                class="awe-btn awe-btn-5 arrow-right awe-btn-lager text-uppercase float-right"
+              <NavLink to = "/review"
+                className="awe-btn awe-btn-5 arrow-right awe-btn-lager text-uppercase float-right"
               >
-                view all
-              </a>
+                Xem tất cả
+              </NavLink>
             </div>
           </div>
           {/* <!-- End Title --> */}
-          <div class="container">
-            <div class="magazine-cn">
-              <div class="row">
+          <div className="container">
+            <div className="magazine-cn">
+              <div className="row">
                 {/* <!-- Magazine Descript --> */}
-                <div class="col-lg-6">
-                  <div class="magazine-ds">
+                <div className="col-lg-6">
+                  <div className="magazine-ds">
                     <div
                       id="owl-magazine-ds"
-                      class="owl-carousel owl-theme"
+                      className="owl-carousel owl-theme"
                       style={{ display: " block", opacity: "1" }}
                     >
                       {/* <!-- Magazine Descript Item --> */}
-                      <div class="owl-wrapper-outer">
+                      <div className="owl-wrapper-outer">
                         <div
-                          class="owl-wrapper"
+                          className="owl-wrapper"
                           style={{
                             width: "4200px",
                             left: "0px",
@@ -847,11 +853,11 @@ class Home extends Component {
                           }}
                         >
                           <div
-                            class="owl-item active"
+                            className="owl-item active"
                             style={{ width: "525px" }}
                           >
-                            <div class="magazine-item">
-                              <div class="magazine-header">
+                            <div className="magazine-item">
+                              <div className="magazine-header">
                                 <h2>
                                   Five festivals to look forward to this year
                                 </h2>
@@ -864,9 +870,9 @@ class Home extends Component {
                                   </li>
                                   <li>03.5.2014</li>
                                 </ul>
-                                <hr class="hr" />
+                                <hr className="hr" />
                               </div>
-                              <div class="magazine-body">
+                              <div className="magazine-body">
                                 <p>
                                   Suspendisse ullamcorper lacus et commodo
                                   laoreet. Sed sodales aliquet felis, quis
@@ -894,25 +900,18 @@ class Home extends Component {
                                   mattis vitae.
                                 </p>
                               </div>
-                              <div class="magazine-footer clearfix">
-                                <div class="post-share magazine-share float-left">
+                              <div className="magazine-footer clearfix">
+                                <div className="post-share magazine-share float-left">
                                   <a href="#void" title="">
-                                    <i class="fa fa-facebook"></i>
+                                    <i className="fa fa-facebook"></i>
                                   </a>
                                   <a href="#void" title="">
-                                    <i class="fa fa-twitter"></i>
+                                    <i className="fa fa-twitter"></i>
                                   </a>
                                   <a href="#void" title="">
-                                    <i class="fa fa-google-plus"></i>
+                                    <i className="fa fa-google-plus"></i>
                                   </a>
                                 </div>
-                                <a
-                                  href="#void"
-                                  title=""
-                                  class="awe-btn awe-btn-5 arrow-right awe-btn-lager text-uppercase float-right"
-                                >
-                                  view more
-                                </a>
                               </div>
                             </div>
                           </div>
@@ -924,14 +923,14 @@ class Home extends Component {
                 </div>
                 {/* <!-- End Magazine Descript -->
                         <!-- Magazine Thumnail --> */}
-                <div class="col-lg-6">
-                  <div class="magazine-thum" id="magazine-thum">
+                <div className="col-lg-6" style = {{marginBottom:"10px"}}>
+                  <div className="magazine-thum" id="magazine-thum">
                     {/* <!--Thumnail Item--> */}
-                    <div class="thumnail-item clearfix active">
-                      <figure class="float-left">
+                    <div className="thumnail-item clearfix">
+                      <figure className="float-left">
                         <img src="assets/images/travel.jpg" alt="" />
                       </figure>
-                      <div class="thumnail-text">
+                      <div className="thumnail-text">
                         <h4>
                           Thailand by Train with Eastern and Oriental Express
                         </h4>
@@ -940,11 +939,11 @@ class Home extends Component {
                     </div>
                     {/* <!--End Thumnail Item-->
                                 <!--Thumnail Item--> */}
-                    <div class="thumnail-item clearfix">
-                      <figure class="float-left">
+                    <div className="thumnail-item clearfix">
+                      <figure className="float-left">
                         <img src="assets/images/traveldalat.jpg" alt="" />
                       </figure>
-                      <div class="thumnail-text">
+                      <div className="thumnail-text">
                         <h4>
                           Thailand by Train with Eastern and Oriental Express
                         </h4>
@@ -953,11 +952,11 @@ class Home extends Component {
                     </div>
                     {/* <!--End Thumnail Item-->
                                 <!--Thumnail Item--> */}
-                    <div class="thumnail-item clearfix">
-                      <figure class="float-left">
+                    <div className="thumnail-item clearfix">
+                      <figure className="float-left">
                         <img src="assets/images/travel5.jpg" alt="" />
                       </figure>
-                      <div class="thumnail-text">
+                      <div className="thumnail-text">
                         <h4>
                           Thailand by Train with Eastern and Oriental Express
                         </h4>
@@ -966,11 +965,11 @@ class Home extends Component {
                     </div>
                     {/* <!--End Thumnail Item-->
                                 <!--Thumnail Item--> */}
-                    <div class="thumnail-item clearfix">
-                      <figure class="float-left">
+                    <div className="thumnail-item clearfix">
+                      <figure className="float-left">
                         <img src="assets/images/travelhalong.jpg" alt="" />
                       </figure>
-                      <div class="thumnail-text">
+                      <div className="thumnail-text">
                         <h4>
                           Thailand by Train with Eastern and Oriental Express
                         </h4>
@@ -989,18 +988,18 @@ class Home extends Component {
          {/* <!-- End Travel Magazine --> */}
          {/* <!-- Footer --> */}
         <footer>
-            <div class="container">
-                <div class="row">
+            <div className="container" style = {{marginTop:"20px"}}>
+                <div className="row">
                     {/* <!-- Logo --> */}
-                    <div class="col-md-4">
-                        <div class="logo-foter">
-                        <a href="#" class="navbar-brand" style= {{float:"none"}}><img style ={{maxHeight:"70px"}} alt="Travel!" src="assets/images/logo.png"/><span>&nbsp; Travel!</span></a>
+                    <div className="col-md-4">
+                        <div className="logo-foter">
+                        <a href="#" className="navbar-brand" style= {{float:"none"}}><img style ={{maxHeight:"70px"}} alt="Travel!" src="assets/images/logo.png"/><span>&nbsp; Travel!</span></a>
                         </div>
                     </div>
                     {/* <!-- End Logo -->
                     <!-- Navigation Footer --> */}
-                    <div class="col-xs-6 col-sm-3 col-md-2">
-                        <div class="ul-ft">
+                    <div className="col-xs-6 col-sm-3 col-md-2">
+                        <div className="ul-ft">
                             <ul>
                                 <li><a href="#void" title="">About</a></li>
                                 <li><a href="#void" title="">Blog</a></li>
@@ -1011,8 +1010,8 @@ class Home extends Component {
                     </div>
                     {/* <!-- End Navigation Footer -->
                     <!-- Navigation Footer --> */}
-                    <div class="col-xs-6 col-sm-3 col-md-2">
-                        <div class="ul-ft">
+                    <div className="col-xs-6 col-sm-3 col-md-2">
+                        <div className="ul-ft">
                             <ul>
                                 <li><a href="#void" title="">Contact Us</a></li>
                                 <li><a href="#void" title="">Privacy Policy</a></li>
@@ -1023,15 +1022,15 @@ class Home extends Component {
                     </div>
                     {/* <!-- End Navigation Footer -->
                     <!-- Footer Currency, Language --> */}
-                    <div class="col-sm-6 col-md-4">
+                    <div className="col-sm-6 col-md-4">
                         {/* <!-- Language --> */}
-                        <div class="currency-lang-bottom dropdown-cn float-left">
-                            <div class="dropdown-head">English
-                                <span class="angle-down"><i class="fa fa-angle-down"></i></span>
+                        <div className="currency-lang-bottom dropdown-cn float-left">
+                            <div className="dropdown-head">English
+                                <span className="angle-down"><i className="fa fa-angle-down"></i></span>
                             </div>
-                            <div class="dropdown-body">
+                            <div className="dropdown-body">
                                 <ul>
-                                    <li class="current"><a href="#void" title="">English</a></li>
+                                    <li className="current"><a href="#void" title="">English</a></li>
                                     <li><a href="#void" title="">Bahasa Melayu</a></li>
                                     <li><a href="#void" title="">Català</a></li>
                                     <li><a href="#void" title="">Dansk</a></li>
@@ -1043,13 +1042,13 @@ class Home extends Component {
                         </div>
                         {/* <!-- End Language -->
                         <!-- Currency --> */}
-                        <div class="currency-lang-bottom dropdown-cn float-left">
-                            <div class="dropdown-head">US
-                                <span class="angle-down"><i class="fa fa-angle-down"></i></span>
+                        <div className="currency-lang-bottom dropdown-cn float-left">
+                            <div className="dropdown-head">US
+                                <span className="angle-down"><i className="fa fa-angle-down"></i></span>
                             </div>
-                            <div class="dropdown-body">
+                            <div className="dropdown-body">
                                 <ul>
-                                    <li class="current"><a href="#void" title="">US</a></li>
+                                    <li className="current"><a href="#void" title="">US</a></li>
                                     <li><a href="#void" title="">ARS</a></li>
                                     <li><a href="#void" title="">ADU</a></li>
                                     <li><a href="#void" title="">CAD</a></li>
@@ -1061,9 +1060,7 @@ class Home extends Component {
                         </div>
                         {/* <!-- End Currency -->
                         <!--CopyRight--> */}
-                        <p class="copyright">
-                            © 2009 – 2014 Bookyourtrip™ All rights reserved.
-                        </p>
+                       
                         {/* <!--CopyRight--> */}
                     </div>
                     {/* <!-- End Footer Currency, Language --> */}

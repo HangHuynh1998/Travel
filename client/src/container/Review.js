@@ -7,11 +7,11 @@ class Review extends Component {
             <div>
                 <NavBar />
                 <div style = {{height:"70px",marginTop:"100px"}}>
-                <div class="container" style = {{position:"fixed",zIndex:"100"}}>
+                <div className="container" style = {{position:"fixed",zIndex:"100"}}>
               <a
                 href="#void"
                 title=""
-                class="awe-btn awe-btn-5 arrow-right awe-btn-lager text-uppercase float-right"
+                className="awe-btn awe-btn-5 arrow-right awe-btn-lager text-uppercase float-right"
                 style = {{backgroundColor:"#25ab4b",color:"#ffffff"}}
               >
                Add Review
@@ -19,23 +19,23 @@ class Review extends Component {
             </div>
                 </div>
                 
-                <section class="magazine">
+                <section className="magazine">
                
-          <div class="container">
-            <div class="magazine-cn">
-              <div class="row">
+          <div className="container">
+            <div className="magazine-cn">
+              <div className="row">
                 {/* <!-- Magazine Descript --> */}
-                <div class="col-lg-6">
-                  <div class="magazine-ds">
+                <div className="col-lg-6">
+                  <div className="magazine-ds">
                     <div
                       id="owl-magazine-ds"
-                      class="owl-carousel owl-theme"
+                      className="owl-carousel owl-theme"
                       style={{ display: " block", opacity: "1" }}
                     >
                       {/* <!-- Magazine Descript Item --> */}
-                      <div class="owl-wrapper-outer">
+                      <div className="owl-wrapper-outer">
                         <div
-                          class="owl-wrapper"
+                          className="owl-wrapper"
                           style={{
                             width: "4200px",
                             left: "0px",
@@ -43,11 +43,11 @@ class Review extends Component {
                           }}
                         >
                           <div
-                            class="owl-item active"
+                            className="owl-item active"
                             style={{ width: "525px" }}
                           >
-                            <div class="magazine-item">
-                              <div class="magazine-header">
+                            <div className="magazine-item">
+                              <div className="magazine-header">
                                 <h2>
                                   Five festivals to look forward to this year
                                 </h2>
@@ -60,9 +60,9 @@ class Review extends Component {
                                   </li>
                                   <li>03.5.2014</li>
                                 </ul>
-                                <hr class="hr" />
+                                <hr className="hr" />
                               </div>
-                              <div class="magazine-body">
+                              <div className="magazine-body">
                                 <p>
                                   Suspendisse ullamcorper lacus et commodo
                                   laoreet. Sed sodales aliquet felis, quis
@@ -90,16 +90,16 @@ class Review extends Component {
                                   mattis vitae.
                                 </p>
                               </div>
-                              <div class="magazine-footer clearfix">
-                                <div class="post-share magazine-share float-left">
+                              <div className="magazine-footer clearfix">
+                                <div className="post-share magazine-share float-left">
                                   <a href="#void" title="">
-                                    <i class="fa fa-facebook"></i>
+                                    <i className="fa fa-facebook"></i>
                                   </a>
                                   <a href="#void" title="">
-                                    <i class="fa fa-twitter"></i>
+                                    <i className="fa fa-twitter"></i>
                                   </a>
                                   <a href="#void" title="">
-                                    <i class="fa fa-google-plus"></i>
+                                    <i className="fa fa-google-plus"></i>
                                   </a>
                                 </div>
                               </div>
@@ -113,26 +113,26 @@ class Review extends Component {
                 </div>
                 {/* <!-- End Magazine Descript -->
                         <!-- Magazine Thumnail --> */}
-                <div class="col-lg-6" style = {{marginTop:"7%",marginRight:"3%",width:"47%"}}>
+                <div className="col-lg-6" style = {{marginTop:"7%",marginRight:"3%",width:"47%"}}>
                         <img src="assets/images/travel.jpg" alt="" />
                   </div>
                 </div>
                 {/* <!-- End Magazine Thumnail --> */}
             </div>
-            <div class="magazine-cn">
-              <div class="row">
+            <div className="magazine-cn">
+              <div className="row">
                 {/* <!-- Magazine Descript --> */}
-                <div class="col-lg-6">
-                  <div class="magazine-ds">
+                <div className="col-lg-6">
+                  <div className="magazine-ds">
                     <div
                       id="owl-magazine-ds"
-                      class="owl-carousel owl-theme"
+                      className="owl-carousel owl-theme"
                       style={{ display: " block", opacity: "1" }}
                     >
                       {/* <!-- Magazine Descript Item --> */}
-                      <div class="owl-wrapper-outer">
+                      <div className="owl-wrapper-outer">
                         <div
-                          class="owl-wrapper"
+                          className="owl-wrapper"
                           style={{
                             width: "4200px",
                             left: "0px",
@@ -140,11 +140,11 @@ class Review extends Component {
                           }}
                         >
                           <div
-                            class="owl-item active"
+                            className="owl-item active"
                             style={{ width: "525px" }}
                           >
-                            <div class="magazine-item">
-                              <div class="magazine-header">
+                            <div className="magazine-item">
+                              <div className="magazine-header">
                                 <h2>
                                   Five festivals to look forward to this year
                                 </h2>
@@ -157,9 +157,9 @@ class Review extends Component {
                                   </li>
                                   <li>03.5.2014</li>
                                 </ul>
-                                <hr class="hr" />
+                                <hr className="hr" />
                               </div>
-                              <div class="magazine-body">
+                              <div className="magazine-body">
                                 <p>
                                   Suspendisse ullamcorper lacus et commodo
                                   laoreet. Sed sodales aliquet felis, quis
@@ -187,16 +187,16 @@ class Review extends Component {
                                   mattis vitae.
                                 </p>
                               </div>
-                              <div class="magazine-footer clearfix">
-                                <div class="post-share magazine-share float-left">
+                              <div className="magazine-footer clearfix">
+                                <div className="post-share magazine-share float-left">
                                   <a href="#void" title="">
-                                    <i class="fa fa-facebook"></i>
+                                    <i className="fa fa-facebook"></i>
                                   </a>
                                   <a href="#void" title="">
-                                    <i class="fa fa-twitter"></i>
+                                    <i className="fa fa-twitter"></i>
                                   </a>
                                   <a href="#void" title="">
-                                    <i class="fa fa-google-plus"></i>
+                                    <i className="fa fa-google-plus"></i>
                                   </a>
                                 </div>
                               </div>
@@ -210,7 +210,7 @@ class Review extends Component {
                 </div>
                 {/* <!-- End Magazine Descript -->
                         <!-- Magazine Thumnail --> */}
-                <div class="col-lg-6" style = {{marginTop:"7%",marginRight:"3%",width:"47%"}}>
+                <div className="col-lg-6" style = {{marginTop:"7%",marginRight:"3%",width:"47%"}}>
                         <img src="assets/images/travel.jpg" alt="" />
                   </div>
                 </div>

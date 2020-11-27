@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const users = require("../../../app/controllers/admin/users");
+const users = require("../../../app/controllers/admin/user");
 const confirmJWT = require("../../middleware/confirmJWT")
 // multer
 
@@ -9,7 +9,7 @@ router.get("/users", users.getListUsers);
 
 // create user
 router.get("/users/create", users.viewCreatePage);
-router.post("/users/create/seeker", users.createSeeker);
+router.post("/users/create/seeker", users.createCustomer);
 router.post("/users/create/company", users.createCompany);
 
 // detail user

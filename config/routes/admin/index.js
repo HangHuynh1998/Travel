@@ -5,8 +5,8 @@ const authCtrl = require("../../../app/controllers/admin/auth");
 
 const profile = require("./profile");
 const users = require("./users");
-const jobs = require("./jobs");
-const applications = require("./applications");
+const tours = require("./tours");
+// const applications = require("./applications");
 const category = require("./category");
 
 // Controllers
@@ -40,11 +40,11 @@ router.use(profile);
 router.use(users);
 
 // jobs
-router.use(jobs);
+router.use(tours);
 
 
 // applications
-router.use(applications);
+// router.use(applications);
 
 // category
 router.use(category);
