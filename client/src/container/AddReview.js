@@ -30,13 +30,13 @@ class AddReview extends Component {
                     //onChange={(e) => this.handleChange(e)}
                   />
                 </div>
-                <div class="form-group">
+                <div className="form-group">
                       <label for="exampleFormControlFile1" style = {{marginBottom:"5px"}}>
                         Chọn hình ảnh
                       </label>
                       <input
                         type="file"
-                        class="form-control-file"
+                        className="form-control-file"
                         id="exampleFormControlFile1"
                       />
                     </div>

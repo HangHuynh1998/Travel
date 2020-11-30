@@ -85,15 +85,16 @@ class NavBar extends Component {
                 </li>
                 {this.state.isAuthenticated && (
                   <li>
-                    <NavLink to="/profile">Quản lý thông tin</NavLink>
+                    {!this.state.isCompany && <NavLink to="/profileCompany/1">Quản lý thông tin</NavLink>}
+                    {this.state.isCustomer && <NavLink to="/profileCustomer/1">Quản lý thông tin</NavLink>}
                   </li>
                 )}
                 {!this.state.isCustomer && (
                   <li>
-                    <NavLink to="/">
-                      Đặt tour
+                    <NavLink to="/managerCustomer/1">
+                      Quản lí tour
                       <i
-                        class="fa fa-shopping-cart"
+                        className="fa fa-shopping-cart"
                         style={{ marginLeft: "2px" }}
                       ></i>
                     </NavLink>
@@ -101,7 +102,7 @@ class NavBar extends Component {
                 )}
                 {this.state.isCompany && (
                   <li>
-                    <NavLink to="/">Quản lý tour</NavLink>
+                    <NavLink to="/managerCompany/1">Quản lý tour</NavLink>
                   </li>
                 )}
                 {this.state.isAuthenticated && (
@@ -113,7 +114,7 @@ class NavBar extends Component {
                   >
                    Thông báo
                       <i
-                        class="fa fa-circle"
+                        className="fa fa-circle"
                         style={{
                           position: "absolute",
                           top: "22px",

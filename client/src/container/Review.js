@@ -1,26 +1,28 @@
-import React, { Component } from 'react';
-import NavBar from '../Component/NavBar';
-import { NavLink } from 'react-router-dom';
+import React, { Component } from "react";
+import NavBar from "../Component/NavBar";
+import { NavLink } from "react-router-dom";
 
 class Review extends Component {
-    render() {
-        return (
-            <div>
-                <NavBar />
-                <div style = {{height:"70px",marginTop:"100px"}}>
-                <div className="container" style = {{position:"fixed",zIndex:"100"}}>
-              <NavLink
-                className="awe-btn awe-btn-5 arrow-right awe-btn-lager text-uppercase float-right"
-                style = {{backgroundColor:"#25ab4b",color:"#ffffff"}}
-                to = "/addReview"
-              >
-                 Thêm đánh giá
-              </NavLink>
-            </div>
-                </div>
-                
-                <section className="magazine">
-               
+  render() {
+    return (
+      <div>
+        <NavBar />
+        <div style={{ height: "70px", marginTop: "100px" }}>
+          <div
+            className="container"
+            style={{ position: "fixed", zIndex: "100" }}
+          >
+            <NavLink
+              className="awe-btn awe-btn-5 arrow-right awe-btn-lager text-uppercase float-right"
+              style={{ backgroundColor: "#25ab4b", color: "#ffffff" }}
+              to="/addReview"
+            >
+              Thêm đánh giá
+            </NavLink>
+          </div>
+        </div>
+
+        <section className="magazine">
           <div className="container">
             <div className="magazine-cn">
               <div className="row">
@@ -105,7 +107,6 @@ class Review extends Component {
                               </div>
                             </div>
                           </div>
-                          
                         </div>
                       </div>
                     </div>
@@ -113,11 +114,14 @@ class Review extends Component {
                 </div>
                 {/* <!-- End Magazine Descript -->
                         <!-- Magazine Thumnail --> */}
-                <div className="col-lg-6" style = {{marginTop:"7%",marginRight:"3%",width:"47%"}}>
-                        <img src="assets/images/travel.jpg" alt="" />
-                  </div>
+                <div
+                  className="col-lg-6"
+                  style={{ marginTop: "7%", marginRight: "3%", width: "47%" }}
+                >
+                  <img src="assets/images/travel.jpg" alt="" />
                 </div>
-                {/* <!-- End Magazine Thumnail --> */}
+              </div>
+              {/* <!-- End Magazine Thumnail --> */}
             </div>
             <div className="magazine-cn">
               <div className="row">
@@ -202,7 +206,6 @@ class Review extends Component {
                               </div>
                             </div>
                           </div>
-                          
                         </div>
                       </div>
                     </div>
@@ -210,19 +213,21 @@ class Review extends Component {
                 </div>
                 {/* <!-- End Magazine Descript -->
                         <!-- Magazine Thumnail --> */}
-                <div className="col-lg-6" style = {{marginTop:"7%",marginRight:"3%",width:"47%"}}>
-                        <img src="assets/images/travel.jpg" alt="" />
-                  </div>
+                <div
+                  className="col-lg-6"
+                  style={{ marginTop: "7%", marginRight: "3%", width: "47%" }}
+                >
+                  <img src="assets/images/travel.jpg" alt="" />
                 </div>
-                {/* <!-- End Magazine Thumnail --> */}
+              </div>
+              {/* <!-- End Magazine Thumnail --> */}
             </div>
-            
           </div>
           {/* <!-- End Magazine Content --> */}
         </section>
-            </div>
-        );
-    }
+      </div>
+    );
+  }
 }
 
 export default Review;

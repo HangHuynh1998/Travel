@@ -4,11 +4,10 @@ const initialState = {
   token: null,
   userId: null,
   error: null,
-  loading: false,
-  authRedirectPath: "/",
+  loading: "loading",
 };
 const authStart = (state, action) => {
-  return {...state, error: null, loading: true };
+  return {...state, error: null, loading: "loading" };
 };
 const authSuccess = (state, action) => {
   return{
@@ -16,13 +15,13 @@ const authSuccess = (state, action) => {
     token: action.idToken,
     userId: action.userId,
     error: null,
-    loading: false,
+    loading: "success",
 }};
 const authFail = (state, action) => {
   return{
     ...state,
     error: action.error,
-    loading: false,
+    loading: "errors",
   }
 };
 const authLogout = (state, action) => {

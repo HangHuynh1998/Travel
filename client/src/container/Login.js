@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import NavBar from "../Component/NavBar";
 import { connect } from "react-redux";
-import { NavLink } from "react-router-dom";
-import * as actions from "../store/actions/index";
+import { NavLink, Redirect } from "react-router-dom";
+import { auth } from "../store/actions/auth";
 class Login extends Component {
   constructor() {
     super();
@@ -10,6 +10,7 @@ class Login extends Component {
       email: "",
       password: "",
     };
+    this.handleSubmit=this.handleSubmit.bind(this)
   }
   handleChange(e) {
     e.preventDefault();
@@ -19,8 +20,12 @@ class Login extends Component {
   }
   handleSubmit(e) {
     e.preventDefault();
-    console.log("hahah");
-    //this.props.onAuth(this.state.email,this.state.password)
+    this.props.auth(this.state.email,this.state.password)
+  }
+  componentWillReceiveProps(nextPros){
+    if(this.props.loading === "success"){
+      this.props.history.push('/')
+    }
   }
   render() {
     return (
@@ -147,21 +152,17 @@ class Login extends Component {
   }
 }
 
-// const mapStateProps = (state) => {
-//   return {
-//     loading: state.auth.loading,
-//     error: state.auth.error,
-//     isAuthenticated: state.auth.token !== null,
-//     // buildingBurger: state.burgerBuilder.building,
-//     // authRedirectPath: state.auth.authRedirectPath,
-//   };
-// };
-// const mapDispatchToProps = (dispatch) => {
-//   return {
-//     onAuth: (email, password) =>
-//     dispatch(actions.auth(email, password)),
-//     //onSetAuthRedirectPath: () => dispatch(actions.setAuthRedirectPath("/")),
-//   };
-// };
-//export default connect(mapStateProps, mapDispatchToProps)(Login);
-export default (Login);
+
+function mapStateProps (state){
+  return {
+    loading: state.auth.loading,
+    error: state.auth.error,
+    isAuthenticated: state.auth.token !== null,
+  };
+};
+function mapDispatchToProps ( dispatch ) {
+  return{
+    auth:(email,password)=>dispatch(auth(email,password))
+  }
+};
+export default connect(mapStateProps, mapDispatchToProps)(Login);

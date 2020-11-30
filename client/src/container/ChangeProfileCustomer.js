@@ -1,40 +1,12 @@
-import React, { Component } from "react";
-import NavBar from "../Component/NavBar";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
+import React, { Component } from 'react';
+import NavBar from '../Component/NavBar';
 
-class Register extends Component {
-  constructor() {
-    super();
-    this.state = {
-      customer: false,
-    };
-  }
-  componentDidMount() {
-    if (this.props.location) {
-      this.isCustomer();
-    }
-  }
-  componentWillReceiveProps(nextProps) {
-    if (this.props.location.search !== nextProps.location.search) {
-      this.isCustomer();
-    }
-  }
-  isCustomer() {
-    const search = this.props.location.search.slice(8);
-    console.log("is", this.props.location.search);
-    if (search === "customer") {
-      this.setState({ customer: true });
-    } else {
-      this.setState({ customer: false });
-    }
-  }
-  render() {
-    //const { match, location, history } = this.props
-    return (
-      <div>
-        <NavBar />
-        <div
+class ChangeProfileCustomer extends Component {
+    render() {
+        return (
+            <div>
+                  <NavBar />
+                <div
           className="limiter"
           style={{ backgroundImage: `url('assets/images/travel5.jpg')` }}
         >
@@ -44,22 +16,31 @@ class Register extends Component {
                 className="login-form validate-form"
                 style={{ background: "white" }}
               >
-                {this.state.customer ? (
-                  <>
-                    <span className="login100-form-title p-b-43">
-                      Khách hàng
-                    </span>
-                    <div className="form-group">
-                      <label>Họ tên</label>
+    
+                 
+                  <span className="login100-form-title p-b-43">Khách hàng</span>
+                  <div className="form-group">
+                      <label>Tên khách hàng</label>
                       <input
                         type="text"
                         className="form-control"
                         id="name"
                         aria-describedby="name"
-                        placeholder="Họ tên"
+                        placeholder="Tên công ty"
                         //onChange={(e) => this.handleChange(e)}
                       />
                     </div>
+                    <div className="form-group">
+                      <label for="exampleFormControlFile1" style = {{marginBottom:"5px"}}>
+                        Avartar
+                      </label>
+                      <input
+                        type="file"
+                        className="form-control-file"
+                        id="exampleFormControlFile1"
+                      />
+                    </div>
+                    
                     <div className="form-group ">
                       <label
                         for="example-date-input"
@@ -77,7 +58,7 @@ class Register extends Component {
                       </div>
                     </div>
 
-                    <div className="form-group">
+                    <div classNameName="form-group">
                       <label>Giới tính</label>
                       <div style={{ display: "flex" }}>
                         <div
@@ -120,10 +101,6 @@ class Register extends Component {
                         </div>
                       </div>
                     </div>
-                  </>
-                ) : (
-                  <span className="login100-form-title p-b-43">Công ty</span>
-                )}
                 <div className="form-group">
                   <label>Email</label>
                   <input
@@ -135,32 +112,9 @@ class Register extends Component {
                     //onChange={(e) => this.handleChange(e)}
                   />
                 </div>
-                <div className="form-group">
-                  <label>Mật khẩu</label>
-                  <input
-                    type="password"
-                    className="form-control"
-                    id="password"
-                    aria-describedby="password"
-                    placeholder="Mật khẩu"
-                    //onChange={(e) => this.handleChange(e)}
-                  />
-                </div>
-                <div className="form-group">
-                  <label>Nhập lại mật khẩu</label>
-                  <input
-                    type="password"
-                    className="form-control"
-                    id="password"
-                    aria-describedby="password"
-                    placeholder="Nhập lại mật khẩu"
-                    //onChange={(e) => this.handleChange(e)}
-                  />
-                </div>
-                {!this.state.customer && (
-                  <>
+               
                     <div className="form-group">
-                      <label>Địa chỉ công ty</label>
+                      <label>Địa chỉ </label>
                       <input
                         type="text"
                         className="form-control"
@@ -181,44 +135,23 @@ class Register extends Component {
                         //onChange={(e) => this.handleChange(e)}
                       />
                     </div>
-                    <div className="form-group">
-                      <label for="exampleFormControlFile1" style = {{marginBottom:"5px"}}>
-                        Hình ảnh công ty
-                      </label>
-                      <input
-                        type="file"
-                        className="form-control-file"
-                        id="exampleFormControlFile1"
-                      />
-                    </div>
-                    <div className="form-group">
-                      <label >Giới thiệu về công ty</label>
-                      <textarea
-                        type="text"
-                        className="form-control"
-                        id="about"
-                        aria-describedby="about"
-                        placeholder="Giới thiệu về công ty"
-                        //onChange={(e) => this.handleChange(e)}
-                      />
-                    </div>
-                  </>
-                )}
+                    
+ 
                 <div
                   className="container-login100-form-btn"
                   style={{ marginTop: "40px" }}
                 >
                   <button type="button" className="login100-form-btn">
-                    Đăng kí
+                    Lưu
                   </button>
                 </div>
               </form>
             </div>
           </div>
         </div>
-      </div>
-    );
-  }
+            </div>
+        );
+    }
 }
 
-export default Register;
+export default ChangeProfileCustomer;

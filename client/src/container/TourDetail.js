@@ -23,6 +23,10 @@ class TourDetail extends Component {
                   <span>Du lịch Huế</span>
                 </div>
                 <div className="form-group">
+                  <span>Loại du lịch: </span>
+                  <span>Du lịch văn hóa</span>
+                </div>
+                <div className="form-group">
                 <span>Địa điểm đến: </span>
                   <span>Đại Nội Huế, Lăng Minh Mạng,...</span>
                 </div>

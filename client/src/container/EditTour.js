@@ -1,11 +1,11 @@
-import React, { Component } from "react";
-import NavBar from "../Component/NavBar";
+import React, { Component } from 'react';
+import NavBar from '../Component/NavBar';
 
-class AddTour extends Component {
-  render() {
-    return (
-      <div>
-        <NavBar />
+class EditTour extends Component {
+    render() {
+        return (
+            <div>
+                <NavBar />
         <div
           className="limiter"
           style={{ backgroundImage: `url('assets/images/travel5.jpg')` }}
@@ -14,12 +14,12 @@ class AddTour extends Component {
             <div className="wrap-login100">
               <form
                 className="login-form validate-form"
-                style={{ background: "white" }}
+                style={{ background: "white",paddingBottom:"30px", marginBottom:"10px"}}
               >
-                <span className="login100-form-title ">Thêm Tour</span>
+                <span className="login100-form-title ">Chỉnh sửa Tour</span>
                 <span
-                  className="login100-form-title p-b-43"
-                  style={{ fontSize: "24px", marginTop: "10px" }}
+                  className="login100-form-title"
+                  style={{ fontSize: "24px", marginTop: "20px" }}
                 >
                   Công ty SaiGonTourist
                 </span>
@@ -123,21 +123,32 @@ class AddTour extends Component {
                     //onChange={(e) => this.handleChange(e)}
                   />
                 </div>
+                <div className="form-group">
+                  <label>Giảm giá(%)</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="price"
+                    aria-describedby="price"
+                    placeholder="Nhập % giảm giá"
+                    //onChange={(e) => this.handleChange(e)}
+                  />
+                </div>
                 <div
                   className="container-login100-form-btn"
-                  style={{ marginTop: "40px" }}
+                  style={{ marginTop: "20px" }}
                 >
                   <button type="button" className="login100-form-btn">
-                   Thêm tour
+                   Lưu tour
                   </button>
                 </div>
               </form>
             </div>
           </div>
         </div>
-      </div>
-    );
-  }
+            </div>
+        );
+    }
 }
 
-export default AddTour;
+export default EditTour;
