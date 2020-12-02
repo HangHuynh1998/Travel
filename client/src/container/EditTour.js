@@ -69,7 +69,6 @@ class EditTour extends Component {
                 </div>
                 <div className="form-group">
                   <label
-                    for="exampleFormControlFile1"
                     style={{ marginBottom: "5px" }}
                   >
                     Hình ảnh tour
@@ -82,7 +81,6 @@ class EditTour extends Component {
                 </div>
                 <div className="form-group ">
                       <label
-                        for="example-date-input"
                         className="col-2 col-form-label"
                       >
                         Ngày bắt đầu
@@ -98,7 +96,6 @@ class EditTour extends Component {
                     </div>
                     <div className="form-group ">
                       <label
-                        for="example-date-input"
                         className="col-2 col-form-label"
                       >
                         Ngày kết thúc

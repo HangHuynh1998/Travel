@@ -1,13 +1,32 @@
 import React, { Component } from "react";
 import NavBar from "../Component/NavBar";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
+import {storage} from "../firebase/index"
+import { connect } from "react-redux";
+import { registerCompany, registerCustomer } from "../store/actions/auth";
 
 class Register extends Component {
   constructor() {
     super();
+    this.isCustomer = this.isCustomer.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.handleUpload = this.handleUpload.bind(this);
+    this.handleChangeImage = this.handleChangeImage.bind(this);
+    this.submit = this.submit.bind(this)
+
     this.state = {
       customer: false,
+      image:null,
+      avatar:null,
+      progress:0,
+      email:"",
+      password:"",
+      repass:"",
+      name:"",
+      address:"",
+      phone:0,
+      birthday:null,
+      gender:true,
+      disabled:true
     };
   }
   componentDidMount() {
@@ -22,15 +41,62 @@ class Register extends Component {
   }
   isCustomer() {
     const search = this.props.location.search.slice(8);
-    console.log("is", this.props.location.search);
     if (search === "customer") {
       this.setState({ customer: true });
     } else {
       this.setState({ customer: false });
     }
   }
+  handleChangeImage = e =>{
+    if(e.target.files[0]){
+    this.setState({image:e.target.files[0]},()=>{
+      this.handleUpload()
+    })
+    }
+  }
+  handleChange(e){
+    e.preventDefault();
+    this.setState({
+      [e.target.id]: e.target.value,
+    });
+
+  }
+  handleUpload(){
+    const uploadTask = storage.ref(`images/${this.state.image.name}`).put(this.state.image)
+    uploadTask.on(
+      "state_changed",
+      snapshot => {
+        const progress =Math.round(
+          (snapshot.bytesTransferred/snapshot.totalBytes)*100
+        );
+        this.setState({progress:progress})
+      },
+      error => {
+        console.log(error)
+      },
+      ()=>{
+        storage
+        .ref("images")
+        .child(this.state.image.name)
+        .getDownloadURL()
+        .then(url => {
+          this.setState({avatar:url})
+        })
+      }
+    )
+  }
+  submit(){
+      if(this.state.customer === true){
+        this.props.registerCustomer(this.state.name,this.state.address,this.state.phone,this.state.birthday,this.state.gender,this.state.email, this.state.password)
+      }
+      if(this.state.customer === false){
+        this.props.registerCustomer(this.state.name,this.state.address,this.state.phone,this.state.avatar,this.state.email, this.state.password)
+      }
+      console.log("value",this.state);
+  }
   render() {
     //const { match, location, history } = this.props
+    console.log("hahaha",this.state.customer);
     return (
       <div>
         <NavBar />
@@ -57,12 +123,12 @@ class Register extends Component {
                         id="name"
                         aria-describedby="name"
                         placeholder="Họ tên"
-                        //onChange={(e) => this.handleChange(e)}
+                        value={this.state.name}
+                        onChange={(e) => this.handleChange(e)}
                       />
                     </div>
                     <div className="form-group ">
                       <label
-                        for="example-date-input"
                         className="col-2 col-form-label"
                       >
                         Ngày sinh
@@ -71,8 +137,9 @@ class Register extends Component {
                         <input
                           className="form-control"
                           type="date"
-                          value="2011-08-19"
+                          value={this.state.birthday}
                           id="example-date-input"
+                        onChange={(e) => this.handleChange(e)}
                         />
                       </div>
                     </div>
@@ -93,8 +160,9 @@ class Register extends Component {
                             type="radio"
                             name="exampleRadios"
                             id="exampleRadios1"
-                            value="option1"
-                            checked
+                            value={this.state.gender}
+                            checked ={this.state.gender}
+                            onChange={() => this.setState({gender:!this.state.gender})}
                           />
                           <label
                             className="form-check-label"
@@ -109,7 +177,7 @@ class Register extends Component {
                             type="radio"
                             name="exampleRadios"
                             id="exampleRadios2"
-                            value="option2"
+                            value={!this.state.gender}
                           />
                           <label
                             className="form-check-label"
@@ -122,7 +190,21 @@ class Register extends Component {
                     </div>
                   </>
                 ) : (
+                  <>
                   <span className="login100-form-title p-b-43">Công ty</span>
+                  <div className="form-group">
+                      <label>Họ tên</label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        id="name"
+                        aria-describedby="name"
+                        placeholder="Họ tên"
+                        value={this.state.name}
+                        onChange={(e) => this.handleChange(e)}
+                      />
+                    </div>
+                    </>
                 )}
                 <div className="form-group">
                   <label>Email</label>
@@ -132,7 +214,8 @@ class Register extends Component {
                     id="email"
                     aria-describedby="email"
                     placeholder="Email"
-                    //onChange={(e) => this.handleChange(e)}
+                    value = {this.state.email}
+                    onChange={(e) => this.handleChange(e)}
                   />
                 </div>
                 <div className="form-group">
@@ -143,7 +226,8 @@ class Register extends Component {
                     id="password"
                     aria-describedby="password"
                     placeholder="Mật khẩu"
-                    //onChange={(e) => this.handleChange(e)}
+                    value = {this.state.password}
+                    onChange={(e) => this.handleChange(e)}
                   />
                 </div>
                 <div className="form-group">
@@ -151,15 +235,14 @@ class Register extends Component {
                   <input
                     type="password"
                     className="form-control"
-                    id="password"
-                    aria-describedby="password"
+                    id="repass"
+                    aria-describedby="repass"
                     placeholder="Nhập lại mật khẩu"
-                    //onChange={(e) => this.handleChange(e)}
+                    value={this.state.repass}
+                    onChange={(e) => this.handleChange(e)}
                   />
                 </div>
-                {!this.state.customer && (
-                  <>
-                    <div className="form-group">
+                <div className="form-group">
                       <label>Địa chỉ công ty</label>
                       <input
                         type="text"
@@ -167,7 +250,8 @@ class Register extends Component {
                         id="address"
                         aria-describedby="address"
                         placeholder="Địa chỉ công ty"
-                        //onChange={(e) => this.handleChange(e)}
+                        value ={this.state.address}
+                        onChange={(e) => this.handleChange(e)}
                       />
                     </div>
                     <div className="form-group">
@@ -178,19 +262,28 @@ class Register extends Component {
                         id="phone"
                         aria-describedby="phone"
                         placeholder="Số điện thoại"
-                        //onChange={(e) => this.handleChange(e)}
+                        value = {this.state.phone}
+                        onChange={(e) => this.handleChange(e)}
                       />
                     </div>
+                {!this.state.customer && (
+                  <>
                     <div className="form-group">
-                      <label for="exampleFormControlFile1" style = {{marginBottom:"5px"}}>
+                      <label style = {{marginBottom:"5px"}}>
                         Hình ảnh công ty
                       </label>
                       <input
                         type="file"
                         className="form-control-file"
                         id="exampleFormControlFile1"
+                        onChange = {(e)=> this.handleChangeImage(e)}
                       />
                     </div>
+                    <div className="form-group">
+                      <process value = {process} max = "100"></process>
+                      <img src={this.state.avatar} alt="" />
+                    </div>
+                   
                     <div className="form-group">
                       <label >Giới thiệu về công ty</label>
                       <textarea
@@ -208,7 +301,7 @@ class Register extends Component {
                   className="container-login100-form-btn"
                   style={{ marginTop: "40px" }}
                 >
-                  <button type="button" className="login100-form-btn">
+                  <button type="button" className="login100-form-btn" onClick = {this.submit} >
                     Đăng kí
                   </button>
                 </div>
@@ -220,5 +313,18 @@ class Register extends Component {
     );
   }
 }
+function mapStateProps (state){
+  return {
+    loading: state.auth.loading,
+    error: state.auth.error,
+    // token: state.auth.token,
+  };
+};
+function mapDispatchToProps ( dispatch ) {
+  return{
+    registerCustomer:(name,address,phone,birthday,gender,email, password)=>dispatch(registerCustomer(name,address,phone,birthday,gender,email, password)),
+    registerCompany:(name,address,phone,avatar,email, password) => dispatch (registerCompany(name,address,phone,avatar,email, password))
+  }
+};
 
-export default Register;
+export default connect(mapStateProps,mapDispatchToProps) (Register);

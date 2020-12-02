@@ -31,7 +31,7 @@ class AddReview extends Component {
                   />
                 </div>
                 <div className="form-group">
-                      <label for="exampleFormControlFile1" style = {{marginBottom:"5px"}}>
+                      <label  style = {{marginBottom:"5px"}}>
                         Chọn hình ảnh
                       </label>
                       <input

@@ -10,9 +10,10 @@ const authStart = (state, action) => {
   return {...state, error: null, loading: "loading" };
 };
 const authSuccess = (state, action) => {
+  console.log("action",action);
   return{
     ...state,
-    token: action.idToken,
+    token: action.token,
     userId: action.userId,
     error: null,
     loading: "success",
@@ -21,7 +22,7 @@ const authFail = (state, action) => {
   return{
     ...state,
     error: action.error,
-    loading: "errors",
+    loading: "error",
   }
 };
 const authLogout = (state, action) => {
@@ -37,6 +38,23 @@ const setAuthRedirectPath = (state, action) => {
     authRedirectPath: action.path
   }
 };
+const registerStart = (state, action) => {
+  return {...state, error: null, loading: "loading" };
+};
+const registerSuccess = (state, action) => {
+  console.log("action",action);
+  return{
+    ...state,
+    error: null,
+    loading: "success",
+}};
+const registerFail = (state, action) => {
+  return{
+    ...state,
+    error: action.error,
+    loading: "error",
+  }
+};
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.AUTH_START:
@@ -49,6 +67,13 @@ const reducer = (state = initialState, action) => {
       return authLogout(state, action);
     case actionTypes.SET_AUTH_REDIRECT_PATH:
       return setAuthRedirectPath(state, action);
+      case actionTypes.REGISTER_START:
+      return registerStart(state, action);
+    case actionTypes.REGISTER_SUCCESS:
+      return registerSuccess(state, action);
+    case actionTypes.REGISTER_FAIL:
+      return registerFail(state, action);
+
     default:
       return state;
   }

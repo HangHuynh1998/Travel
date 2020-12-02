@@ -1,14 +1,16 @@
 import React, { Component } from "react";
 import NavBar from "../Component/NavBar";
 import { connect } from "react-redux";
-import { NavLink, Redirect } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { auth } from "../store/actions/auth";
+import jwt_decode from "jwt-decode";
 class Login extends Component {
   constructor() {
     super();
     this.state = {
       email: "",
       password: "",
+      message:""
     };
     this.handleSubmit=this.handleSubmit.bind(this)
   }
@@ -23,8 +25,16 @@ class Login extends Component {
     this.props.auth(this.state.email,this.state.password)
   }
   componentWillReceiveProps(nextPros){
-    if(this.props.loading === "success"){
-      this.props.history.push('/')
+    if(nextPros.loading === "success"){
+      let status = jwt_decode(localStorage.getItem("token")).user_id.status
+      if(status === "blocked"){
+        this.setState({message: "Tài khoản của bạn đã bị khóa"})
+      }else{
+        this.props.history.push('/')
+      }
+    }
+    if(nextPros.loading === "error"){
+      this.setState({message: "Email hoặc mật khẩu không đúng"})
     }
   }
   render() {
@@ -59,6 +69,7 @@ class Login extends Component {
                     onChange={(e) => this.handleChange(e)}
                   />
                 </div>
+                {this.props.loading === "error" && <span class="text-danger">{this.state.message}</span>}
                 <div className="flex-sb-m w-full p-t-3 p-b-32">
                   <div className="contact100-form-checkbox">
                     <input
@@ -157,7 +168,7 @@ function mapStateProps (state){
   return {
     loading: state.auth.loading,
     error: state.auth.error,
-    isAuthenticated: state.auth.token !== null,
+    // token: state.auth.token,
   };
 };
 function mapDispatchToProps ( dispatch ) {

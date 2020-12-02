@@ -31,7 +31,7 @@ class ChangeProfileCustomer extends Component {
                       />
                     </div>
                     <div className="form-group">
-                      <label for="exampleFormControlFile1" style = {{marginBottom:"5px"}}>
+                      <label style = {{marginBottom:"5px"}}>
                         Avartar
                       </label>
                       <input
@@ -43,7 +43,6 @@ class ChangeProfileCustomer extends Component {
                     
                     <div className="form-group ">
                       <label
-                        for="example-date-input"
                         className="col-2 col-form-label"
                       >
                         Ngày sinh

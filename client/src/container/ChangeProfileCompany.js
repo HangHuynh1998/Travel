@@ -65,7 +65,7 @@ class ChangeProfileCompany extends Component {
                       />
                     </div>
                     <div className="form-group">
-                      <label for="exampleFormControlFile1" style = {{marginBottom:"5px"}}>
+                      <label style = {{marginBottom:"5px"}}>
                         Avartar
                       </label>
                       <input

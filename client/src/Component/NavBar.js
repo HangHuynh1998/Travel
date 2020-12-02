@@ -1,23 +1,43 @@
 import React, { Component } from "react";
-import { NavLink } from "react-router-dom";
-import { Button, Popover, PopoverHeader, PopoverBody, UncontrolledPopover } from "reactstrap";
+import { NavLink, Redirect } from "react-router-dom";
+import jwt_decode from "jwt-decode";
+import { connect } from "react-redux";
+import { logout } from "../store/actions";
 class NavBar extends Component {
   constructor() {
     super();
     this.toggle = this.toggle.bind(this);
+    this.logOut = this.logOut.bind(this)
     this.state = {
-      isCustomer: false,
-      isCompany: false,
-      isAuthenticated: true,
       popoverOpen: false,
+      role:"",
+      userId:null
     };
+  }
+  componentDidMount(){
+    // console.log("aaa",nextPros.loading);
+    // if(nextPros.loading === "success"){
+      if(localStorage.getItem("token")){
+        const role = jwt_decode(localStorage.getItem("token")).user_id.role;
+        const userId=jwt_decode(localStorage.getItem("token")).user_id._id;
+        this.setState({role:role,userId:userId})
+      }
+     
+    // }
+
   }
   toggle() {
     this.setState({
       popoverOpen: !this.state.popoverOpen,
     });
   }
+  logOut(){
+   this.props.logOut();
+   this.setState({role:"", userId:null})
+   return <Redirect to ="/"/>
+  }
   render() {
+    console.log("state",this.state, "isAu",this.props.isAuthenticated);
     return (
       <div className="navbar-wrapper">
         <header className="navbar navbar-default navbar-fixed-top">
@@ -83,15 +103,15 @@ class NavBar extends Component {
                 <li>
                   <NavLink to="/about">Giới thiệu</NavLink>
                 </li>
-                {this.state.isAuthenticated && (
+                {this.props.isAuthenticated && (
                   <li>
-                    {!this.state.isCompany && <NavLink to="/profileCompany/1">Quản lý thông tin</NavLink>}
-                    {this.state.isCustomer && <NavLink to="/profileCustomer/1">Quản lý thông tin</NavLink>}
+                    {(this.state.role === "company")&& <NavLink to={`/profileCompany/${this.state.userId}`}>Quản lý thông tin</NavLink>}
+                    {(this.state.role === "customer") && <NavLink to={`/profileCustomer/${this.state.userId}`}>Quản lý thông tin</NavLink>}
                   </li>
                 )}
-                {!this.state.isCustomer && (
+                {(this.state.role === "customer") && (
                   <li>
-                    <NavLink to="/managerCustomer/1">
+                    <NavLink to={`/managerCustomer/${this.state.userId}`}>
                       Quản lí tour
                       <i
                         className="fa fa-shopping-cart"
@@ -100,12 +120,12 @@ class NavBar extends Component {
                     </NavLink>
                   </li>
                 )}
-                {this.state.isCompany && (
+                {(this.state.role === "company") && (
                   <li>
-                    <NavLink to="/managerCompany/1">Quản lý tour</NavLink>
+                    <NavLink to={`/managerCompany/${this.state.userId}`}>Quản lý tour</NavLink>
                   </li>
                 )}
-                {this.state.isAuthenticated && (
+                {this.props.isAuthenticated && (
                   <li className="dropdown show-on-hover">
                   <a
                     className="dropdown-toggle"
@@ -136,13 +156,13 @@ class NavBar extends Component {
                 </li>
                 )}
 
-                {!this.state.isAuthenticated ? (
+                {!this.props.isAuthenticated ? (
                   <li>
                     <NavLink to="/login"> Đăng nhập</NavLink>
                   </li>
                 ) : (
                   <li>
-                    <NavLink to="/logOut">Đăng xuất</NavLink>
+                    <a href="#void" onClick = {this.logOut}>Đăng xuất</a>
                   </li>
                 )}
               </ul>
@@ -154,5 +174,15 @@ class NavBar extends Component {
     );
   }
 }
-
-export default NavBar;
+function mapStateProps (state){
+  return {
+    loading: state.auth.loading,
+    isAuthenticated:localStorage.getItem("token") !==null,
+  };
+};
+function mapDispatchToProps ( dispatch ) {
+  return{
+   logOut:()=>dispatch(logout())
+  }
+};
+export default connect(mapStateProps, mapDispatchToProps)(NavBar);

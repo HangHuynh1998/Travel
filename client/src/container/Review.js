@@ -98,9 +98,6 @@ class Review extends Component {
                                     <i className="fa fa-facebook"></i>
                                   </a>
                                   <a href="#void" title="">
-                                    <i className="fa fa-twitter"></i>
-                                  </a>
-                                  <a href="#void" title="">
                                     <i className="fa fa-google-plus"></i>
                                   </a>
                                 </div>
@@ -195,9 +192,6 @@ class Review extends Component {
                                 <div className="post-share magazine-share float-left">
                                   <a href="#void" title="">
                                     <i className="fa fa-facebook"></i>
-                                  </a>
-                                  <a href="#void" title="">
-                                    <i className="fa fa-twitter"></i>
                                   </a>
                                   <a href="#void" title="">
                                     <i className="fa fa-google-plus"></i>

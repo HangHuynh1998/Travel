@@ -1,23 +1,38 @@
 import * as actionTypes from "./actionType";
 import axios from "../../axios-travel";
+import jwt_decode from "jwt-decode";
 export const authStart = () => {
-  console.log("bbbbb");
   return {
     type: actionTypes.AUTH_START,
   };
 };
 export const authSuccess = (token, userId) => {
-  console.log("hahahah");
   return {
     type: actionTypes.AUTH_SUCCESS,
     //authData: authData,
-    idToken: token,
+    token: token,
     userId: userId,
   };
 };
 export const authFail = (error) => {
   return {
     type: actionTypes.AUTH_FAIL,
+    error: error,
+  };
+};
+export const registerStart = () => {
+  return {
+    type: actionTypes.REGISTER_START,
+  };
+};
+export const registerSuccess = () => {
+  return {
+    type: actionTypes.REGISTER_SUCCESS,
+  };
+};
+export const registerFail = (error) => {
+  return {
+    type: actionTypes.REGISTER_FAIL,
     error: error,
   };
 };
@@ -29,13 +44,13 @@ export const logout = () => {
     type: actionTypes.AUTH_LOGOUT,
   };
 };
-export const checkAuthTimeout = (expirationTime) => {
-  return (dispatch) => {
-    setTimeout(() => {
-      dispatch(logout());
-    }, expirationTime * 1000);
-  };
-};
+// export const checkAuthTimeout = (expirationTime) => {
+//   return (dispatch) => {
+//     setTimeout(() => {
+//       dispatch(logout());
+//     }, expirationTime * 1000);
+//   };
+// };
 export const auth = (email, password) => {
   return (dispatch) => {
     dispatch(authStart());
@@ -51,16 +66,65 @@ export const auth = (email, password) => {
         const expirationDate = new Date(
           new Date().getTime() + res.data.expiresIn * 1000
         );
-        console.log("login", res.data.data.token);
         localStorage.setItem("token", res.data.data.token);
+        const userId = jwt_decode(res.data.data.token).user_id._id
         localStorage.setItem("expirationDate", expirationDate);
-        localStorage.setItem("userId", res.data.localId);
+        localStorage.setItem("userId", userId);
         dispatch(authSuccess(res.data.data.token, res.data.localId));
-        dispatch(checkAuthTimeout(res.data.expiresIn));
+       // dispatch(checkAuthTimeout(res.data.expiresIn));
       })
       .catch((err) => {
-        console.log(err.response.data.message);
-        dispatch(authFail(err.response.message));
+        console.log(err);
+        dispatch(authFail(err));
+      });
+  };
+};
+export const registerCustomer = (name,address,phone,birthday,gender,email, password) => {
+  return (dispatch) => {
+    dispatch(authStart());
+    const data = {
+      name:name,
+      email: email,
+      password: password,
+      birthday: birthday,
+      gender: gender,
+      address:address,
+      phone:phone,
+    };
+    axios
+      .post("/auth/register/customer", data)
+      .then((res) => {
+        console.log(res);
+        dispatch(authSuccess());
+       // dispatch(checkAuthTimeout(res.data.expiresIn));
+      })
+      .catch((err) => {
+        console.log(err);
+        dispatch(authFail(err));
+      });
+  };
+};
+export const registerCompany = (name,address,phone,avatar,email, password) => {
+  return (dispatch) => {
+    dispatch(authStart());
+    const data = {
+      name:name,
+      email: email,
+      password: password,
+      address: address,
+      phone: phone,
+      avatar: avatar    
+    };
+    axios
+      .post("/auth/register/company", data)
+      .then((res) => {
+        console.log(res);
+        dispatch(authSuccess());
+       // dispatch(checkAuthTimeout(res.data.expiresIn));
+      })
+      .catch((err) => {
+        console.log(err);
+        dispatch(authFail(err));
       });
   };
 };
@@ -79,11 +143,11 @@ export const authCheckState = () => {
         const userId = localStorage.getItem("userId");
 
         dispatch(authSuccess(token, userId));
-        dispatch(
-          checkAuthTimeout(
-            (expirationDate.getTime() - new Date().getTime()) / 1000
-          )
-        );
+        // dispatch(
+        //   checkAuthTimeout(
+        //     (expirationDate.getTime() - new Date().getTime()) / 1000
+        //   )
+        // );
       }
     }
   };
