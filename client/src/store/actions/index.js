@@ -8,3 +8,26 @@ export {
     authCheckState,
   } from "./auth";
   
+  export {
+    addtour,
+addTourStart,
+addTourSuccess,
+addTourFail,
+gettours,
+getToursStart,
+getToursSuccess,
+getToursFail,
+getOneTour,
+getOneTourStart,
+getOneTourSuccess,
+getOneTourFail,
+edittour,
+editTourStart,
+editTourSuccess,
+editTourFail,
+deletetour,
+deleteTourStart,
+deleteTourSuccess,deleteTourFail
+
+  } from "./tour";
+  

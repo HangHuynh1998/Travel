@@ -130,7 +130,7 @@ class Login extends Component {
                     type="button"
                   >
                     <NavLink
-                      to="/register?role = customer"
+                      to="/register?customer"
                       style={{ color: "white" }}
                     >
                       Khách hàng
@@ -143,7 +143,7 @@ class Login extends Component {
                   >
                     {" "}
                     <NavLink
-                      to="/register?role = company"
+                      to="/register?company"
                       style={{ color: "white" }}
                     >
                       Nhà cung cấp

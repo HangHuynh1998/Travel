@@ -104,7 +104,7 @@ export const registerCustomer = (name,address,phone,birthday,gender,email, passw
       });
   };
 };
-export const registerCompany = (name,address,phone,avatar,email, password) => {
+export const registerCompany = (name,address,phone,avatar,email, password,description) => {
   return (dispatch) => {
     dispatch(authStart());
     const data = {
@@ -113,7 +113,8 @@ export const registerCompany = (name,address,phone,avatar,email, password) => {
       password: password,
       address: address,
       phone: phone,
-      avatar: avatar    
+      avatar: avatar,
+      description: description  
     };
     axios
       .post("/auth/register/company", data)

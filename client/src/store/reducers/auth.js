@@ -42,7 +42,6 @@ const registerStart = (state, action) => {
   return {...state, error: null, loading: "loading" };
 };
 const registerSuccess = (state, action) => {
-  console.log("action",action);
   return{
     ...state,
     error: null,
