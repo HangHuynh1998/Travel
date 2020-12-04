@@ -1,7 +1,19 @@
 import React, { Component } from "react";
 import NavBar from "../Component/NavBar";
+import { addtour, getCategory } from "../store/actions";
+import { connect } from "react-redux";
 
 class AddTour extends Component {
+  constructor() {
+    super();
+
+    this.state = {
+
+    }
+  }
+  componentDidMount(){
+    this.props.getCategory()
+  }
   render() {
     return (
       <div>
@@ -136,5 +148,40 @@ class AddTour extends Component {
     );
   }
 }
+function mapStateProps(state) {
+  return {
+    loading: state.auth.loading,
+    error: state.auth.error,
+    // token: state.auth.token,
+  };
+}
+function mapDispatchToProps(dispatch) {
+  return {
+    addTour: (
+      name,
+      category_id,
+      place,
+      price,
+      image,
+      startdate,
+      enddate,
+      description
+    ) =>
+      dispatch(
+        addtour(
+          name,
+          category_id,
+          place,
+          price,
+          image,
+          startdate,
+          enddate,
+          description
+        )
+      ),
+    getCategory:()=>dispatch(getCategory())
+  };
+}
 
-export default AddTour;
+
+export default connect(mapStateProps, mapDispatchToProps)(AddTour);

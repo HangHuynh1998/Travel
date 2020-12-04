@@ -30,4 +30,10 @@ deleteTourStart,
 deleteTourSuccess,deleteTourFail
 
   } from "./tour";
-  
+
+export{
+getCategory,
+getCategoryStart,
+getCategorySuccess,
+getCategoryFail
+}from "./category"

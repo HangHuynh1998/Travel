@@ -4,7 +4,8 @@ const instance = axios.create({
   withCredentials: false,
   headers: {
     'Access-Control-Allow-Origin' : '*',
-    'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,PATCH,OPTIONS',   
+    'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,PATCH,OPTIONS',
+    Authorization: `Bearer ${localStorage.getItem('token')}`,
 }
 });
 export default instance;

@@ -38,9 +38,7 @@ class App extends Component {
     this.initState = this.initState.bind(this);
   }
   componentDidMount() {
-    if (this.props.loading !== "loading") {
       this.initState();
-    }
   }
   componentDidUpdate(prevProps) {
     if (
@@ -51,12 +49,14 @@ class App extends Component {
     }
   }
   initState() {
+    console.log("aaaaaaaaaa",localStorage.getItem("token"));
     if (localStorage.getItem("token")) {
       let role = jwt_decode(localStorage.getItem("token")).user_id.role;
       this.setState({ role: role });
     }
   }
   render() {
+    console.log("App",this.props.isAuthenticated);
     let routes = (
       <Switch>
         <Route exact path="/" component={Home} />
