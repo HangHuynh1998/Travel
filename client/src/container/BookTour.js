@@ -1,7 +1,26 @@
 import React, { Component } from 'react';
 import NavBar from '../Component/NavBar';
-
+import { bookTour } from '../store/actions/bookTour';
+import { connect } from 'react-redux';
+import internalApi from '../config/internalApi';
+import axios from "../axios-travel";
 class BookTour extends Component {
+  constructor() {
+    super();
+    this.submit = this.submit.bind(this);
+  }
+
+  submit(){
+    const data = {
+      email: "ngockhanh.2197+8@gmail.com",
+      subject: "this.state.subject",
+      content: "this.state.content"
+  }
+  internalApi.post('contact/send-refer-friend', data)
+  
+    // this.props.bookTour("Customer","address","01234456789","custom@gmail.com","requirement","5fc715216acdcf15a9aa3774","5fc7d25993d3bc3add0c5e50","Du lịch Đà Nẵng")
+  }
+
     render() {
         return (
             <div>
@@ -78,7 +97,7 @@ class BookTour extends Component {
                   className="container-login100-form-btn"
                   style={{ marginTop: "40px" }}
                 >
-                  <button type="button" className="login100-form-btn">
+                  <button type="button" className="login100-form-btn" onClick = {this.submit}>
                     Đăt tour
                   </button>
                 </div>
@@ -91,4 +110,16 @@ class BookTour extends Component {
     }
 }
 
-export default BookTour;
+function mapStateProps(state) {
+  return {
+    loading: state.auth.loading,
+    error: state.auth.error,
+    // token: state.auth.token,
+  };
+}
+function mapDispatchToProps(dispatch) {
+  return {
+    bookTour:(name,address,phone,email,requirement,userId,tourId,nameTour)=>dispatch(bookTour(name,address,phone,email,requirement,userId,tourId,nameTour))
+  };
+}
+export default connect(mapStateProps, mapDispatchToProps)(BookTour);

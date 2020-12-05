@@ -34,6 +34,7 @@ class App extends Component {
     this.state = {
       role: null,
       status: "",
+      name:""
     };
     this.initState = this.initState.bind(this);
   }
@@ -49,10 +50,10 @@ class App extends Component {
     }
   }
   initState() {
-    console.log("aaaaaaaaaa",localStorage.getItem("token"));
     if (localStorage.getItem("token")) {
       let role = jwt_decode(localStorage.getItem("token")).user_id.role;
-      this.setState({ role: role });
+      let name = jwt_decode(localStorage.getItem("token")).user_id.name;
+      this.setState({ role: role,name:name });
     }
   }
   render() {
@@ -93,7 +94,7 @@ class App extends Component {
               component={ChangeProfileCompany}
             />
 
-            <Route path="/addtour" component={AddTour} />
+            <Route path="/addtour" render={() => <AddTour name = {this.state.name} />} />
           </>
         )}
 

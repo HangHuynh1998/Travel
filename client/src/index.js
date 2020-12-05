@@ -10,6 +10,7 @@ import { createStore, compose, applyMiddleware, combineReducers } from "redux";
 import thunk from "redux-thunk";
 import authReducer from "./store/reducers/auth";
 import tourReducer from "./store/reducers/tour";
+import categoryReducer from './store/reducers/category'
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 // const store = createStore(
 //   reducer,
@@ -19,6 +20,7 @@ const rootReducer = combineReducers({
   // burgerBuilder: burgerBuilderReducer,
   tour: tourReducer,
   auth: authReducer,
+  category: categoryReducer,
 });
 
 const store = createStore(

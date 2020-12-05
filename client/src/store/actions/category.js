@@ -7,9 +7,10 @@ export const getCategoryStart = () => {
       type: actionTypes.GETCATEGORY_START,
     };
   };
-  export const getCategorySuccess = () => {
+  export const getCategorySuccess = (data) => {
     return {
       type: actionTypes.GETCATEGORY_SUCCESS,
+      data: data
     };
   };
   export const getCategoryFail = (error) => {
@@ -24,8 +25,7 @@ export const getCategoryStart = () => {
       axios
         .get("/category")
         .then((res) => {
-          console.log(res);
-          dispatch(getCategorySuccess(res));
+          dispatch(getCategorySuccess(res.data.data));
          // dispatch(checkAuthTimeout(res.data.expiresIn));
         })
         .catch((err) => {

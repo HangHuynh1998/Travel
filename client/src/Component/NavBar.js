@@ -37,7 +37,6 @@ class NavBar extends Component {
    return <Redirect to ="/"/>
   }
   render() {
-    console.log("state",this.state, "isAu",this.props.isAuthenticated);
     return (
       <div className="navbar-wrapper">
         <header className="navbar navbar-default navbar-fixed-top">
