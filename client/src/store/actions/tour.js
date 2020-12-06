@@ -1,6 +1,5 @@
 import * as actionTypes from "./actionType";
 import axios from "../../axios-travel";
-import jwt_decode from "jwt-decode";
 
 
 export const addTourStart = () => {
@@ -19,20 +18,33 @@ export const addTourStart = () => {
       error: error,
     };
   };
-  export const addtour = (name,address,phone,birthday,gender,email, password) => {
+  export const addtour = (name,
+    category_id,
+    place,
+    numberpeople,
+    price,
+    image,
+    startdate,
+    enddate,
+    contactInformation,
+    description) => {
     return (dispatch) => {
       dispatch(addTourStart());
       const data = {
         name:name,
-        email: email,
-        password: password,
-        birthday: birthday,
-        gender: gender,
-        address:address,
-        phone:phone,
+          category_id:category_id,
+          place:place,
+          numberPeople:numberpeople,
+          price:price,
+          image:image,
+          startDate:startdate,
+          endDate:enddate,
+          contactInformation:contactInformation,
+          description:description
       };
+      console.log("data",data);
       axios
-        .post("/auth/register/customer", data)
+        .post("/tour", data)
         .then((res) => {
           console.log(res);
           dispatch(addTourSuccess());

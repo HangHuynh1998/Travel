@@ -1,14 +1,16 @@
 import React, { Component } from "react";
 import NavBar from "../Component/NavBar";
-import { addtour, getCategory } from "../store/actions";
+import { addtour, getCategory, addTourStart } from "../store/actions";
 import { connect } from "react-redux";
 import { storage } from "../firebase/index";
+import { Redirect, withRouter } from "react-router-dom";
 class AddTour extends Component {
   constructor() {
     super();
     this.handleChange = this.handleChange.bind(this)
     this.handleChangeImage = this.handleChangeImage.bind(this)
     this.handleUpload = this.handleUpload.bind(this)
+    this.submit = this.submit.bind(this)
     this.state = {
       image:"",
      name:"",
@@ -16,19 +18,23 @@ class AddTour extends Component {
      place:"",
      numberpeople:"",
      price:"",
-avatar:"",
-     startDate:"",
-     endDate:"",
+     avatar:"",
+     startDate:null,
+     endDate:null,
      description:"",
-     contactInformation:""
+     contactInformation:"",
     }
   }
   componentDidMount(){
     this.props.getCategory()
+    this.props.addTourStart()
+    
   }
   componentWillReceiveProps(nextProps){
-    if(nextProps.loading === "success"){
-      this.props.getCategory()
+    console.log("aaaa",nextProps.addTourStatus);
+    if(nextProps.addTourStatus === "success"){
+      console.log("aaaaaa",nextProps.addTourStatus,this.props.user_id);
+      this.props.history.push(`/managerCompany/${this.props.user_id}`)
     }
   }
   handleChange(e) {
@@ -72,6 +78,18 @@ avatar:"",
           });
       }
     );
+  }
+  submit(){
+    this.props.addTour(this.state.name,
+      this.state.category_id,
+      this.state.place,
+      this.state.numberpeople,
+      this.state.price,
+      this.state.avatar,
+      this.state.startDate,
+      this.state.endDate,
+      this.state.contactInformation,
+      this.state.description)
   }
   render() {
     return (
@@ -201,8 +219,8 @@ avatar:"",
                   <textarea
                     type="text"
                     className="form-control"
-                    id="contactInfomation"
-                    aria-describedby="contactInfomation"
+                    id="contactInformation"
+                    aria-describedby="contactInformation"
                     placeholder="Nhập thông tin liên hệ"
                     onChange={(e) => this.handleChange(e)}
                   />
@@ -222,7 +240,7 @@ avatar:"",
                   className="container-login100-form-btn"
                   style={{ marginTop: "40px" }}
                 >
-                  <button type="button" className="login100-form-btn">
+                  <button type="button" className="login100-form-btn" onClick = {this.submit}>
                    Thêm tour
                   </button>
                 </div>
@@ -239,6 +257,7 @@ function mapStateProps(state) {
     loading: state.auth.loading,
     error: state.auth.error,
     categorydata: state.category.data,
+    addTourStatus:state.tour.loading
   };
 }
 function mapDispatchToProps(dispatch) {
@@ -247,10 +266,12 @@ function mapDispatchToProps(dispatch) {
       name,
       category_id,
       place,
+      numberpeople,
       price,
       image,
       startdate,
       enddate,
+      contactInformation,
       description
     ) =>
       dispatch(
@@ -258,16 +279,19 @@ function mapDispatchToProps(dispatch) {
           name,
           category_id,
           place,
+          numberpeople,
           price,
           image,
           startdate,
           enddate,
+          contactInformation,
           description
         )
       ),
+      addTourStart:()=>dispatch (addTourStart()),
     getCategory:()=>dispatch(getCategory())
   };
 }
 
 
-export default connect(mapStateProps, mapDispatchToProps)(AddTour);
+export default withRouter(connect(mapStateProps, mapDispatchToProps)(AddTour));

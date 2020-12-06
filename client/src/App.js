@@ -34,7 +34,8 @@ class App extends Component {
     this.state = {
       role: null,
       status: "",
-      name:""
+      name:"",
+      user_id:"",
     };
     this.initState = this.initState.bind(this);
   }
@@ -53,7 +54,8 @@ class App extends Component {
     if (localStorage.getItem("token")) {
       let role = jwt_decode(localStorage.getItem("token")).user_id.role;
       let name = jwt_decode(localStorage.getItem("token")).user_id.name;
-      this.setState({ role: role,name:name });
+      let user_id = jwt_decode(localStorage.getItem("token")).user_id._id;
+      this.setState({ role: role,name:name,user_id:user_id });
     }
   }
   render() {
@@ -94,7 +96,7 @@ class App extends Component {
               component={ChangeProfileCompany}
             />
 
-            <Route path="/addtour" render={() => <AddTour name = {this.state.name} />} />
+            <Route path="/addtour" render={() => <AddTour name = {this.state.name} user_id ={this.state.user_id} />} />
           </>
         )}
 

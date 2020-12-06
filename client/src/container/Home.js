@@ -483,15 +483,14 @@ class Home extends Component {
           <div className="title-wrap">
             <div className="container">
               <div className="travel-title float-left">
-                <h2>Những tour được yêu thích</h2>
+                <h2>Những tour du lịch </h2>
               </div>
-              <a
-                href="#void"
-                title=""
+              <NavLink
+               to="/travel"
                 className="awe-btn awe-btn-5 arrow-right awe-btn-lager text-uppercase float-right"
               >
                 Xem tất cả
-              </a>
+              </NavLink>
             </div>
           </div>
           {/* <!-- End Title -->

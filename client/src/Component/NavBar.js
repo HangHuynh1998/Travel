@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { NavLink, Redirect } from "react-router-dom";
+import { NavLink, Redirect, withRouter } from "react-router-dom";
 import jwt_decode from "jwt-decode";
 import { connect } from "react-redux";
 import { logout } from "../store/actions";
@@ -34,7 +34,7 @@ class NavBar extends Component {
   logOut(){
    this.props.logOut();
    this.setState({role:"", userId:null})
-   return <Redirect to ="/"/>
+   this.props.history.push('/')
   }
   render() {
     return (
