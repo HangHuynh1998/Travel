@@ -62,9 +62,10 @@ export const getToursStart = () => {
       type: actionTypes.GETTOURS_START,
     };
   };
-  export const getToursSuccess = () => {
+  export const getToursSuccess = (data) => {
     return {
       type: actionTypes.GETTOURS_SUCCESS,
+      data: data
     };
   };
   export const getToursFail = (error) => {
@@ -73,23 +74,14 @@ export const getToursStart = () => {
       error: error,
     };
   };
-  export const gettours = (name,address,phone,birthday,gender,email, password) => {
+  export const gettours = () => {
     return (dispatch) => {
       dispatch(getToursStart());
-      const data = {
-        name:name,
-        email: email,
-        password: password,
-        birthday: birthday,
-        gender: gender,
-        address:address,
-        phone:phone,
-      };
       axios
-        .post("/auth/register/customer", data)
+        .get("/tour")
         .then((res) => {
           console.log(res);
-          dispatch(getToursSuccess());
+          dispatch(getToursSuccess(res.data.data));
          // dispatch(checkAuthTimeout(res.data.expiresIn));
         })
         .catch((err) => {

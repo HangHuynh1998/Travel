@@ -29,6 +29,7 @@ const addTourStart = (state, action) => {
     return {...state, error: null, loading: "loading" };
   };
   const getToursSuccess = (state, action) => {
+    console.log("jajaja",action.data);
     return{
       ...state,
       data: action.data,
