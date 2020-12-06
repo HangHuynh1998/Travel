@@ -2,35 +2,43 @@ import React, { Component } from 'react';
 import NavBar from '../Component/NavBar';
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { gettours, getToursStart } from '../store/actions';
+import { gettours, getToursStart, gettoursCategory } from '../store/actions';
 
 class Travel extends Component {
     constructor(){
       super();
-      this.initState = this.initState.bind(this)
+      this.initData = this.initData.bind(this)
       this.state = {
-        data:[]
+        data:[],
       }
     }
     componentDidMount(){
-      this.props.getAllTour()
-      this.initState();
+      this.initData()
     }
-    componentWillReceiveProps(nextProps){
-      if(nextProps.tourStatus === "success"){
-        this.initState()
+    componentWillMount() {
+      this.unlisten = this.props.history.listen((location, action) => {
+        this.initData()
+      });
+    }
+    // componentWillUnmount() {
+    //     this.unlisten();
+    // }
+    initData(){
+      if(this.props.history.location.search === ""){
+        this.props.getAllTour()
+      }
+      if(this.props.history.location.search !== ""){
+        let search = this.props.history.location.search
+        if(search.slice(0,search.indexOf("="))){
+          this.props.getTourCategoty(search.substr(search.indexOf("=")))
+        }
       }
     }
-    initState(){
+    render() {
+      console.log("hhshshs",this.props.history);
       let tours= this.props.toursdata?.filter( function (tour) {
         return tour.status === "open"
       });
-      this.setState({data:tours})
-    }
-    render() {
-    console.log("haahshs",this.props.toursdata);
-
-    console.log("tours",this.state.data);
         return (
             <div>
                 <NavBar />
@@ -41,7 +49,7 @@ class Travel extends Component {
             <div className="sales-cn">
               <div className="row">
                 {/* <!-- HostSales Item --> */}
-                {this.state.data.map((item,i)=>(
+                {tours?.map((item,i)=>(
                   <NavLink className="col-xs-6 col-md-3" to = "/tourDetail/1" key = {i} style = {{marginBottom:"5px"}}>
                   <div className="sales-item">
                     <figure className="home-sales-img">
@@ -108,7 +116,8 @@ function mapStateProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
    getAllTourStart:()=> dispatch(getToursStart()),
-   getAllTour:()=>dispatch(gettours())
+   getAllTour:()=>dispatch(gettours()),
+   getTourCategoty:(category_id)=>dispatch(gettoursCategory(category_id))
   };
 }
 
