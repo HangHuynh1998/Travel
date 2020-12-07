@@ -4,7 +4,7 @@ import SliderSlick from "react-slick";
 import { NavLink } from "react-router-dom";
 import { gettours, getToursStart, getCategory } from "../store/actions";
 import { connect } from "react-redux";
-import { getToursSale } from "../store/actions/tour";
+import { getToursSale } from "../store/actions/toursale";
 import { getComment } from "../store/actions/comment";
 class Home extends Component {
   constructor() {
@@ -125,6 +125,7 @@ class Home extends Component {
     this.props.getComment(5);
   }
   render() {
+    console.log("shhs",this.props.toursale);
     return (
       <div>
         <NavBar />
@@ -297,9 +298,6 @@ class Home extends Component {
                           className="price-box"
                           style={{ marginTop: "15px" }}
                         >
-                          {/* <span className="price old-price">
-                          From <del>$269</del>
-                        </span> */}
                           <span
                             className="price special-price"
                             style={{ fontSize: "15px" }}
@@ -400,13 +398,6 @@ class Home extends Component {
                                   {item.category_id.name}
                                 </span>
                               </div>
-
-                              {/* <a href="#void" title="">
-                            Công ty: {item.company_id.name}
-                            </a> */}
-                              {/* <a href="#void" title="">
-                            {item.category_id.name}
-                          </a> */}
                             </div>
                             <figure className="destinations-img">
                               <a href="#void" title="">
@@ -425,8 +416,6 @@ class Home extends Component {
           </div>
           {/* <!-- End Destinations Content --> */}
         </section>
-        {/* <!-- End Travel Destinations --> */}
-        {/* <!-- Magazine Content --> */}
         <section className="magazine">
           {/* <!-- Title --> */}
           <div className="title-wrap">
@@ -755,7 +744,7 @@ function mapStateProps(state) {
     categorydata: state.category.data,
     tourStatus: state.tour.loading,
     toursdata: state.tour.data,
-    toursale: state.tour.datasale,
+    toursale: state.toursale.datasale,
     loadingsale: state.tour.loadingsale,
     commentdata: state.comment.datacomment,
     loadingcomment: state.comment.loading,

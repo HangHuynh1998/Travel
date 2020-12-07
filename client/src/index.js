@@ -13,6 +13,8 @@ import tourReducer from "./store/reducers/tour";
 import categoryReducer from './store/reducers/category'
 import commentReducer from './store/reducers/comment'
 import tourDetailReducer from './store/reducers/tourdetail'
+import tourOfCompanyReducer from './store/reducers/tourofcompany'
+import tourSaleReducer from './store/reducers/toursale'
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 // const store = createStore(
 //   reducer,
@@ -24,7 +26,9 @@ const rootReducer = combineReducers({
   auth: authReducer,
   category: categoryReducer,
   comment:commentReducer,
-  tourdetail:tourDetailReducer
+  tourdetail:tourDetailReducer,
+  tourOfCompany:tourOfCompanyReducer,
+  toursale:tourSaleReducer
 });
 
 const store = createStore(

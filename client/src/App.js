@@ -36,6 +36,7 @@ class App extends Component {
       status: "",
       name:"",
       user_id:"",
+      id:"",
     };
     this.initState = this.initState.bind(this);
   }
@@ -55,11 +56,12 @@ class App extends Component {
       let role = jwt_decode(localStorage.getItem("token")).user_id.role;
       let name = jwt_decode(localStorage.getItem("token")).user_id.name;
       let user_id = jwt_decode(localStorage.getItem("token")).user_id._id;
-      this.setState({ role: role,name:name,user_id:user_id });
+      let id = jwt_decode(localStorage.getItem("token"))._id
+      this.setState({ role: role,name:name,user_id:user_id ,id:id});
     }
   }
   render() {
-    console.log("App",this.props.isAuthenticated);
+    // console.log("App",this.props.isAuthenticated,jwt_decode(localStorage.getItem("token")));
     let routes = (
       <Switch>
         <Route exact path="/" component={Home} />
@@ -89,7 +91,7 @@ class App extends Component {
           <>
             <Route path="/profileCompany/:_id" component={ProfileCompany} />
 
-            <Route path="/managerCompany/:_id" component={ManagerTourCompany} />
+            <Route path="/managerCompany/:_id" render={() => <ManagerTourCompany id = {this.state.id} user_id ={this.state.user_id} />} />
             <Route path="/editTour/:_id" component={EditTour} />
             <Route
               path="/changeProfileCompany/:_id"

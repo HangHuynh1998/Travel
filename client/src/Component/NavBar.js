@@ -186,4 +186,4 @@ function mapDispatchToProps(dispatch) {
     getCategory: () => dispatch(getCategory()),
   };
 }
-export default connect(mapStateProps, mapDispatchToProps)(NavBar);
+export default withRouter(connect(mapStateProps, mapDispatchToProps)(NavBar));

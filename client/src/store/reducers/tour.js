@@ -48,6 +48,7 @@ const getToursSuccess = (state, action) => {
     datacompany: null,
     dataprice: null,
     dataname: null,
+    datasale:null
   };
 };
 const getToursFail = (state, action) => {
@@ -70,6 +71,7 @@ const getToursPlaceSuccess = (state, action) => {
     datacompany: null,
     dataprice: null,
     dataname: null,
+    datasale: null
   };
 };
 const getToursPlaceFail = (state, action) => {
@@ -93,6 +95,7 @@ const getToursNameSuccess = (state, action) => {
     datacompany: null,
     dataprice: null,
     dataplace: null,
+    datasale: null
   };
 };
 const getToursNameFail = (state, action) => {
@@ -116,6 +119,7 @@ const getToursPriceSuccess = (state, action) => {
     datacompany: null,
     dataname: null,
     dataplace: null,
+    datasale: null
   };
 };
 const getToursPriceFail = (state, action) => {
@@ -138,13 +142,14 @@ const getToursCompanySuccess = (state, action) => {
     dataname: null,
     dataprice: null,
     dataplace: null,
+    datasale: null
   };
 };
 const getToursCompanyFail = (state, action) => {
   return {
     ...state,
     error: action.error,
-    loadingcompany: "error",
+    loading: "error",
   };
 };
 const getToursSaleStart = (state, action) => {
@@ -153,9 +158,14 @@ const getToursSaleStart = (state, action) => {
 const getToursSaleSuccess = (state, action) => {
   return {
     ...state,
-    datasale: action.data,
+    datasale: action.datasale,
     error: null,
     loadingsale: "success",
+    data: null,
+    dataname: null,
+    dataprice: null,
+    dataplace: null,
+    datacompany: null
   };
 };
 const getToursSaleFail = (state, action) => {
@@ -165,7 +175,6 @@ const getToursSaleFail = (state, action) => {
     loadingsale: "error",
   };
 };
-
 
 const editTourStart = (state, action) => {
   return { ...state, error: null, loading: "loading" };
@@ -242,12 +251,6 @@ const reducer = (state = initialState, action) => {
       return getToursCompanySuccess(state, action);
     case actionTypes.GETTOURSCOMPANY_FAIL:
       return getToursCompanyFail(state, action);
-    case actionTypes.GETTOURSSALE_START:
-      return getToursSaleStart(state, action);
-    case actionTypes.GETTOURSSALE_SUCCESS:
-      return getToursSaleSuccess(state, action);
-    case actionTypes.GETTOURSSALE_FAIL:
-      return getToursSaleFail(state, action);
     case actionTypes.EDITTOUR_START:
       return editTourStart(state, action);
     case actionTypes.EDITTOUR_SUCCESS:
@@ -260,7 +263,12 @@ const reducer = (state = initialState, action) => {
       return deleteTourSuccess(state, action);
     case actionTypes.DELETETOUR_FAIL:
       return deleteTourFail(state, action);
-
+      case actionTypes.GETTOURSSALE_START:
+        return getToursSaleStart(state, action);
+      case actionTypes.GETTOURSSALE_SUCCESS:
+        return getToursSaleSuccess(state, action);
+      case actionTypes.GETTOURSSALE_FAIL:
+        return getToursSaleFail(state, action);
     default:
       return state;
   }

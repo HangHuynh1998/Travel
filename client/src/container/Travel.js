@@ -3,7 +3,7 @@ import NavBar from '../Component/NavBar';
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { gettours, getToursStart, gettoursCategory } from '../store/actions';
-import { gettoursPlace, getToursPrice, getToursName, getToursCompany } from '../store/actions/tour';
+import { gettoursPlace, getToursPrice, getToursName, getToursCompany ,getToursSale} from '../store/actions/tour';
 
 class Travel extends Component {
     constructor(){
@@ -31,24 +31,23 @@ class Travel extends Component {
         if(this.props.history.location.search !== ""){
           let search = this.props.history.location.search
           if(search.slice(0,search.indexOf("=")) === "?category_id"){
-            console.log("category_id");
             this.props.getTourCategoty(search.substr(search.indexOf("=")))
           }else{
             if(search.slice(0,search.indexOf("=")) === "?place"){
-              console.log("place");
               this.props.gettoursPlace(search.substr(search.indexOf("=")))
             }
             if(search.slice(0,search.indexOf("=")) === "?nameTour"){
-              console.log("nameTour");
               this.props.gettoursName(search.substr(search.indexOf("=")))
             }
             if(search.slice(0,search.indexOf("=")) === "?price"){
-              console.log("price");
               this.props.gettoursPrice(search.substr(search.indexOf("=")))
             }
             if(search.slice(0,search.indexOf("=")) === "?company"){
-              console.log("company");
               this.props.gettoursCompany(search.substr(search.indexOf("=")))
+            }
+            if(search.slice(0,search.indexOf("=")) === "?sale"){
+              console.log("sale");
+              this.props.getToursSale()
             }
           }
           
@@ -80,6 +79,11 @@ class Travel extends Component {
       }
       if(this.props.companytour){
         tours= this.props.companytour?.filter( function (tour) {
+          return tour.status === "open"
+        });
+      }
+      if(this.props.toursale){
+        tours= this.props.toursale?.filter( function (tour) {
           return tour.status === "open"
         });
       }
@@ -159,12 +163,14 @@ function mapStateProps(state) {
     pricetour: state.tour.dataprice,
     nametour: state.tour.dataname,
     companytour: state.tour.datacompany,
+    toursale: state.tour.datasale
   };
 }
 function mapDispatchToProps(dispatch) {
   return {
    getAllTourStart:()=> dispatch(getToursStart()),
    getAllTour:()=>dispatch(gettours()),
+   getTourSale:()=>dispatch(getToursSale()),
    getTourCategoty:(category_id)=>dispatch(gettoursCategory(category_id)),
    gettoursPlace:(place)=> dispatch(gettoursPlace(place)),
    gettoursName:(name)=> dispatch(getToursName(name)),
