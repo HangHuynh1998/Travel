@@ -5,6 +5,7 @@ import { NavLink } from "react-router-dom";
 import { gettours, getToursStart, getCategory } from "../store/actions";
 import { connect } from "react-redux";
 import { getToursSale } from "../store/actions/tour";
+import { getComment } from "../store/actions/comment";
 class Home extends Component {
   constructor() {
     super();
@@ -91,7 +92,8 @@ class Home extends Component {
   componentDidMount() {
     this.props.getAllTour(6);
     this.props.getCategoty();
-    this.props.getTourSale(8)
+    this.props.getTourSale(8);
+    this.props.getComment(5);
   }
   render() {
     return (
@@ -206,9 +208,7 @@ class Home extends Component {
             {/* <!-- End Banner Content --> */}
           </div>
         </section>
-        {/* <!-- Sales --> */}
         <section className="sales">
-          {/* <!-- Title --> */}
           <div className="title-wrap">
             <div className="container">
               <div className="travel-title float-left">
@@ -222,59 +222,69 @@ class Home extends Component {
               </NavLink>
             </div>
           </div>
-          {/* <!-- End Title -->
-            <!-- Hot Sales Content --> */}
           <div className="container">
             <div className="sales-cn">
               <div className="row">
                 {/* <!-- HostSales Item --> */}
-                {this.props.toursale?.map((item,i)=>(
-                  <NavLink className="col-xs-6 col-md-3" to={`/tourDetail/${item._id}`}>
-                  <div className="sales-item">
-                    <figure className="home-sales-img">
-                      <a href="#void" title="">
-                        <img src={item.image} alt="" />
-                      </a>
-                      <figcaption>
-                        Save <span>{item.sale}</span>%
-                      </figcaption>
-                    </figure>
-                    <div className="home-sales-text">
-                      <div className="home-sales-name-places">
-                        <div className="home-sales-name">
-                          <a href="#void" title="">
-                            {item.name}
-                          </a>
+                {this.props.toursale?.map((item, i) => (
+                  <NavLink
+                    className="col-xs-6 col-md-3"
+                    to={`/tourDetail/${item._id}`}
+                  >
+                    <div className="sales-item">
+                      <figure className="home-sales-img">
+                        <a href="#void" title="">
+                          <img src={item.image} alt="" />
+                        </a>
+                        <figcaption>
+                          Save <span>{item.sale}</span>%
+                        </figcaption>
+                      </figure>
+                      <div className="home-sales-text">
+                        <div className="home-sales-name-places">
+                          <div className="home-sales-name">
+                            <a href="#void" title="">
+                              {item.name}
+                            </a>
+                          </div>
+                          <div className="home-sales-places">
+                            <a href="#void" title="">
+                              Công ty: {item.company_id.name}
+                            </a>
+                          </div>
+                          <div className="home-sales-places">
+                            <a href="#void" title="">
+                              {item.category_id.name}
+                            </a>
+                          </div>
                         </div>
-                        <div className="home-sales-places">
-                          <a href="#void" title="">
-                            Công ty: {item.company_id.name}
-                          </a>
-                        </div>
-                        <div className="home-sales-places">
-                          <a href="#void" title="">
-                            {item.category_id.name}
-                          </a>
-                        </div>
-                      </div>
-                      <hr className="hr" />
-                      <div className="price-box" style = {{marginTop:"15px"}}>
-                        {/* <span className="price old-price">
+                        <hr className="hr" />
+                        <div
+                          className="price-box"
+                          style={{ marginTop: "15px" }}
+                        >
+                          {/* <span className="price old-price">
                           From <del>$269</del>
                         </span> */}
-                        <span className="price special-price" style = {{fontSize:"15px"}}>
-                        <img src = "assets/images/dola.png" style = {{height:"40px"}}/>{item.price}<small>/tour(VND)</small>
-                        </span>
+                          <span
+                            className="price special-price"
+                            style={{ fontSize: "15px" }}
+                          >
+                            <img
+                              src="assets/images/dola.png"
+                              style={{ height: "40px" }}
+                            />
+                            {item.price}
+                            <small>/tour(VND)</small>
+                          </span>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </NavLink>
+                  </NavLink>
                 ))}
-                
               </div>
             </div>
           </div>
-          {/* <!-- End Hot Sales Content --> */}
         </section>
         {/* <!-- Travel Destinations --> */}
         <section className="destinations">
@@ -347,6 +357,7 @@ class Home extends Component {
                                 </a>
                               </div>
                               <div>
+                                {console.log("item", item)}
                                 <span className="properties-nb">
                                   Công ty: {item.company_id.name}
                                 </span>
@@ -373,164 +384,6 @@ class Home extends Component {
                         </NavLink>
                       ))}
                     </div>
-                    {/* <!-- End Tab One -->
-                                <!-- Tab Two --> */}
-                    <div id="destinations-2" className="clearfix tab-pane fade">
-                      {/* <!-- Destinations Item --> */}
-                      <NavLink
-                        className="col-xs-6 col-sm-4 col-md-6 col-lg-4"
-                        to="/tourDetail/1"
-                      >
-                        <div className="destinations-item ">
-                          <div className="destinations-text">
-                            <div className="destinations-name">
-                              <a href="#void" title="">
-                                London - UK
-                              </a>
-                            </div>
-                            <span className="properties-nb">
-                              <ins>1289</ins> properties
-                            </span>
-                          </div>
-                          <figure className="destinations-img">
-                            <a href="#void" title="">
-                              <img
-                                src="assets/images/travelhalong.jpg"
-                                alt=""
-                              />
-                            </a>
-                          </figure>
-                        </div>
-                      </NavLink>
-                      {/* <!-- End Destinations Item -->
-                                    <!-- Destinations Item --> */}
-                      <NavLink
-                        className="col-xs-6 col-sm-4 col-md-6 col-lg-4"
-                        to="/tourDetail/1"
-                      >
-                        <div className="destinations-item">
-                          <div className="destinations-text">
-                            <div className="destinations-name">
-                              <a href="#void" title="">
-                                Paris - France
-                              </a>
-                            </div>
-                            <span className="properties-nb">
-                              239 properties
-                            </span>
-                          </div>
-                          <figure className="destinations-img">
-                            <a href="#void" title="">
-                              <img src="assets/images/travelHue.jpg" alt="" />
-                            </a>
-                          </figure>
-                        </div>
-                      </NavLink>
-                      {/* <!-- End Destinations Item -->
-                                    <!-- Destinations Item --> */}
-                      <NavLink
-                        className="col-xs-6 col-sm-4 col-md-6 col-lg-4"
-                        to="/tourDetail/1"
-                      >
-                        <div className="destinations-item">
-                          <div className="destinations-text">
-                            <div className="destinations-name">
-                              <a href="#void" title="">
-                                Rome - Italy
-                              </a>
-                            </div>
-                            <span className="properties-nb">
-                              478 properties
-                            </span>
-                          </div>
-                          <figure className="destinations-img">
-                            <a href="#void" title="">
-                              <img src="assets/images/travel.jpg" alt="" />
-                            </a>
-                          </figure>
-                        </div>
-                      </NavLink>
-                      {/* <!-- End Destinations Item -->
-                                    <!-- Destinations Item --> */}
-                      <NavLink
-                        className="col-xs-6 col-sm-4 col-md-6 col-lg-4"
-                        to="/tourDetail/1"
-                      >
-                        <div className="destinations-item">
-                          <div className="destinations-text">
-                            <div className="destinations-name">
-                              <a href="#void" title="">
-                                Barcelona - Spain
-                              </a>
-                            </div>
-                            <span className="properties-nb">
-                              452 properties
-                            </span>
-                          </div>
-                          <figure className="destinations-img">
-                            <a href="#void" title="">
-                              <img
-                                src="assets/images/travelDanang.jpg"
-                                alt=""
-                              />
-                            </a>
-                          </figure>
-                        </div>
-                      </NavLink>
-                      {/* <!-- End Destinations Item -->
-                                    <!-- Destinations Item --> */}
-                      <NavLink
-                        className="col-xs-6 col-sm-4 col-md-6 col-lg-4"
-                        to="/tourDetail/1"
-                      >
-                        <div className="destinations-item">
-                          <div className="destinations-text">
-                            <div className="destinations-name">
-                              <a href="#void" title="">
-                                Madrid - Spain
-                              </a>
-                            </div>
-                            <span className="properties-nb">
-                              794 properties
-                            </span>
-                          </div>
-                          <figure className="destinations-img">
-                            <a href="#void" title="">
-                              <img
-                                src="assets/images/traveldalat2.jpg"
-                                alt=""
-                              />
-                            </a>
-                          </figure>
-                        </div>
-                      </NavLink>
-                      {/* <!-- End Destinations Item -->
-                                    <!-- Destinations Item --> */}
-                      <NavLink
-                        className="col-xs-6 col-sm-4 col-md-6 col-lg-4"
-                        to="/tourDetail/1"
-                      >
-                        <div className="destinations-item">
-                          <div className="destinations-text">
-                            <div className="destinations-name">
-                              <a href="#void" title="">
-                                Vienna - Austria
-                              </a>
-                            </div>
-                            <span className="properties-nb">
-                              1289 properties
-                            </span>
-                          </div>
-                          <figure className="destinations-img">
-                            <a href="#void" title="">
-                              <img src="assets/images/travel5.jpg" alt="" />
-                            </a>
-                          </figure>
-                        </div>
-                      </NavLink>
-                      {/* <!-- End Destinations Item --> */}
-                    </div>
-                    {/* <!-- End Tab Two --> */}
                   </div>
                 </div>
                 {/* <!-- ENd Destinations Grid --> */}
@@ -585,7 +438,8 @@ class Home extends Component {
                             <div className="magazine-item">
                               <div className="magazine-header">
                                 <h2>
-                                  Five festivals to look forward to this year
+                                  Địa điểm du lịch ấn tượng nhất định phải đến
+                                  !!!
                                 </h2>
                                 <ul>
                                   <li>
@@ -594,36 +448,37 @@ class Home extends Component {
                                       Admin
                                     </a>
                                   </li>
-                                  <li>03.5.2014</li>
+                                  <li>10.12.2020</li>
                                 </ul>
                                 <hr className="hr" />
                               </div>
                               <div className="magazine-body">
                                 <p>
-                                  Suspendisse ullamcorper lacus et commodo
-                                  laoreet. Sed sodales aliquet felis, quis
-                                  volutpat massa imperdiet in. Praesent rutrum
-                                  malesuada risus, ullamcorper pretium tortor.
-                                  Mauris lacinia nisl id massa consectetur, eu
-                                  tempus mauris lacinia. Fusce commodo porttitor
-                                  sapien quis condimentum.
+                                  Bạn sẽ không có trải nghiệm tuổi trẻ nếu chỉ
+                                  biết mỗi con đường từ nhà đến công ty mà hãy
+                                  mở rộng con đường đi của mình đến những vùng
+                                  đất mới để biết thêm những nét văn hóa độc
+                                  đáo, những ngôn ngữ thú vị và nói chuyện cùng
+                                  con người địa phương thân thiện. Trong những
+                                  năm gần đây, du lịch ngày càng phát triển mạnh
+                                  hơn với một loạt các xu hướng vô cùng thú vị
+                                  do chính giới trẻ tạo nên. Trong báo cáo “Sức
+                                  mạnh của du lịch giới trẻ”, UNWTO cho biết
+                                  rằng, người trẻ hiện nay đầu tư rất nhiều cho
+                                  các trải nghiệm trong mỗi chuyến du lịch bởi
+                                  nó mang lại cho họ một giá trị lâu dài.
                                 </p>
                                 <p>
-                                  Curabitur sollicitudin magna sed sem blandit
-                                  sodales. Integer in eros sit amet tellus
-                                  vulputate laoreet ut in purus. Nullam quis
-                                  lacus nisl. <br />
-                                  Sed venenatis commodo leo, ac pulvinar ipsum
-                                  mattis vitae. Suspendisse eu libero odio.
+                                  Chúng ta – sống thế nào để “đáng mặt” tuổi trẻ ?
                                 </p>
 
                                 <p>
-                                  Curabitur sollicitudin magna sed sem blandit
-                                  sodales. Integer in eros sit amet tellus
-                                  vulputate laoreet ut in purus. Nullam quis
-                                  lacus nisl. <br />
-                                  Sed venenatis commodo leo, ac pulvinar ipsum
-                                  mattis vitae.
+                                  Lên kế hoạch cho những chuyến đi khám phá
+                                  những vùng đất mới để hòa mình vào thiên
+                                  nhiên, làm quen với những con người mới, quyết
+                                  định táo bạo để bước ra khỏi vùng an toàn và
+                                  ghi lại từng khoảnh khắc đáng nhớ là cách ghi
+                                  dấu thanh xuân tươi đẹp.
                                 </p>
                               </div>
                               <div className="magazine-footer clearfix">
@@ -646,82 +501,30 @@ class Home extends Component {
                     </div>
                   </div>
                 </div>
-                {/* <!-- End Magazine Descript -->
-                        <!-- Magazine Thumnail --> */}
+
                 <div className="col-lg-6" style={{ marginBottom: "10px" }}>
                   <div className="magazine-thum" id="magazine-thum">
-                    {/* <!--Thumnail Item--> */}
-                    <NavLink to="/tourDetail/1">
+                    {this.props.commentdata?.map((item,i)=>(
+                      <NavLink to={`/commentDetail/${item._id}`} key = {i}>
                       <div className="thumnail-item clearfix">
                         <figure className="float-left">
-                          <img src="assets/images/travel.jpg" alt="" />
+                          <img src={item.image} alt="" />
                         </figure>
                         <div className="thumnail-text">
                           <h4>
-                            Thailand by Train with Eastern and Oriental Express
+                            {item.title}
                           </h4>
-                          <span>03.5.2014</span>
+                          <span>{item.name}</span>
                         </div>
                       </div>
                     </NavLink>
-                    {/* <!--End Thumnail Item-->
-                                <!--Thumnail Item--> */}
-
-                    <NavLink to="/tourDetail/1">
-                      <div className="thumnail-item clearfix">
-                        <figure className="float-left">
-                          <img src="assets/images/traveldalat.jpg" alt="" />
-                        </figure>
-                        <div className="thumnail-text">
-                          <h4>
-                            Thailand by Train with Eastern and Oriental Express
-                          </h4>
-                          <span>03.5.2014</span>
-                        </div>
-                      </div>
-                    </NavLink>
-                    {/* <!--End Thumnail Item-->
-                                <!--Thumnail Item--> */}
-                    <NavLink to="/tourDetail/1">
-                      <div className="thumnail-item clearfix">
-                        <figure className="float-left">
-                          <img src="assets/images/travel5.jpg" alt="" />
-                        </figure>
-                        <div className="thumnail-text">
-                          <h4>
-                            Thailand by Train with Eastern and Oriental Express
-                          </h4>
-                          <span>03.5.2014</span>
-                        </div>
-                      </div>
-                    </NavLink>
-
-                    {/* <!--End Thumnail Item-->
-                                <!--Thumnail Item--> */}
-                    <NavLink to="/tourDetail/1">
-                      <div className="thumnail-item clearfix">
-                        <figure className="float-left">
-                          <img src="assets/images/travelhalong.jpg" alt="" />
-                        </figure>
-                        <div className="thumnail-text">
-                          <h4>
-                            Thailand by Train with Eastern and Oriental Express
-                          </h4>
-                          <span>03.5.2014</span>
-                        </div>
-                      </div>
-                    </NavLink>
-
-                    {/* <!--End Thumnail Item--> */}
+                    ))}
                   </div>
                 </div>
-                {/* <!-- End Magazine Thumnail --> */}
               </div>
             </div>
           </div>
-          {/* <!-- End Magazine Content --> */}
         </section>
-        {/* <!-- End Travel Magazine --> */}
         {/* <!-- Footer --> */}
         <footer>
           <div className="container" style={{ marginTop: "20px" }}>
@@ -921,14 +724,17 @@ function mapStateProps(state) {
     toursdata: state.tour.data,
     toursale: state.tour.datasale,
     loadingsale: state.tour.loadingsale,
+    commentdata: state.comment.datacomment,
+    loadingcomment: state.comment.loading,
   };
 }
 function mapDispatchToProps(dispatch) {
   return {
     getAllTourStart: () => dispatch(getToursStart()),
     getAllTour: (limit) => dispatch(gettours(limit)),
-    getTourSale: () => dispatch(getToursSale()),
+    getTourSale: (limit) => dispatch(getToursSale(limit)),
     getCategoty: () => dispatch(getCategory()),
+    getComment: (limit) => dispatch(getComment(limit)),
   };
 }
 
