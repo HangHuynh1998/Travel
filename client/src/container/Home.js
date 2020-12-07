@@ -9,7 +9,8 @@ import { getComment } from "../store/actions/comment";
 class Home extends Component {
   constructor() {
     super();
-    // this.initTourSale = this.initTourSale.bind(this)
+     this.handleChange = this.handleChange.bind(this)
+     this.handleSearch = this.handleSearch.bind(this)
     this.state = {
       textIntroduction: [
         "Where would you like to go?",
@@ -75,7 +76,17 @@ class Home extends Component {
       isShow: true,
       index: 0,
       showdate: false,
+      place:"",
+      name:"",
+      company:"",
+      price:"",
     };
+  }
+  handleChange(e) {
+    e.preventDefault();
+    this.setState({
+      [e.target.id]: e.target.value,
+    });
   }
   beforeChange = (current, next) => {
     this.setState({
@@ -83,13 +94,31 @@ class Home extends Component {
       isShow: false,
     });
   };
-
+  handleSearch(){
+    console.log("search",this.state.place);
+    if(this.state.place !== ""){
+      this.props.history.push(`/travel?place=${this.state.place}`)
+    }
+    if(this.state.name !== ""){
+      this.props.history.push(`/travel?nameTour=${this.state.name}`)
+    }
+    if(this.state.company !== ""){
+      this.props.history.push(`/travel?company=${this.state.company}`)
+    }
+    if(this.state.price !== ""){
+      this.props.history.push(`/travel?price=${this.state.price}`)
+    }
+  }
   afterChange = (cur) => {
     this.setState({
       isShow: true,
     });
   };
   componentDidMount() {
+    this.setState({ place:"",
+    name:"",
+    company:"",
+    price:"",})
     this.props.getAllTour(6);
     this.props.getCategoty();
     this.props.getTourSale(8);
@@ -161,7 +190,8 @@ class Home extends Component {
                         className="field-input hasDatepicker"
                         placeholder="Điểm đến: Huế, Đà Nẵng, Hà Nội, Đà Lạt,
                         Sapa,..."
-                        id="number"
+                        id="place"
+                        onChange= {(e)=>this.handleChange(e)}
                       />
                     </div>
                     <div className="form-field field-date">
@@ -169,7 +199,8 @@ class Home extends Component {
                         type="text"
                         className="field-input hasDatepicker"
                         placeholder="Tên tour"
-                        id="nameTour"
+                        id="name"
+                        onChange= {(e)=>this.handleChange(e)}
                       />
                     </div>
                     <div
@@ -180,7 +211,8 @@ class Home extends Component {
                         type="text"
                         className="field-input hasDatepicker"
                         placeholder="Tên công ty"
-                        id="company_name"
+                        id="company"
+                        onChange= {(e)=>this.handleChange(e)}
                       />
                     </div>
                     <div className="form-field field-date">
@@ -189,6 +221,7 @@ class Home extends Component {
                         className="field-input hasDatepicker"
                         placeholder="Giá tiền"
                         id="price"
+                        onChange= {(e)=>this.handleChange(e)}
                       />
                     </div>
 
@@ -196,6 +229,7 @@ class Home extends Component {
                       <button
                         type="submit"
                         className="awe-btn awe-btn-lager awe-search"
+                        onClick= {this.handleSearch}
                       >
                         Search
                       </button>
@@ -357,7 +391,6 @@ class Home extends Component {
                                 </a>
                               </div>
                               <div>
-                                {console.log("item", item)}
                                 <span className="properties-nb">
                                   Công ty: {item.company_id.name}
                                 </span>

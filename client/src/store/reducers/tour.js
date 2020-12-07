@@ -39,12 +39,15 @@ const getToursStart = (state, action) => {
   return { ...state, error: null, loading: "loading" };
 };
 const getToursSuccess = (state, action) => {
-  console.log("jajaja", action.data);
   return {
     ...state,
     data: action.data,
     error: null,
     loading: "success",
+    dataplace: null,
+    datacompany: null,
+    dataprice: null,
+    dataname: null,
   };
 };
 const getToursFail = (state, action) => {
@@ -60,9 +63,13 @@ const getToursPlaceStart = (state, action) => {
 const getToursPlaceSuccess = (state, action) => {
   return {
     ...state,
-    dataplace: action.data,
+    dataplace: action.dataplace,
     error: null,
     loadingplace: "success",
+    data: null,
+    datacompany: null,
+    dataprice: null,
+    dataname: null,
   };
 };
 const getToursPlaceFail = (state, action) => {
@@ -79,9 +86,13 @@ const getToursNameSuccess = (state, action) => {
   console.log("jajaja", action.data);
   return {
     ...state,
-    dataname: action.data,
+    dataname: action.dataname,
     error: null,
     loadingname: "success",
+    data: null,
+    datacompany: null,
+    dataprice: null,
+    dataplace: null,
   };
 };
 const getToursNameFail = (state, action) => {
@@ -98,9 +109,13 @@ const getToursPriceSuccess = (state, action) => {
   console.log("jajaja", action.data);
   return {
     ...state,
-    dataprice: action.data,
+    dataprice: action.dataprice,
     error: null,
     loadingprice: "success",
+    data: null,
+    datacompany: null,
+    dataname: null,
+    dataplace: null,
   };
 };
 const getToursPriceFail = (state, action) => {
@@ -114,12 +129,15 @@ const getToursCompanyStart = (state, action) => {
   return { ...state, error: null, loadingcompany: "loading" };
 };
 const getToursCompanySuccess = (state, action) => {
-  console.log("jajaja", action.data);
   return {
     ...state,
-    datacompany: action.data,
+    datacompany: action.datacompany,
     error: null,
     loadingcompany: "success",
+    data: null,
+    dataname: null,
+    dataprice: null,
+    dataplace: null,
   };
 };
 const getToursCompanyFail = (state, action) => {

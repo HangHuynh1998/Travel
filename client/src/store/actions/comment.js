@@ -24,12 +24,10 @@ export const getComment = (limit) => {
     axios
       .get(`/comment?limit=${limit}&&status=open`)
       .then((res) => {
-        console.log(res);
         dispatch(getCommentSuccess(res.data.data));
         // dispatch(checkAuthTimeout(res.data.expiresIn));
       })
       .catch((err) => {
-        console.log(err);
         dispatch(getCommentFail(err));
       });
   };

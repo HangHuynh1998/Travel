@@ -1,6 +1,5 @@
 import * as actionTypes from "./actionType";
 import axios from "../../axios-travel";
-import jwt_decode from "jwt-decode";
 
 
 export const bookTourStart = () => {

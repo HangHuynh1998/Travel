@@ -47,12 +47,10 @@ export const addtour = (
     axios
       .post("/tour", data)
       .then((res) => {
-        console.log(res);
         dispatch(addTourSuccess());
         // dispatch(checkAuthTimeout(res.data.expiresIn));
       })
       .catch((err) => {
-        console.log(err);
         dispatch(addTourFail(err));
       });
   };
@@ -81,12 +79,10 @@ export const gettours = (limit) => {
     axios
       .get(`/tour?limit=${limit}&&status=open`)
       .then((res) => {
-        console.log(res);
         dispatch(getToursSuccess(res.data.data));
         // dispatch(checkAuthTimeout(res.data.expiresIn));
       })
       .catch((err) => {
-        console.log(err);
         dispatch(getToursFail(err));
       });
   };
@@ -97,12 +93,10 @@ export const gettoursCategory = (category_id) => {
     axios
       .get(`/tour/?searchCategory${category_id}`)
       .then((res) => {
-        console.log(res);
         dispatch(getToursSuccess(res.data.data));
         // dispatch(checkAuthTimeout(res.data.expiresIn));
       })
       .catch((err) => {
-        console.log(err);
         dispatch(getToursFail(err));
       });
   };
@@ -115,7 +109,7 @@ export const getToursPlaceStart = () => {
 export const getToursPlaceSuccess = (data) => {
   return {
     type: actionTypes.GETTOURSPLACE_SUCCESS,
-    data: data,
+    dataplace: data,
   };
 };
 export const getToursPlaceFail = (error) => {
@@ -127,18 +121,13 @@ export const getToursPlaceFail = (error) => {
 export const gettoursPlace = (place) => {
   return (dispatch) => {
     dispatch(getToursPlaceStart());
-    const data = {
-      searchPlace:place
-    }
     axios
-      .get(`/tour/place?status=open`,data)
+      .get(`/tour/place?status=open&&place${place}`)
       .then((res) => {
-        console.log(res);
         dispatch(getToursPlaceSuccess(res.data.data));
         // dispatch(checkAuthTimeout(res.data.expiresIn));
       })
       .catch((err) => {
-        console.log(err);
         dispatch(getToursPlaceFail(err));
       });
   };
@@ -152,7 +141,7 @@ export const getToursPriceStart = () => {
 export const getToursPriceSuccess = (data) => {
   return {
     type: actionTypes.GETTOURSPRICE_SUCCESS,
-    data: data,
+    dataprice: data,
   };
 };
 export const getToursPriceFail = (error) => {
@@ -164,18 +153,13 @@ export const getToursPriceFail = (error) => {
 export const getToursPrice = (price) => {
   return (dispatch) => {
     dispatch(getToursPriceStart());
-    const data = {
-      searchPrice:price
-    }
     axios
-      .get(`/tour/price?status=open`,data)
+      .get(`/tour/price?status=open&&price${price}`)
       .then((res) => {
-        console.log(res);
         dispatch(getToursPriceSuccess(res.data.data));
         // dispatch(checkAuthTimeout(res.data.expiresIn));
       })
       .catch((err) => {
-        console.log(err);
         dispatch(getToursPriceFail(err));
       });
   };
@@ -201,18 +185,13 @@ export const getToursNameFail = (error) => {
 export const getToursName = (name) => {
   return (dispatch) => {
     dispatch(getToursNameStart());
-    const data = {
-      searchName:name
-    }
     axios
-      .get(`/tour/name?status=open`,data)
+      .get(`/tour/name?status=open&&name${name}`,)
       .then((res) => {
-        console.log(res);
         dispatch(getToursNameSuccess(res.data.data));
         // dispatch(checkAuthTimeout(res.data.expiresIn));
       })
       .catch((err) => {
-        console.log(err);
         dispatch(getToursNameFail(err));
       });
   };
@@ -238,18 +217,13 @@ export const getToursCompanyFail = (error) => {
 export const getToursCompany = (company) => {
   return (dispatch) => {
     dispatch(getToursCompanyStart());
-    const data = {
-      searchCompany:company
-    }
     axios
-      .get(`/tour/company?status=open`,data)
+      .get(`/tour/company?status=open&&company${company}`)
       .then((res) => {
-        console.log(res);
         dispatch(getToursCompanySuccess(res.data.data));
         // dispatch(checkAuthTimeout(res.data.expiresIn));
       })
       .catch((err) => {
-        console.log(err);
         dispatch(getToursCompanyFail(err));
       });
   };
@@ -282,62 +256,12 @@ export const getToursSale = (limit) => {
     axios
       .get(`/tour/toursale?status=open`,data)
       .then((res) => {
-        console.log("res",res);
         dispatch(getToursSaleSuccess(res.data.data));
         // dispatch(checkAuthTimeout(res.data.expiresIn));
       })
       .catch((err) => {
         console.log(err);
         dispatch(getToursSaleFail(err));
-      });
-  };
-};
-export const getOneTourStart = () => {
-  return {
-    type: actionTypes.GETONETOUR_START,
-  };
-};
-export const getOneTourSuccess = () => {
-  return {
-    type: actionTypes.GETONETOUR_SUCCESS,
-  };
-};
-export const getOneTourFail = (error) => {
-  return {
-    type: actionTypes.GETONETOUR_FAIL,
-    error: error,
-  };
-};
-export const getOneTour = (
-  name,
-  address,
-  phone,
-  birthday,
-  gender,
-  email,
-  password
-) => {
-  return (dispatch) => {
-    dispatch(getOneTourStart());
-    const data = {
-      name: name,
-      email: email,
-      password: password,
-      birthday: birthday,
-      gender: gender,
-      address: address,
-      phone: phone,
-    };
-    axios
-      .post("/auth/register/customer", data)
-      .then((res) => {
-        console.log(res);
-        dispatch(getOneTourSuccess());
-        // dispatch(checkAuthTimeout(res.data.expiresIn));
-      })
-      .catch((err) => {
-        console.log(err);
-        dispatch(getOneTourFail(err));
       });
   };
 };
@@ -381,12 +305,10 @@ export const edittour = (
     axios
       .post("/auth/register/customer", data)
       .then((res) => {
-        console.log(res);
         dispatch(editTourSuccess());
         // dispatch(checkAuthTimeout(res.data.expiresIn));
       })
       .catch((err) => {
-        console.log(err);
         dispatch(editTourFail(err));
       });
   };
@@ -431,12 +353,10 @@ export const deletetour = (
     axios
       .post("/auth/register/customer", data)
       .then((res) => {
-        console.log(res);
         dispatch(deleteTourSuccess());
         // dispatch(checkAuthTimeout(res.data.expiresIn));
       })
       .catch((err) => {
-        console.log(err);
         dispatch(deleteTourFail(err));
       });
   };

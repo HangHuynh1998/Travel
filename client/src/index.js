@@ -12,6 +12,7 @@ import authReducer from "./store/reducers/auth";
 import tourReducer from "./store/reducers/tour";
 import categoryReducer from './store/reducers/category'
 import commentReducer from './store/reducers/comment'
+import tourDetailReducer from './store/reducers/tourdetail'
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 // const store = createStore(
 //   reducer,
@@ -23,6 +24,7 @@ const rootReducer = combineReducers({
   auth: authReducer,
   category: categoryReducer,
   comment:commentReducer,
+  tourdetail:tourDetailReducer
 });
 
 const store = createStore(

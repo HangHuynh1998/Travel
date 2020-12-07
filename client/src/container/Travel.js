@@ -3,14 +3,15 @@ import NavBar from '../Component/NavBar';
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { gettours, getToursStart, gettoursCategory } from '../store/actions';
+import { gettoursPlace, getToursPrice, getToursName, getToursCompany } from '../store/actions/tour';
 
 class Travel extends Component {
     constructor(){
       super();
       this.initData = this.initData.bind(this)
-      this.state = {
-        data:[],
-      }
+      // this.state = {
+      //   data:[],
+      // }
     }
     componentDidMount(){
       this.initData()
@@ -20,25 +21,68 @@ class Travel extends Component {
         this.initData()
       });
     }
-    // componentWillUnmount() {
-    //     this.unlisten();
-    // }
+    componentWillUnmount() {
+        this.unlisten();
+    }
     initData(){
       if(this.props.history.location.search === ""){
         this.props.getAllTour()
-      }
-      if(this.props.history.location.search !== ""){
-        let search = this.props.history.location.search
-        if(search.slice(0,search.indexOf("="))){
-          this.props.getTourCategoty(search.substr(search.indexOf("=")))
+      }else{
+        if(this.props.history.location.search !== ""){
+          let search = this.props.history.location.search
+          if(search.slice(0,search.indexOf("=")) === "?category_id"){
+            console.log("category_id");
+            this.props.getTourCategoty(search.substr(search.indexOf("=")))
+          }else{
+            if(search.slice(0,search.indexOf("=")) === "?place"){
+              console.log("place");
+              this.props.gettoursPlace(search.substr(search.indexOf("=")))
+            }
+            if(search.slice(0,search.indexOf("=")) === "?nameTour"){
+              console.log("nameTour");
+              this.props.gettoursName(search.substr(search.indexOf("=")))
+            }
+            if(search.slice(0,search.indexOf("=")) === "?price"){
+              console.log("price");
+              this.props.gettoursPrice(search.substr(search.indexOf("=")))
+            }
+            if(search.slice(0,search.indexOf("=")) === "?company"){
+              console.log("company");
+              this.props.gettoursCompany(search.substr(search.indexOf("=")))
+            }
+          }
+          
         }
       }
+      
     }
     render() {
-      console.log("hhshshs",this.props.history);
-      let tours= this.props.toursdata?.filter( function (tour) {
-        return tour.status === "open"
-      });
+      let tours = null
+      if(this.props.toursdata){
+        tours= this.props.toursdata?.filter( function (tour) {
+          return tour.status === "open"
+        });
+      }
+      if(this.props.placetour){
+        tours= this.props.placetour?.filter( function (tour) {
+          return tour.status === "open"
+        });
+      }
+      if(this.props.pricetour){
+        tours= this.props.pricetour?.filter( function (tour) {
+          return tour.status === "open"
+        });
+      }
+      if(this.props.nametour){
+        tours= this.props.nametour?.filter( function (tour) {
+          return tour.status === "open"
+        });
+      }
+      if(this.props.companytour){
+        tours= this.props.companytour?.filter( function (tour) {
+          return tour.status === "open"
+        });
+      }
         return (
             <div>
                 <NavBar />
@@ -110,14 +154,22 @@ function mapStateProps(state) {
     error: state.auth.error,
     categorydata: state.category.data,
     tourStatus:state.tour.loading,
-    toursdata:state.tour.data
+    toursdata:state.tour.data,
+    placetour: state.tour.dataplace,
+    pricetour: state.tour.dataprice,
+    nametour: state.tour.dataname,
+    companytour: state.tour.datacompany,
   };
 }
 function mapDispatchToProps(dispatch) {
   return {
    getAllTourStart:()=> dispatch(getToursStart()),
    getAllTour:()=>dispatch(gettours()),
-   getTourCategoty:(category_id)=>dispatch(gettoursCategory(category_id))
+   getTourCategoty:(category_id)=>dispatch(gettoursCategory(category_id)),
+   gettoursPlace:(place)=> dispatch(gettoursPlace(place)),
+   gettoursName:(name)=> dispatch(getToursName(name)),
+   gettoursPrice:(price)=> dispatch(getToursPrice(price)),
+   gettoursCompany:(company)=> dispatch(getToursCompany(company))
   };
 }
 
