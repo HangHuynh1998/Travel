@@ -22,7 +22,7 @@ export const getOneTourStart = () => {
     return (dispatch) => {
       dispatch(getOneTourStart());
       axios
-        .post(`/tour/${id}`)
+        .get(`/tour/${id}`)
         .then((res) => {
           dispatch(getOneTourSuccess(res.data.data));
           // dispatch(checkAuthTimeout(res.data.expiresIn));

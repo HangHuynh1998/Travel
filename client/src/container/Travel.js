@@ -94,7 +94,7 @@ class Travel extends Component {
               <div className="row">
                 {/* <!-- HostSales Item --> */}
                 {tours?.map((item,i)=>(
-                  <NavLink className="col-xs-6 col-md-3" to = "/tourDetail/1" key = {i} style = {{marginBottom:"5px"}}>
+                  <NavLink className="col-xs-6 col-md-3" to = {`/tourDetail/${item._id}`} key = {i} style = {{marginBottom:"5px"}}>
                   <div className="sales-item">
                     <figure className="home-sales-img">
                       <a href="#void" title="">

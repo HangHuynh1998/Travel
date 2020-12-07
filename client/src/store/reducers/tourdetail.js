@@ -12,7 +12,7 @@ const getOneTourStart = (state, action) => {
   const getOneTourSuccess = (state, action) => {
     return {
       ...state,
-      tourdetail: action.data,
+      tourdetail: action.tourdetail,
       error: null,
       loading: "success",
     };

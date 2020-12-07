@@ -165,24 +165,7 @@ const getToursSaleFail = (state, action) => {
     loadingsale: "error",
   };
 };
-const getOneTourStart = (state, action) => {
-  return { ...state, error: null, loading: "loading" };
-};
-const getOneTourSuccess = (state, action) => {
-  return {
-    ...state,
-    data: action.data,
-    error: null,
-    loading: "success",
-  };
-};
-const getOneTourFail = (state, action) => {
-  return {
-    ...state,
-    error: action.error,
-    loading: "error",
-  };
-};
+
 
 const editTourStart = (state, action) => {
   return { ...state, error: null, loading: "loading" };
@@ -265,12 +248,6 @@ const reducer = (state = initialState, action) => {
       return getToursSaleSuccess(state, action);
     case actionTypes.GETTOURSSALE_FAIL:
       return getToursSaleFail(state, action);
-    case actionTypes.GETONETOUR_START:
-      return getOneTourStart(state, action);
-    case actionTypes.GETONETOUR_SUCCESS:
-      return getOneTourSuccess(state, action);
-    case actionTypes.GETONETOUR_FAIL:
-      return getOneTourFail(state, action);
     case actionTypes.EDITTOUR_START:
       return editTourStart(state, action);
     case actionTypes.EDITTOUR_SUCCESS:

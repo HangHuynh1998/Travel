@@ -1,18 +1,24 @@
 import React, { Component } from 'react';
 import NavBar from '../Component/NavBar';
-import { NavLink } from 'react-router-dom';
+import { NavLink, withRouter } from 'react-router-dom';
+import { getOneTour } from '../store/actions/tourdetail';
+import { connect } from 'react-redux';
 
 class TourDetail extends Component {
+    componentDidMount(){
+      this.props.getTourDetail(this.props.history.location.pathname.slice(12));
+    }
     render() {
+      console.log("hshahs",this.props.tourdetail,this.props.history);
         return (
             <div>
                 <NavBar />
                 <div className="limiter">
           <div className="container-login100">
-            <div className="wrap-login100">
+            <div className="wrap-login100" style = {{minHeight:"800px"}}>
             <div
                 className="login100-more"
-                style={{ backgroundImage: `url('assets/images/login.jpg')` }}
+                style={{ backgroundImage: `url(${this.props.tourdetail?.image})` }}
               ></div>
               <form className="login100-form validate-form">
                 <span className="login100-form-title p-b-43">
@@ -20,58 +26,46 @@ class TourDetail extends Component {
                 </span>
                 <div className="form-group">
                   <span>Tên chuyến đi: </span>
-                  <span>Du lịch Huế</span>
+                  <span>{this.props.tourdetail?.name}</span>
                 </div>
                 <div className="form-group">
                   <span>Loại du lịch: </span>
-                  <span>Du lịch văn hóa</span>
+                  <span>{this.props.tourdetail?.category_id.name}</span>
                 </div>
                 <div className="form-group">
                 <span>Địa điểm đến: </span>
-                  <span>Đại Nội Huế, Lăng Minh Mạng,...</span>
+                  <span>{this.props.tourdetail?.place}</span>
                 </div>
                 <div className="form-group">
                 <span>Ngày đi: </span>
-                  <span>29/12/2020</span>
+                  <span>{this.props.tourdetail?.startDate.slice(0,10)}</span>
                 </div>
                 <div className="form-group">
                 <span>Ngày về: </span>
-                  <span>31/12/2020</span>
+                  <span>{this.props.tourdetail?.endDate.slice(0,10)}</span>
                 </div>
                 <div className="form-group">
                 <span>Giá tiền (VNĐ): </span>
-                  <span>2.000.000</span>
+                  <span>{this.props.tourdetail?.price}</span>
                 </div>
-                <div className="form-group">
+                {this.props.tourdetail?.sale &&<div className="form-group">
                 <span>Giảm giá: </span>
-                  <span>30%</span>
-                </div>
+                  <span>{this.props.tourdetail?.sale}</span>
+                </div>}
                 <div className="form-group">
                 <span>Chi tiết chuyến đi: </span>
                 </div>
                 <div className="form-group">
-                <span>Ngày 29/12/2020 : tập trung tại khách sạn Morning (Huế)...</span>
+                <span>Mô tả chuyến đi : {this.props.tourdetail?.description}</span>
                 </div>
                 <div className="form-group">
                 <span>Muốn biết thêm thông tin chi tiết hãy liên lạc với chúng tôi</span>
                 </div>
                 <div className="form-group">
-                <span>Tên công ty: </span>
-                <span>SaigonTourist</span>
+                <span>{this.props.tourdetail?.contactInformation}</span>
                 </div>
-                <div className="form-group">
-                <span>Địa chỉ công ty: </span>
-                <span>SaigonTourist</span>
-                </div>
-                <div className="form-group">
-                <span>Số điện thoại: </span>
-                <span>0123456789</span>
-                </div>
-                <div className="form-group">
-                <span>Email: </span>
-                <span>company@company.com</span>
-                </div>
-                <div
+                {(this.props.role === "customer")
+                 && <div
                   className="container-login100-form-btn"
                   style={{ display: "flex",marginTop:"10px" }}
                 >
@@ -107,13 +101,64 @@ class TourDetail extends Component {
                   >
                     {" "}
                     <NavLink
-                      to="/companyDetail/1"
+                      to={`/companyDetail/${this.props.tourdetail?.company_id._id}`}
                       style={{ color: "white" }}
                     >
                       Xem Công ty
                     </NavLink>
                   </button>
-                </div>
+                </div>}
+                {(this.props.role === null ) && 
+                <>
+                 <div>Đăng nhập để đặt tour</div>
+                <div
+                  className="container-login100-form-btn"
+                  style={{display: "flex",marginTop:"10px" }}
+                >
+                  <button
+                    className="login100-form-btn"
+                    style={{ width: "150px", marginRight: "20px" }}
+                    type="button"
+                  >
+                    <NavLink
+                      to="/login"
+                      style={{ color: "white" }}
+                    >
+                      Đăng nhập
+                    </NavLink>
+                  </button>
+                  <button
+                    className="login100-form-btn"
+                    style={{ width: "150px", marginRight: "20px" }}
+                    type="button"
+                  >
+                    <NavLink
+                       to={`/companyDetail/${this.props.tourdetail?.company_id._id}`}
+                      style={{ color: "white" }}
+                    >
+                      Xem Công ty
+                    </NavLink>
+                  </button>
+                  </div>
+                  </>
+                  }
+                  {(this.props.role === "company" ) && <div
+                  className="container-login100-form-btn"
+                  style={{ display: "flex",marginTop:"10px" }}
+                >
+                  <button
+                    className="login100-form-btn"
+                    style={{ width: "150px", marginRight: "20px" }}
+                    type="button"
+                  >
+                    <NavLink
+                      to={`/managerCompany/${this.props.tourdetail?.company_id._id}`}
+                      style={{ color: "white" }}
+                    >
+                      Quản lý tour
+                    </NavLink>
+                  </button>
+                  </div>}
               </form>
             </div>
           </div>
@@ -122,5 +167,15 @@ class TourDetail extends Component {
         );
     }
 }
-
-export default TourDetail;
+function mapStateProps(state) {
+  return {
+    tourdetail:state.tourdetail.tourdetail,
+    loading:state.tourdetail.loading
+  };
+}
+function mapDispatchToProps(dispatch) {
+  return {
+   getTourDetail:(id)=>dispatch(getOneTour(id))
+  };
+}
+export default  withRouter(connect(mapStateProps, mapDispatchToProps)(TourDetail));

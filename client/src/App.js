@@ -68,7 +68,7 @@ class App extends Component {
         <Route path="/about" component={About} />
         <Route path="/review" component={Review} />
         <Route path="/travel" component={Travel} />
-        <Route path="/tourDetail/:tour_id" component={TourDetail} />
+        <Route path="/tourDetail/:tour_id" render={() => <TourDetail role = {this.state.role} user_id ={this.state.user_id}/>}/>
         <Route path="/companyDetail/:company_id" component={CompanyDetail} />
         {this.state.role === "customer" && (
           <>
