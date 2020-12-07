@@ -2,9 +2,13 @@ import React, { Component } from "react";
 import NavBar from "../Component/NavBar";
 import SliderSlick from "react-slick";
 import { NavLink } from "react-router-dom";
+import { gettours, getToursStart, getCategory } from "../store/actions";
+import { connect } from "react-redux";
+import { getToursSale } from "../store/actions/tour";
 class Home extends Component {
   constructor() {
     super();
+    // this.initTourSale = this.initTourSale.bind(this)
     this.state = {
       textIntroduction: [
         "Where would you like to go?",
@@ -84,6 +88,11 @@ class Home extends Component {
       isShow: true,
     });
   };
+  componentDidMount() {
+    this.props.getAllTour(6);
+    this.props.getCategoty();
+    this.props.getTourSale(8)
+  }
   render() {
     return (
       <div>
@@ -141,12 +150,6 @@ class Home extends Component {
                   </div>
 
                   <div className="form-search clearfix">
-                    {/* <div className="form-field field-destination">
-                      <label>
-                        <span>Điểm đến:</span> 
-                      </label>
-                      <input type="text" id="destination" className="field-input" />
-                    </div> */}
                     <div
                       className="form-field field-date"
                       style={{ width: "40%" }}
@@ -163,8 +166,8 @@ class Home extends Component {
                       <input
                         type="text"
                         className="field-input hasDatepicker"
-                        placeholder="Số ngày du lịch"
-                        id="number"
+                        placeholder="Tên tour"
+                        id="nameTour"
                       />
                     </div>
                     <div
@@ -172,20 +175,21 @@ class Home extends Component {
                       style={{ width: "16%" }}
                     >
                       <input
-                        type="date"
+                        type="text"
                         className="field-input hasDatepicker"
-                        placeholder="Ngày khởi hành"
-                        id="date-start"
+                        placeholder="Tên công ty"
+                        id="company_name"
                       />
                     </div>
                     <div className="form-field field-date">
                       <input
                         type="text"
                         className="field-input hasDatepicker"
-                        placeholder="Số lượng người"
-                        id="peoplenumber"
+                        placeholder="Giá tiền"
+                        id="price"
                       />
                     </div>
+
                     <div className="form-submit">
                       <button
                         type="submit"
@@ -208,10 +212,7 @@ class Home extends Component {
           <div className="title-wrap">
             <div className="container">
               <div className="travel-title float-left">
-                <h2>
-                  Những tour được giảm giá:{" "}
-                  <span>Đà Nẵng, Ninh Bình, Phú Quốc, ...</span>
-                </h2>
+                <h2>Những tour được giảm giá: </h2>
               </div>
               <NavLink
                 to="/travel?sale"
@@ -227,251 +228,49 @@ class Home extends Component {
             <div className="sales-cn">
               <div className="row">
                 {/* <!-- HostSales Item --> */}
-                <NavLink className="col-xs-6 col-md-3" to="/tourDetail/1">
+                {this.props.toursale?.map((item,i)=>(
+                  <NavLink className="col-xs-6 col-md-3" to={`/tourDetail/${item._id}`}>
                   <div className="sales-item">
                     <figure className="home-sales-img">
                       <a href="#void" title="">
-                        <img src="assets/images/traveldalat2.jpg" alt="" />
+                        <img src={item.image} alt="" />
                       </a>
                       <figcaption>
-                        Save <span>30</span>%
+                        Save <span>{item.sale}</span>%
                       </figcaption>
                     </figure>
                     <div className="home-sales-text">
                       <div className="home-sales-name-places">
                         <div className="home-sales-name">
                           <a href="#void" title="">
-                            Copley Square Hotel
+                            {item.name}
                           </a>
                         </div>
                         <div className="home-sales-places">
                           <a href="#void" title="">
-                            Boston
+                            Công ty: {item.company_id.name}
                           </a>
+                        </div>
+                        <div className="home-sales-places">
                           <a href="#void" title="">
-                            Massachusetts
+                            {item.category_id.name}
                           </a>
                         </div>
                       </div>
                       <hr className="hr" />
-                      <div className="price-box">
-                        <span className="price old-price">
+                      <div className="price-box" style = {{marginTop:"15px"}}>
+                        {/* <span className="price old-price">
                           From <del>$269</del>
-                        </span>
-                        <span className="price special-price">
-                          $175<small>/night</small>
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                </NavLink>
-                {/* <!-- End HostSales Item -->
-                        <!-- HostSales Item --> */}
-                <NavLink className="col-xs-6 col-md-3" to="/tourDetail/1">
-                  <div className="sales-item">
-                    <figure className="home-sales-img">
-                      <a href="#void" title="">
-                        <img src="assets/images/travelsapa.jpg" alt="" />
-                      </a>
-                      <figcaption>
-                        Save <span>30</span>%
-                      </figcaption>
-                    </figure>
-
-                    <div className="home-sales-text">
-                      <div className="home-sales-name-places">
-                        <div className="home-sales-name">
-                          <a href="#void" title="">
-                            Grand Hotel Bagni Nuovi
-                          </a>
-                        </div>
-                        <div className="home-sales-places">
-                          <a href="#void" title="">
-                            Boston
-                          </a>
-                          ,
-                          <a href="#void" title="">
-                            Italy
-                          </a>
-                        </div>
-                      </div>
-                      <hr className="hr" />
-                      <div className="price-box">
-                        <span className="price old-price">
-                          From <del>$632</del>
-                        </span>
-                        <span className="price special-price">
-                          $345<small>/night</small>
+                        </span> */}
+                        <span className="price special-price" style = {{fontSize:"15px"}}>
+                        <img src = "assets/images/dola.png" style = {{height:"40px"}}/>{item.price}<small>/tour(VND)</small>
                         </span>
                       </div>
                     </div>
                   </div>
                 </NavLink>
-                {/* <!-- End HostSales Item -->
-                        <!-- HostSales Item --> */}
-                <NavLink className="col-md-6" to="/tourDetail/1">
-                  <div className="sales-item ">
-                    <figure className="home-sales-img">
-                      <a href="#void" title="">
-                        <img src="assets/images/traveldalat.jpg" alt="" />
-                      </a>
-                      <figcaption>
-                        Save <span>30</span>%
-                      </figcaption>
-                    </figure>
-                    <div className="home-sales-text">
-                      <div className="home-sales-name-places">
-                        <div className="home-sales-name">
-                          <a href="#void" title="">
-                            The Standard, East Village
-                          </a>
-                        </div>
-                        <div className="home-sales-places">
-                          <a href="#void" title="">
-                            New York
-                          </a>
-                          ,
-                          <a href="#void" title="">
-                            New York
-                          </a>
-                        </div>
-                      </div>
-                      <hr className="hr" />
-                      <div className="price-box">
-                        <span className="price old-price">
-                          From <del>$582</del>
-                        </span>
-                        <span className="price special-price">
-                          $258<small>/night</small>
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                </NavLink>
-                {/* <!-- End HostSales Item -->
-                        <!-- HostSales Item --> */}
-                <NavLink className="col-md-6" to="/tourDetail/1">
-                  <div className="sales-item">
-                    <figure className="home-sales-img">
-                      <a href="#void" title="">
-                        <img src="assets/images/travelSonDoong.jpg" alt="" />
-                      </a>
-                      <figcaption>
-                        Save <span>30</span>%
-                      </figcaption>
-                    </figure>
-                    <div className="home-sales-text">
-                      <div className="home-sales-name-places">
-                        <div className="home-sales-name">
-                          <a href="#void" title="">
-                            Ganges River Cruise
-                          </a>
-                        </div>
-                        <div className="home-sales-places">
-                          <a href="#void" title="">
-                            London
-                          </a>
-                          ,
-                          <a href="#void" title="">
-                            United Kingdom
-                          </a>
-                        </div>
-                      </div>
-                      <hr className="hr" />
-                      <div className="price-box">
-                        <span className="price old-price">
-                          From <del>$457</del>
-                        </span>
-                        <span className="price special-price">
-                          $258<small>/night</small>
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                </NavLink>
-                {/* <!-- End HostSales Item -->
-                        <!-- HostSales Item --> */}
-                <NavLink className="col-xs-6 col-md-3" to="/tourDetail/1">
-                  <div className="sales-item">
-                    <figure className="home-sales-img">
-                      <a href="#void" title="">
-                        <img src="assets/images/travelHue.jpg" alt="" />
-                      </a>
-                      <figcaption>
-                        Save <span>30</span>%
-                      </figcaption>
-                    </figure>
-                    <div className="home-sales-text">
-                      <div className="home-sales-name-places">
-                        <div className="home-sales-name">
-                          <a href="#void" title="">
-                            Town Hall Hotel
-                          </a>
-                        </div>
-                        <div className="home-sales-places">
-                          <a href="#void" title="">
-                            Boston
-                          </a>
-                          ,
-                          <a href="#void" title="">
-                            Massachusetts
-                          </a>
-                        </div>
-                      </div>
-                      <hr className="hr" />
-                      <div className="price-box">
-                        <span className="price old-price">
-                          From <del>$269</del>
-                        </span>
-                        <span className="price special-price">
-                          $175<small>/night</small>
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                </NavLink>
-                {/* <!-- End HostSales Item -->
-                        <!-- HostSales Item --> */}
-                <NavLink className="col-xs-6 col-md-3" to="/tourDetail/1">
-                  <div className="sales-item">
-                    <figure className="home-sales-img">
-                      <a href="#void" title="">
-                        <img src="assets/images/TravelDanang.jpg" alt="" />
-                      </a>
-                      <figcaption>
-                        Save <span>30</span>%
-                      </figcaption>
-                    </figure>
-                    <div className="home-sales-text">
-                      <div className="home-sales-name-places">
-                        <div className="home-sales-name">
-                          <a href="#void" title="">
-                            A Hidden NYC Mystery Hotel
-                          </a>
-                        </div>
-                        <div className="home-sales-places">
-                          <a href="#void" title="">
-                            Boston
-                          </a>
-                          ,
-                          <a href="#void" title="">
-                            Italy
-                          </a>
-                        </div>
-                      </div>
-                      <hr className="hr" />
-                      <div className="price-box">
-                        <span className="price old-price">
-                          From <del>$354</del>
-                        </span>
-                        <span className="price special-price">
-                          $255<small>/night</small>
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                </NavLink>
-                {/* <!-- End HostSales Item --> */}
+                ))}
+                
               </div>
             </div>
           </div>
@@ -486,7 +285,7 @@ class Home extends Component {
                 <h2>Những tour du lịch </h2>
               </div>
               <NavLink
-               to="/travel"
+                to="/travel"
                 className="awe-btn awe-btn-5 arrow-right awe-btn-lager text-uppercase float-right"
               >
                 Xem tất cả
@@ -516,36 +315,13 @@ class Home extends Component {
                           bạn
                         </a>
                       </li>
-                      <li>
-                        <NavLink to="/travel?sightseeing">
-                          <i className="fa fa-map-marker"></i> Du lịch tham quan
-                        </NavLink>
-                      </li>
-                      <li>
-                        <NavLink to="/travel?cultural">
-                          <i className="fa fa-map-marker"></i> Du lịch văn hóa
-                        </NavLink>
-                      </li>
-                      <li>
-                        <NavLink to="/travel?cuisine">
-                          <i className="fa fa-map-marker"></i> Du lịch ẩm thực
-                        </NavLink>
-                      </li>
-                      <li>
-                        <NavLink to="/travel?green">
-                          <i className="fa fa-map-marker"></i> Du lịch xanh
-                        </NavLink>
-                      </li>
-                      <li>
-                        <NavLink to="/travel?mice">
-                          <i className="fa fa-map-marker"></i> Du lịch MICE
-                        </NavLink>
-                      </li>
-                      <li>
-                        <NavLink to="/travel?building">
-                          <i className="fa fa-map-marker"></i> Team building
-                        </NavLink>
-                      </li>
+                      {this.props.categorydata?.map((item, i) => (
+                        <li>
+                          <NavLink to={`/travel?${item._id}`} key={i}>
+                            <i className="fa fa-map-marker"></i> {item.name}
+                          </NavLink>
+                        </li>
+                      ))}
                     </ul>
                   </div>
                 </div>
@@ -553,164 +329,49 @@ class Home extends Component {
                         <!-- Destinations Grid --> */}
                 <div className="col-md-8 col-lg-9">
                   <div className="tab-content destinations-grid">
-                    {/* <!-- Tab One --> */}
                     <div
                       id="destinations-1"
                       className="clearfix tab-pane fade active in "
                     >
-                      {/* <!-- Destinations Item --> */}
-                      <NavLink
-                        className="col-xs-6 col-sm-4 col-md-6 col-lg-4"
-                        to="/tourDetail/1"
-                      >
-                        <div className="destinations-item ">
-                          <div className="destinations-text">
-                            <div className="destinations-name">
-                              <a href="#void" title="">
-                                London - UK
-                              </a>
+                      {this.props.toursdata?.map((item, i) => (
+                        <NavLink
+                          key={i}
+                          className="col-xs-6 col-sm-4 col-md-6 col-lg-4"
+                          to={`/tourDetail/${item._id}`}
+                        >
+                          <div className="destinations-item ">
+                            <div className="destinations-text">
+                              <div className="destinations-name">
+                                <a href="#void" title="">
+                                  {item.name}
+                                </a>
+                              </div>
+                              <div>
+                                <span className="properties-nb">
+                                  Công ty: {item.company_id.name}
+                                </span>
+                              </div>
+                              <div>
+                                <span className="properties-nb">
+                                  {item.category_id.name}
+                                </span>
+                              </div>
+
+                              {/* <a href="#void" title="">
+                            Công ty: {item.company_id.name}
+                            </a> */}
+                              {/* <a href="#void" title="">
+                            {item.category_id.name}
+                          </a> */}
                             </div>
-                            <span className="properties-nb">
-                              <ins>1289</ins> properties
-                            </span>
-                          </div>
-                          <figure className="destinations-img">
-                            <a href="#void" title="">
-                              <img src="assets/images/travel.jpg" alt="" />
-                            </a>
-                          </figure>
-                        </div>
-                      </NavLink>
-                      {/* <!-- End Destinations Item -->
-                                    <!-- Destinations Item --> */}
-                      <NavLink
-                        className="col-xs-6 col-sm-4 col-md-6 col-lg-4"
-                        to="/tourDetail/1"
-                      >
-                        <div className="destinations-item">
-                          <div className="destinations-text">
-                            <div className="destinations-name">
+                            <figure className="destinations-img">
                               <a href="#void" title="">
-                                Paris - France
+                                <img src={item.image} alt="" />
                               </a>
-                            </div>
-                            <span className="properties-nb">
-                              239 properties
-                            </span>
+                            </figure>
                           </div>
-                          <figure className="destinations-img">
-                            <a href="#void" title="">
-                              <img src="assets/images/travelsapa.jpg" alt="" />
-                            </a>
-                          </figure>
-                        </div>
-                      </NavLink>
-                      {/* <!-- End Destinations Item -->
-                                    <!-- Destinations Item --> */}
-                      <NavLink
-                        className="col-xs-6 col-sm-4 col-md-6 col-lg-4"
-                        to="/tourDetail/1"
-                      >
-                        <div className="destinations-item">
-                          <div className="destinations-text">
-                            <div className="destinations-name">
-                              <a href="#void" title="">
-                                Rome - Italy
-                              </a>
-                            </div>
-                            <span className="properties-nb">
-                              478 properties
-                            </span>
-                          </div>
-                          <figure className="destinations-img">
-                            <a href="#void" title="">
-                              <img
-                                src="assets/images/travelSonDoong.jpg"
-                                alt=""
-                              />
-                            </a>
-                          </figure>
-                        </div>
-                      </NavLink>
-                      {/* <!-- End Destinations Item -->
-                                    <!-- Destinations Item --> */}
-                      <NavLink
-                        className="col-xs-6 col-sm-4 col-md-6 col-lg-4"
-                        to="/tourDetail/1"
-                      >
-                        <div className="destinations-item">
-                          <div className="destinations-text">
-                            <div className="destinations-name">
-                              <a href="#void" title="">
-                                Barcelona - Spain
-                              </a>
-                            </div>
-                            <span className="properties-nb">
-                              452 properties
-                            </span>
-                          </div>
-                          <figure className="destinations-img">
-                            <a href="#void" title="">
-                              <img
-                                src="assets/images/TravelDanang.jpg"
-                                alt=""
-                              />
-                            </a>
-                          </figure>
-                        </div>
-                      </NavLink>
-                      {/* <!-- End Destinations Item -->
-                                    <!-- Destinations Item --> */}
-                      <NavLink
-                        className="col-xs-6 col-sm-4 col-md-6 col-lg-4"
-                        to="/tourDetail/1"
-                      >
-                        <div className="destinations-item">
-                          <div className="destinations-text">
-                            <div className="destinations-name">
-                              <a href="#void" title="">
-                                Madrid - Spain
-                              </a>
-                            </div>
-                            <span className="properties-nb">
-                              794 properties
-                            </span>
-                          </div>
-                          <figure className="destinations-img">
-                            <a href="#void" title="">
-                              <img
-                                src="assets/images/traveldalat2.jpg"
-                                alt=""
-                              />
-                            </a>
-                          </figure>
-                        </div>
-                      </NavLink>
-                      {/* <!-- End Destinations Item -->
-                                    <!-- Destinations Item --> */}
-                      <NavLink
-                        className="col-xs-6 col-sm-4 col-md-6 col-lg-4"
-                        to="/tourDetail/1"
-                      >
-                        <div className="destinations-item">
-                          <div className="destinations-text">
-                            <div className="destinations-name">
-                              <a href="#void" title="">
-                                Vienna - Austria
-                              </a>
-                            </div>
-                            <span className="properties-nb">
-                              1289 properties
-                            </span>
-                          </div>
-                          <figure className="destinations-img">
-                            <a href="#void" title="">
-                              <img src="assets/images/travel5.jpg" alt="" />
-                            </a>
-                          </figure>
-                        </div>
-                      </NavLink>
-                      {/* <!-- End Destinations Item --> */}
+                        </NavLink>
+                      ))}
                     </div>
                     {/* <!-- End Tab One -->
                                 <!-- Tab Two --> */}
@@ -1251,5 +912,24 @@ class Home extends Component {
     );
   }
 }
+function mapStateProps(state) {
+  return {
+    loading: state.auth.loading,
+    error: state.auth.error,
+    categorydata: state.category.data,
+    tourStatus: state.tour.loading,
+    toursdata: state.tour.data,
+    toursale: state.tour.datasale,
+    loadingsale: state.tour.loadingsale,
+  };
+}
+function mapDispatchToProps(dispatch) {
+  return {
+    getAllTourStart: () => dispatch(getToursStart()),
+    getAllTour: (limit) => dispatch(gettours(limit)),
+    getTourSale: () => dispatch(getToursSale()),
+    getCategoty: () => dispatch(getCategory()),
+  };
+}
 
-export default Home;
+export default connect(mapStateProps, mapDispatchToProps)(Home);
