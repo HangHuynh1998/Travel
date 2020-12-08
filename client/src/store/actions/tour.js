@@ -61,7 +61,6 @@ export const getToursStart = () => {
   };
 };
 export const getToursSuccess = (data) => {
-  console.log("getour success",data);
   return {
     type: actionTypes.GETTOURS_SUCCESS,
     data: data,
@@ -309,7 +308,6 @@ export const getToursSaleFail = (error) => {
   };
 };
 export const getToursSale = () => {
-  console.log("dddddd");
   return (dispatch) => {
     dispatch(getToursSaleStart());
     axios

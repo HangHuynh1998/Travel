@@ -135,9 +135,6 @@ class Home extends Component {
     this.unlisten();
   }
   render() {
-    console.log("tourdata", this.props.toursdata);
-    console.log("sale",this.props.toursale);
-    console.log("comment",this.props.commentdata);
     return (
       <div>
         <NavBar />
@@ -746,7 +743,6 @@ class Home extends Component {
   }
 }
 function mapStateProps(state) {
-  console.log("mapProps",state.tour.data);
   return {
     loading: state.auth.loading,
     error: state.auth.error,

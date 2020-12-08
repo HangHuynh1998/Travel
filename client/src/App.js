@@ -21,6 +21,7 @@ import ChangeProfileCompany from "./container/ChangeProfileCompany";
 import ChangeProfileCustomer from "./container/ChangeProfileCustomer";
 import { Component } from "react";
 import jwt_decode from "jwt-decode";
+import { authStart } from "./store/actions";
 function NotFound() {
   return (
     <div>
@@ -34,14 +35,14 @@ class App extends Component {
     this.state = {
       role: null,
       status: "",
-      name:"",
-      user_id:"",
-      id:"",
+      name: "",
+      user_id: "",
+      id: "",
     };
     this.initState = this.initState.bind(this);
   }
   componentDidMount() {
-      this.initState();
+    this.initState();
   }
   componentDidUpdate(prevProps) {
     if (
@@ -51,14 +52,20 @@ class App extends Component {
       this.initState();
     }
   }
+  // componentWillReceiveProps(nextProps) {
+  //   this.props.authStart()
+  //   if(nextProps.loading === "success"){
+  //     this.initState()
+  //   }
+  // }
   initState() {
     console.log("ajsjdjsajdjas");
     if (localStorage.getItem("token")) {
       let role = jwt_decode(localStorage.getItem("token")).user_id.role;
       let name = jwt_decode(localStorage.getItem("token")).user_id.name;
       let user_id = jwt_decode(localStorage.getItem("token")).user_id._id;
-      let id = jwt_decode(localStorage.getItem("token"))._id
-      this.setState({ role: role,name:name,user_id:user_id ,id:id});
+      let id = jwt_decode(localStorage.getItem("token"))._id;
+      this.setState({ role: role, name: name, user_id: user_id, id: id });
     }
   }
   render() {
@@ -69,10 +76,28 @@ class App extends Component {
         <Route path="/login" exact component={Login} />
         <Route path="/register" component={Register} />
         <Route path="/about" component={About} />
-        <Route path="/review" render={() => <Review role = {this.state.role} user_id ={this.state.user_id}/>} />
+        <Route
+          path="/review"
+          render={() => (
+            <Review role={this.state.role} user_id={this.state.user_id} />
+          )}
+        />
         <Route path="/travel" component={Travel} />
-        <Route path="/tourDetail/:tour_id" render={() => <TourDetail role = {this.state.role} user_id ={this.state.user_id}/>}/>
+        <Route
+          path="/tourDetail/:tour_id"
+          render={() => (
+            <TourDetail role={this.state.role} user_id={this.state.user_id} />
+          )}
+        />
         <Route path="/companyDetail/:company_id" component={CompanyDetail} />
+        {this.state.role !== null && (
+          <Route
+            path="/changePass/:_id"
+            render={() => (
+              <ChangePass name={this.state.name} user_id={this.state.user_id} />
+            )}
+          />
+        )}
         {this.state.role === "customer" && (
           <>
             <Route path="/booktour/:tour_id" component={BookTour} />
@@ -92,21 +117,39 @@ class App extends Component {
           <>
             <Route path="/profileCompany/:_id" component={ProfileCompany} />
 
-            <Route path="/managerCompany/:_id" render={() => <ManagerTourCompany id = {this.state.id} user_id ={this.state.user_id} />} />
-            <Route path="/editTour/:_id" render={() => <EditTour name = {this.state.name} user_id ={this.state.user_id} />} />
+            <Route
+              path="/managerCompany/:_id"
+              render={() => (
+                <ManagerTourCompany
+                  id={this.state.id}
+                  user_id={this.state.user_id}
+                />
+              )}
+            />
+            <Route
+              path="/editTour/:_id"
+              render={() => (
+                <EditTour name={this.state.name} user_id={this.state.user_id} />
+              )}
+            />
             <Route
               path="/changeProfileCompany/:_id"
-              render={() => <ChangeProfileCompany name = {this.state.name} user_id ={this.state.user_id} />}
+              render={() => (
+                <ChangeProfileCompany
+                  name={this.state.name}
+                  user_id={this.state.user_id}
+                />
+              )}
             />
 
-            <Route path="/addtour" render={() => <AddTour name = {this.state.name} user_id ={this.state.user_id} />} />
+            <Route
+              path="/addtour"
+              render={() => (
+                <AddTour name={this.state.name} user_id={this.state.user_id} />
+              )}
+            />
           </>
         )}
-
-        {this.props.isAuthenticated && (
-          <Route path="/changePass/:_id" component={ChangePass} />
-        )}
-
         <Route component={NotFound} />
       </Switch>
     );
@@ -125,7 +168,7 @@ const mapStateProps = (state) => {
 };
 const mapDispatchToProps = (dispatch) => {
   return {
-    //onTryAutoSignup: () => dispatch(actions.authCheckState()),
+    authStart:() => dispatch(authStart())
   };
 };
 export default connect(mapStateProps, mapDispatchToProps)(App);
