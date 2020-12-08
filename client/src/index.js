@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useReducer } from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 // import burgerBuilderReducer from "./store/reducers/burgerBuilder";
@@ -15,6 +15,7 @@ import commentReducer from './store/reducers/comment'
 import tourDetailReducer from './store/reducers/tourdetail'
 import tourOfCompanyReducer from './store/reducers/tourofcompany'
 import tourSaleReducer from './store/reducers/toursale'
+import userReducer from './store/reducers/user'
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 // const store = createStore(
 //   reducer,
@@ -28,7 +29,8 @@ const rootReducer = combineReducers({
   comment:commentReducer,
   tourdetail:tourDetailReducer,
   tourOfCompany:tourOfCompanyReducer,
-  toursale:tourSaleReducer
+  toursale:tourSaleReducer,
+  user:userReducer
 });
 
 const store = createStore(

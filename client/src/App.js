@@ -96,7 +96,7 @@ class App extends Component {
             <Route path="/editTour/:_id" render={() => <EditTour name = {this.state.name} user_id ={this.state.user_id} />} />
             <Route
               path="/changeProfileCompany/:_id"
-              component={ChangeProfileCompany}
+              render={() => <ChangeProfileCompany name = {this.state.name} user_id ={this.state.user_id} />}
             />
 
             <Route path="/addtour" render={() => <AddTour name = {this.state.name} user_id ={this.state.user_id} />} />

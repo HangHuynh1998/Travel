@@ -1,7 +1,14 @@
 import React, { Component } from "react";
 import NavBar from "../Component/NavBar";
-import { NavLink } from "react-router-dom";
+import { NavLink, withRouter } from "react-router-dom";
+import { getUser } from "../store/actions/user";
+import { connect } from "react-redux";
 class ProfileCompany extends Component {
+
+
+  componentDidMount(){
+    this.props.getUser()
+  }
   render() {
     return (
       <div>
@@ -20,10 +27,10 @@ class ProfileCompany extends Component {
                   className="login100-form-title p-b-43"
                   style={{ marginLeft: "10px", marginTop:"50px" }}
                 >
-                  Công ty DaNangTourist
+                  Công ty {this.props.user?.name}
                 </span>
                 <img
-                  src="assets/images/login.jpg"
+                  src={this.props.user?.avatar}
                   alt="..."
                   className="round-circle"
                   style={{
@@ -35,29 +42,29 @@ class ProfileCompany extends Component {
                 ></img>
                 <div className="form-group" style = {{marginTop:"10px"}}>
                   <span>Đia chỉ: </span>
-                  <span>54 Nguyễn Lương Bằng</span>
+                  <span>{this.props.user?.address}</span>
                 </div>
                 <div className="form-group">
                   <span>Số điện thoại: </span>
-                  <span>0123456789</span>
+                  <span>0{this.props.user?.phone}</span>
                 </div>
                 <div className="form-group">
                   <span>Email: </span>
-                  <span>travel@gmai.com</span>
+                  <span>{this.props.user?.email}</span>
                 </div>
                 <div className="form-group">
                   <span>Mô tả: </span>
-                  <span>Là công ty hàng đầu về lĩnh vực du lịch trong nước</span>
+                  <span>{this.props.user?.description}</span>
                 </div>
                 <div
                   className="container-login100-form-btn"
                   style={{ marginTop: "70px",justifyContent:"space-around" }}
-                > <NavLink to= "/changeProfileCompany/1">
+                > <NavLink to= {`/changeProfileCompany/${this.props.user?._id}`}>
                 <button type="button" className="login100-form-btn" style = {{width:"170px"}} >
                   Thay đổi thông tin
                 </button>
                 </NavLink>
-                <NavLink to ="/changePass/1">
+                <NavLink to ={`/changePass/${this.props.user?._id}`}>
                 <button type="button" className="login100-form-btn" style = {{width:"170px"}}>
                   Thay đổi mật khẩu
                 </button>
@@ -71,5 +78,15 @@ class ProfileCompany extends Component {
     );
   }
 }
-
-export default ProfileCompany;
+function mapStateProps(state) {
+  return {
+    loading: state.user.loading,
+    user: state.user.data
+  };
+}
+function mapDispatchToProps(dispatch) {
+  return {
+     getUser:() => dispatch(getUser())
+  };
+}
+export default withRouter(connect(mapStateProps, mapDispatchToProps)(ProfileCompany));
