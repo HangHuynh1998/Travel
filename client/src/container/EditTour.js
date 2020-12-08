@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import NavBar from '../Component/NavBar';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { getCategory, edittour } from '../store/actions';
+import { getCategory, edittour, editTourStart } from '../store/actions';
 import { getOneTour, getOneTourStart } from '../store/actions/tourdetail';
 import { storage } from '../firebase';
 
@@ -32,11 +32,17 @@ class EditTour extends Component {
   componentDidMount(){
     this.props.getCategory()
     this.props.getTourDetail(this.props.history.location.pathname.slice(10))
+    this.initState()
   }
   componentWillReceiveProps(nextProps){
+
     this.props.getTourDetailStart()
     if(nextProps.loading === "success"){
       this.initState()
+    }
+    this.props.editTourStart()
+    if(nextProps.editTourStatus === "success"){
+      this.props.history.push(`/managerCompany/${this.props.user_id}`)
     }
   }
   initState(){
@@ -95,6 +101,7 @@ class EditTour extends Component {
     );
   }
   submit(){
+    console.log("háhshss",this.state);
     this.props.editTour(
       this.props.history.location.pathname.slice(10),
       this.state.name,
@@ -195,6 +202,10 @@ class EditTour extends Component {
                     onChange={(e) => this.handleChangeImage(e)}
                   />
                 </div>
+                <div className="form-group">
+                      <process value={process} max="100"></process>
+                      <img src={this.state.avatar} alt="" />
+                    </div>
                 <div className="form-group ">
                       <label
                         className="col-2 col-form-label"
@@ -206,7 +217,7 @@ class EditTour extends Component {
                           className="form-control"
                           type="date"
                           id="startDate"
-                          value={this.props.tourdetail?.startDate}
+                          value={this.state.startDate}
                           onChange={(e) => this.handleChange(e)}
                         />
                       </div>
@@ -222,7 +233,7 @@ class EditTour extends Component {
                           className="form-control"
                           type="date"
                           id="endDate"
-                          value={this.props.tourdetail?.endDate}
+                          value={this.state.endDate}
                           onChange={(e) => this.handleChange(e)}
                         />
                       </div>
@@ -280,7 +291,8 @@ function mapStateProps(state) {
   return {
     categorydata: state.category.data,
     tourdetail: state.tourdetail.tourdetail,
-    loading: state.tourdetail.loading
+    loading: state.tourdetail.loading,
+    editTourStatus: state.tour.loading
   };
 }
 function mapDispatchToProps(dispatch) {
@@ -288,6 +300,7 @@ function mapDispatchToProps(dispatch) {
     getCategory:()=>dispatch(getCategory()),
     getTourDetailStart:()=>dispatch(getOneTourStart()),
     getTourDetail:(id)=>dispatch(getOneTour(id)),
+    editTourStart:() => dispatch(editTourStart()),
     editTour:(
       id,
       name,

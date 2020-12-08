@@ -215,7 +215,6 @@ const deleteTourStart = (state, action) => {
 const deleteTourSuccess = (state, action) => {
   return {
     ...state,
-    data: action.data,
     error: null,
     loading: "success",
   };

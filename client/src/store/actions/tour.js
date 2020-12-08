@@ -341,27 +341,12 @@ export const deleteTourFail = (error) => {
   };
 };
 export const deletetour = (
-  name,
-  address,
-  phone,
-  birthday,
-  gender,
-  email,
-  password
+id
 ) => {
   return (dispatch) => {
     dispatch(deleteTourStart());
-    const data = {
-      name: name,
-      email: email,
-      password: password,
-      birthday: birthday,
-      gender: gender,
-      address: address,
-      phone: phone,
-    };
     axios
-      .post("/auth/register/customer", data)
+      .delete(`/tour/${id}`)
       .then((res) => {
         dispatch(deleteTourSuccess());
         // dispatch(checkAuthTimeout(res.data.expiresIn));

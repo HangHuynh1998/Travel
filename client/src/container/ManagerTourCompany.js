@@ -3,17 +3,24 @@ import NavBar from "../Component/NavBar";
 import { NavLink, withRouter } from "react-router-dom";
 import { getTourOfCompany } from "../store/actions/tourofcompany";
 import { connect } from "react-redux";
+import { deletetour, deleteTourStart } from "../store/actions";
 
 class ManagerTourCompany extends Component {
-  constructor(){
-    super()
-    this.handleDeleteTour = this.handleDeleteTour.bind(this)
+  constructor() {
+    super();
+    this.handleDeleteTour = this.handleDeleteTour.bind(this);
   }
   componentDidMount() {
     this.props.getTourOfCompany(this.props.id);
   }
-  handleDeleteTour(id){
-
+  handleDeleteTour(id) {
+    this.props.deleteTour(id)
+  }
+  componentWillReceiveProps(nextProps){
+    this.props.deleteTourStart()
+    if(nextProps.deleteloading === "success"){
+      this.props.getTourOfCompany(this.props.id);
+    }
   }
   render() {
     let tours = null;
@@ -55,23 +62,24 @@ class ManagerTourCompany extends Component {
               <div className="row">
                 {/* <!-- HostSales Item --> */}
                 {tours?.map((item, i) => (
-                  <NavLink
-                    className="col-xs-6 col-md-3"
-                    to={`/tourDetail/${item._id}`}
-                    key={i}
-                    style={{ marginBottom: "5px" }}
-                  >
-                    <div className="sales-item" style = {{height:"650px"}}>
-                      <figure className="home-sales-img">
-                        <a href="#void" title="">
-                          <img src={item.image} alt="" />
-                        </a>
-                        {item.sale && (
-                          <figcaption>
-                            Save <span>{item.sale}</span>%
-                          </figcaption>
-                        )}
-                      </figure>
+                  <div className="col-xs-6 col-md-3">
+                    <div className="sales-item" style={{ height: "650px" }}>
+                      <NavLink
+                        to={`/tourDetail/${item._id}`}
+                        key={i}
+                        style={{ marginBottom: "5px" }}
+                      >
+                        <figure className="home-sales-img">
+                          <a href="#void" title="">
+                            <img src={item.image} alt="" />
+                          </a>
+                          {item.sale && (
+                            <figcaption>
+                              Save <span>{item.sale}</span>%
+                            </figcaption>
+                          )}
+                        </figure>
+                      </NavLink>
                       <div className="home-sales-text">
                         <div
                           className="home-sales-name-places"
@@ -98,9 +106,6 @@ class ManagerTourCompany extends Component {
                           className="price-box"
                           style={{ marginTop: "15px" }}
                         >
-                          {/* <span className="price old-price">
-                          From <del>$269</del>
-                        </span> */}
                           <span
                             className="price special-price"
                             style={{ fontSize: "15px" }}
@@ -113,6 +118,7 @@ class ManagerTourCompany extends Component {
                             <small>/tour(VND)</small>
                           </span>
                         </div>
+
                         <div
                           style={{
                             display: "flex",
@@ -134,7 +140,7 @@ class ManagerTourCompany extends Component {
                             type="button"
                             className="login100-form-btn"
                             style={{ width: "100px", backgroundColor: "red" }}
-                            onClick = {()=>this.handleDeleteTour(item.id)}
+                            onClick={() => this.handleDeleteTour(item._id)}
                           >
                             {" "}
                             Xóa tour
@@ -142,19 +148,16 @@ class ManagerTourCompany extends Component {
                         </div>
                       </div>
                     </div>
-                  </NavLink>
+                  </div>
                 ))}
-                {/* <!-- End HostSales Item --> */}
               </div>
             </div>
           </div>
-          {/* <!-- End Hot Sales Content --> */}
         </section>
         <section
           className="sales"
           style={{ marginTop: "20px", marginBottom: "20px" }}
         >
-          {/* <!-- Title --> */}
           <div className="title-wrap">
             <div className="container">
               <div className="travel-title float-left">
@@ -162,12 +165,9 @@ class ManagerTourCompany extends Component {
               </div>
             </div>
           </div>
-          {/* <!-- End Title -->
-            <!-- Hot Sales Content --> */}
           <div className="container">
             <div className="sales-cn">
               <div className="row">
-                {/* <!-- HostSales Item --> */}
                 <NavLink className="col-xs-6 col-md-3" to="/tourDetail/1">
                   <div className="sales-item">
                     <figure className="home-sales-img">
@@ -209,7 +209,6 @@ class ManagerTourCompany extends Component {
               </div>
             </div>
           </div>
-          {/* <!-- End Hot Sales Content --> */}
         </section>
       </div>
     );
@@ -219,11 +218,14 @@ function mapStateProps(state) {
   return {
     loading: state.tourOfCompany.loading,
     tourOfCompany: state.tourOfCompany.tourOfCompany,
+    deleteloading: state.tour.loading
   };
 }
 function mapDispatchToProps(dispatch) {
   return {
     getTourOfCompany: (id) => dispatch(getTourOfCompany(id)),
+    deleteTourStart:() => dispatch(deleteTourStart()),
+    deleteTour:(id) => dispatch(deletetour(id))
   };
 }
 export default withRouter(
