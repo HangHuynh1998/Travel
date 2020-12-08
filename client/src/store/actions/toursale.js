@@ -4,18 +4,18 @@ import axios from "../../axios-travel";
 
 export const getToursSaleStart = () => {
     return {
-      type: actionTypes.GETTOURSSALE_START,
+      type: actionTypes.GETTOURSSALEHOME_START,
     };
   };
   export const getToursSaleSuccess = (data) => {
     return {
-      type: actionTypes.GETTOURSSALE_SUCCESS,
+      type: actionTypes.GETTOURSSALEHOME_SUCCESS,
       datasale: data,
     };
   };
   export const getToursSaleFail = (error) => {
     return {
-      type: actionTypes.GETTOURSSALE_FAIL,
+      type: actionTypes.GETTOURSSALEHOME_FAIL,
       error: error,
     };
   };

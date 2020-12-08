@@ -194,9 +194,7 @@ class Register extends Component {
         }
         if (this.state.phone) {
           var phone = new RegExp(/^[0-9\b]+$/);
-          console.log("vvvvv");
           if (!phone.test(this.state.phone)) {
-            console.log("aaaa");
             this.setState({
               valiphone: "Không đúng định dạng",
               validation: true,
@@ -250,7 +248,6 @@ class Register extends Component {
   }
   render() {
     //const { match, location, history } = this.props
-    console.log("error", this.state);
     return (
       <div>
         <NavBar />

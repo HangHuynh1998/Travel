@@ -10,7 +10,6 @@ const authStart = (state, action) => {
   return {...state, error: null, loading: "loading" };
 };
 const authSuccess = (state, action) => {
-  console.log("action",action);
   return{
     ...state,
     token: action.token,

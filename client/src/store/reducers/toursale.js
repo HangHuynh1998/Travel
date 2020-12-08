@@ -26,11 +26,11 @@ const initialState = {
   
   const reducer = (state = initialState, action) => {
     switch (action.type) {
-        case actionTypes.GETTOURSSALE_START:
+        case actionTypes.GETTOURSSALEHOME_START:
             return getToursSaleStart(state, action);
-          case actionTypes.GETTOURSSALE_SUCCESS:
+          case actionTypes.GETTOURSSALEHOME_SUCCESS:
             return getToursSaleSuccess(state, action);
-          case actionTypes.GETTOURSSALE_FAIL:
+          case actionTypes.GETTOURSSALEHOME_FAIL:
             return getToursSaleFail(state, action);
             default:
                 return state;

@@ -95,7 +95,6 @@ class Home extends Component {
     });
   };
   handleSearch(){
-    console.log("search",this.state.place);
     if(this.state.place !== ""){
       this.props.history.push(`/travel?place=${this.state.place}`)
     }
@@ -124,8 +123,21 @@ class Home extends Component {
     this.props.getTourSale(8);
     this.props.getComment(5);
   }
+  componentWillMount() {
+    this.unlisten = this.props.history.listen((location, action) => {
+    this.props.getAllTour(6);
+    this.props.getCategoty();
+    this.props.getTourSale(8);
+    this.props.getComment(5);
+    });
+  }
+  componentWillUnmount() {
+    this.unlisten();
+  }
   render() {
-    console.log("shhs",this.props.toursale);
+    console.log("tourdata", this.props.toursdata);
+    console.log("sale",this.props.toursale);
+    console.log("comment",this.props.commentdata);
     return (
       <div>
         <NavBar />
@@ -334,16 +346,12 @@ class Home extends Component {
               </NavLink>
             </div>
           </div>
-          {/* <!-- End Title -->
-
-            <!-- Destinations Content --> */}
           <div className="destinations-cn">
             {/* <!-- Background --> */}
             <div
               className="bg-parallax bg-2"
               style={{ backgroundPosition: "50% 62px" }}
             ></div>
-            {/* <!-- End Background --> */}
 
             <div className="container">
               <div className="row">
@@ -738,14 +746,13 @@ class Home extends Component {
   }
 }
 function mapStateProps(state) {
+  console.log("mapProps",state.tour.data);
   return {
     loading: state.auth.loading,
     error: state.auth.error,
     categorydata: state.category.data,
-    tourStatus: state.tour.loading,
     toursdata: state.tour.data,
     toursale: state.toursale.datasale,
-    loadingsale: state.tour.loadingsale,
     commentdata: state.comment.datacomment,
     loadingcomment: state.comment.loading,
   };

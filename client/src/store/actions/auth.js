@@ -62,7 +62,6 @@ export const auth = (email, password) => {
     axios
       .post("/auth/login", authData)
       .then((res) => {
-        console.log(res.data.data.token);
         const expirationDate = new Date(
           new Date().getTime() + res.data.expiresIn * 1000
         );
@@ -74,7 +73,6 @@ export const auth = (email, password) => {
        // dispatch(checkAuthTimeout(res.data.expiresIn));
       })
       .catch((err) => {
-        console.log(err);
         dispatch(authFail(err));
       });
   };
@@ -94,12 +92,10 @@ export const registerCustomer = (name,address,phone,birthday,gender,email, passw
     axios
       .post("/auth/register/customer", data)
       .then((res) => {
-        console.log(res);
         dispatch(authSuccess());
        // dispatch(checkAuthTimeout(res.data.expiresIn));
       })
       .catch((err) => {
-        console.log(err);
         dispatch(authFail(err));
       });
   };
@@ -119,12 +115,10 @@ export const registerCompany = (name,address,phone,avatar,email, password,descri
     axios
       .post("/auth/register/company", data)
       .then((res) => {
-        console.log(res);
         dispatch(authSuccess());
        // dispatch(checkAuthTimeout(res.data.expiresIn));
       })
       .catch((err) => {
-        console.log(err);
         dispatch(authFail(err));
       });
   };
@@ -133,7 +127,6 @@ export const registerCompany = (name,address,phone,avatar,email, password,descri
 export const authCheckState = () => {
   return (dispatch) => {
     const token = localStorage.getItem("token");
-    console.log("localStorage", token);
     if (!token) {
       dispatch(logout());
     } else {

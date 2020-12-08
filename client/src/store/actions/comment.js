@@ -3,18 +3,18 @@ import axios from "../../axios-travel";
 
 export const getCommentStart = () => {
   return {
-    type: actionTypes.ADDTOUR_START,
+    type: actionTypes.GETCOMMENT_START,
   };
 };
 export const getCommentSuccess = (data) => {
   return {
-    type: actionTypes.ADDTOUR_SUCCESS,
+    type: actionTypes.GETCOMMENT_SUCCESS,
     datacomment: data
   };
 };
 export const getCommentFail = (error) => {
   return {
-    type: actionTypes.ADDTOUR_FAIL,
+    type: actionTypes.GETCOMMENT_FAIL,
     error: error,
   };
 };

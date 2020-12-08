@@ -5,8 +5,15 @@ import { getTourOfCompany } from "../store/actions/tourofcompany";
 import { connect } from "react-redux";
 
 class ManagerTourCompany extends Component {
+  constructor(){
+    super()
+    this.handleDeleteTour = this.handleDeleteTour.bind(this)
+  }
   componentDidMount() {
     this.props.getTourOfCompany(this.props.id);
+  }
+  handleDeleteTour(id){
+
   }
   render() {
     let tours = null;
@@ -59,9 +66,9 @@ class ManagerTourCompany extends Component {
                         <a href="#void" title="">
                           <img src={item.image} alt="" />
                         </a>
-                        {item.save && (
+                        {item.sale && (
                           <figcaption>
-                            Save <span>{item.save}</span>%
+                            Save <span>{item.sale}</span>%
                           </figcaption>
                         )}
                       </figure>
@@ -113,7 +120,7 @@ class ManagerTourCompany extends Component {
                             justifyContent: "space-around",
                           }}
                         >
-                          <NavLink to="/edittour/1">
+                          <NavLink to={`/edittour/${item._id}`}>
                             <button
                               type="button"
                               className="login100-form-btn"
@@ -127,6 +134,7 @@ class ManagerTourCompany extends Component {
                             type="button"
                             className="login100-form-btn"
                             style={{ width: "100px", backgroundColor: "red" }}
+                            onClick = {()=>this.handleDeleteTour(item.id)}
                           >
                             {" "}
                             Xóa tour

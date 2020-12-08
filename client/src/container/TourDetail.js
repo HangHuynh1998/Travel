@@ -9,7 +9,6 @@ class TourDetail extends Component {
       this.props.getTourDetail(this.props.history.location.pathname.slice(12));
     }
     render() {
-      console.log("hshahs",this.props.tourdetail,this.props.history);
         return (
             <div>
                 <NavBar />

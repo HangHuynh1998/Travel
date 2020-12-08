@@ -4,16 +4,16 @@ const initialState = {
   data: null,
   error: null,
   loading: "loading",
-  datasale: null,
-  loadingsale: "loading",
-  dataplace: null,
-  loadingplace: "loading",
-  datacompany: null,
-  loadingcompany: "loading",
-  dataprice: null,
-  loadingprice: "loading",
-  dataname: null,
-  loadingname: "loading",
+  // datasale: null,
+  // loadingsale: "loading",
+  // dataplace: null,
+  // loadingplace: "loading",
+  // datacompany: null,
+  // loadingcompany: "loading",
+  // dataprice: null,
+  // loadingprice: "loading",
+  // dataname: null,
+  // loadingname: "loading",
 };
 
 const addTourStart = (state, action) => {
@@ -39,16 +39,17 @@ const getToursStart = (state, action) => {
   return { ...state, error: null, loading: "loading" };
 };
 const getToursSuccess = (state, action) => {
+  console.log("reduce",action.data);
   return {
     ...state,
     data: action.data,
     error: null,
     loading: "success",
-    dataplace: null,
-    datacompany: null,
-    dataprice: null,
-    dataname: null,
-    datasale:null
+    // dataplace: null,
+    // datacompany: null,
+    // dataprice: null,
+    // dataname: null,
+    // datasale:null
   };
 };
 const getToursFail = (state, action) => {
@@ -64,14 +65,17 @@ const getToursPlaceStart = (state, action) => {
 const getToursPlaceSuccess = (state, action) => {
   return {
     ...state,
-    dataplace: action.dataplace,
+    // dataplace: action.dataplace,
+    // error: null,
+    // loadingplace: "success",
+    // data: null,
+    // datacompany: null,
+    // dataprice: null,
+    // dataname: null,
+    // datasale: null
+    data: action.data,
     error: null,
-    loadingplace: "success",
-    data: null,
-    datacompany: null,
-    dataprice: null,
-    dataname: null,
-    datasale: null
+    loading: "success",
   };
 };
 const getToursPlaceFail = (state, action) => {
@@ -85,17 +89,19 @@ const getToursNameStart = (state, action) => {
   return { ...state, error: null, loadingname: "loading" };
 };
 const getToursNameSuccess = (state, action) => {
-  console.log("jajaja", action.data);
   return {
     ...state,
-    dataname: action.dataname,
+    // dataname: action.dataname,
+    // error: null,
+    // loadingname: "success",
+    // data: null,
+    // datacompany: null,
+    // dataprice: null,
+    // dataplace: null,
+    // datasale: null
+    data: action.data,
     error: null,
-    loadingname: "success",
-    data: null,
-    datacompany: null,
-    dataprice: null,
-    dataplace: null,
-    datasale: null
+    loading: "success",
   };
 };
 const getToursNameFail = (state, action) => {
@@ -109,24 +115,26 @@ const getToursPriceStart = (state, action) => {
   return { ...state, error: null, loadingprice: "loading" };
 };
 const getToursPriceSuccess = (state, action) => {
-  console.log("jajaja", action.data);
   return {
     ...state,
-    dataprice: action.dataprice,
+    // dataprice: action.dataprice,
+    // error: null,
+    // loadingprice: "success",
+    // data: null,
+    // datacompany: null,
+    // dataname: null,
+    // dataplace: null,
+    // datasale: null
+    data: action.data,
     error: null,
-    loadingprice: "success",
-    data: null,
-    datacompany: null,
-    dataname: null,
-    dataplace: null,
-    datasale: null
+    loading: "success",
   };
 };
 const getToursPriceFail = (state, action) => {
   return {
     ...state,
     error: action.error,
-    loadingprice: "error",
+    // loadingprice: "error",
   };
 };
 const getToursCompanyStart = (state, action) => {
@@ -135,14 +143,17 @@ const getToursCompanyStart = (state, action) => {
 const getToursCompanySuccess = (state, action) => {
   return {
     ...state,
-    datacompany: action.datacompany,
+    // datacompany: action.datacompany,
+    // error: null,
+    // loadingcompany: "success",
+    // data: null,
+    // dataname: null,
+    // dataprice: null,
+    // dataplace: null,
+    // datasale: null
+    data: action.data,
     error: null,
-    loadingcompany: "success",
-    data: null,
-    dataname: null,
-    dataprice: null,
-    dataplace: null,
-    datasale: null
+    loading: "success",
   };
 };
 const getToursCompanyFail = (state, action) => {
@@ -158,14 +169,17 @@ const getToursSaleStart = (state, action) => {
 const getToursSaleSuccess = (state, action) => {
   return {
     ...state,
-    datasale: action.datasale,
+    // datasale: action.datasale,
+    // error: null,
+    // loadingsale: "success",
+    // data: null,
+    // dataname: null,
+    // dataprice: null,
+    // dataplace: null,
+    // datacompany: null
+    data: action.data,
     error: null,
-    loadingsale: "success",
-    data: null,
-    dataname: null,
-    dataprice: null,
-    dataplace: null,
-    datacompany: null
+    loading: "success",
   };
 };
 const getToursSaleFail = (state, action) => {

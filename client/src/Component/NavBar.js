@@ -15,15 +15,12 @@ class NavBar extends Component {
     };
   }
   componentDidMount() {
-    // console.log("aaa",nextPros.loading);
-    // if(nextPros.loading === "success"){
     if (localStorage.getItem("token")) {
       const role = jwt_decode(localStorage.getItem("token")).user_id.role;
       const userId = jwt_decode(localStorage.getItem("token")).user_id._id;
       this.setState({ role: role, userId: userId });
     }
     this.props.getCategory();
-    // }
   }
   toggle() {
     this.setState({

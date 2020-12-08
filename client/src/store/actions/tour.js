@@ -43,7 +43,6 @@ export const addtour = (
       contactInformation: contactInformation,
       description: description,
     };
-    console.log("data", data);
     axios
       .post("/tour", data)
       .then((res) => {
@@ -62,6 +61,7 @@ export const getToursStart = () => {
   };
 };
 export const getToursSuccess = (data) => {
+  console.log("getour success",data);
   return {
     type: actionTypes.GETTOURS_SUCCESS,
     data: data,
@@ -109,7 +109,8 @@ export const getToursPlaceStart = () => {
 export const getToursPlaceSuccess = (data) => {
   return {
     type: actionTypes.GETTOURSPLACE_SUCCESS,
-    dataplace: data,
+    // dataplace: data,
+    data:data
   };
 };
 export const getToursPlaceFail = (error) => {
@@ -141,7 +142,8 @@ export const getToursPriceStart = () => {
 export const getToursPriceSuccess = (data) => {
   return {
     type: actionTypes.GETTOURSPRICE_SUCCESS,
-    dataprice: data,
+    // dataprice: data,
+    data:data
   };
 };
 export const getToursPriceFail = (error) => {
@@ -173,7 +175,8 @@ export const getToursNameStart = () => {
 export const getToursNameSuccess = (data) => {
   return {
     type: actionTypes.GETTOURSNAME_SUCCESS,
-    dataname: data,
+    // dataname: data,
+    data:data
   };
 };
 export const getToursNameFail = (error) => {
@@ -205,7 +208,8 @@ export const getToursCompanyStart = () => {
 export const getToursCompanySuccess = (data) => {
   return {
     type: actionTypes.GETTOURSCOMPANY_SUCCESS,
-    datacompany: data,
+    // datacompany: data,
+    data:data
   };
 };
 export const getToursCompanyFail = (error) => {
@@ -247,27 +251,36 @@ export const editTourFail = (error) => {
   };
 };
 export const edittour = (
+  id,
   name,
-  address,
-  phone,
-  birthday,
-  gender,
-  email,
-  password
+  category_id,
+  place,
+  numberpeople,
+  price,
+  image,
+  startdate,
+  enddate,
+  contactInformation,
+  description,
+  sale
 ) => {
   return (dispatch) => {
     dispatch(editTourStart());
     const data = {
-      name: name,
-      email: email,
-      password: password,
-      birthday: birthday,
-      gender: gender,
-      address: address,
-      phone: phone,
+      name:name,
+      category_id:category_id,
+      place:place,
+      numberPeople:numberpeople,
+      price:price,
+      image:image,
+      startDate:startdate,
+      endDate:enddate,
+      contactInformation:contactInformation,
+      description:description,
+      sale:sale
     };
     axios
-      .post("/auth/register/customer", data)
+      .put(`/tour/${id}`, data)
       .then((res) => {
         dispatch(editTourSuccess());
         // dispatch(checkAuthTimeout(res.data.expiresIn));
@@ -285,7 +298,8 @@ export const getToursSaleStart = () => {
 export const getToursSaleSuccess = (data) => {
   return {
     type: actionTypes.GETTOURSSALE_SUCCESS,
-    datasale: data,
+    // datasale: data,
+    data:data
   };
 };
 export const getToursSaleFail = (error) => {
@@ -294,11 +308,12 @@ export const getToursSaleFail = (error) => {
     error: error,
   };
 };
-export const getToursSale = (limit) => {
+export const getToursSale = () => {
+  console.log("dddddd");
   return (dispatch) => {
     dispatch(getToursSaleStart());
     axios
-      .get(`/tour/toursale?status=open&&limit=${limit}`)
+      .get(`/tour/toursale?status=open`)
       .then((res) => {
         dispatch(getToursSaleSuccess(res.data.data));
         // dispatch(checkAuthTimeout(res.data.expiresIn));

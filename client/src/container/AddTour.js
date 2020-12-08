@@ -31,9 +31,7 @@ class AddTour extends Component {
     
   }
   componentWillReceiveProps(nextProps){
-    console.log("aaaa",nextProps.addTourStatus);
     if(nextProps.addTourStatus === "success"){
-      console.log("aaaaaa",nextProps.addTourStatus,this.props.user_id);
       this.props.history.push(`/managerCompany/${this.props.user_id}`)
     }
   }
@@ -41,9 +39,6 @@ class AddTour extends Component {
     e.preventDefault();
     this.setState({
       [e.target.id]: e.target.value,
-    },
-    ()=>{
-      console.log("state",this.state);
     });
   }
   handleChangeImage = (e) => {
