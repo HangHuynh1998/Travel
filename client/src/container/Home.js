@@ -367,7 +367,7 @@ class Home extends Component {
                       </li>
                       {this.props.categorydata?.map((item, i) => (
                         <li>
-                          <NavLink to={`/travel?${item._id}`} key={i}>
+                          <NavLink to={`/travel?category_id=${item._id}`} key={i}>
                             <i className="fa fa-map-marker"></i> {item.name}
                           </NavLink>
                         </li>
@@ -535,7 +535,7 @@ class Home extends Component {
                 <div className="col-lg-6" style={{ marginBottom: "10px" }}>
                   <div className="magazine-thum" id="magazine-thum">
                     {this.props.commentdata?.map((item,i)=>(
-                      <NavLink to={`/commentDetail/${item._id}`} key = {i}>
+                      <NavLink to={`/reviews`} key = {i}>
                       <div className="thumnail-item clearfix">
                         <figure className="float-left">
                           <img src={item.image} alt="" />

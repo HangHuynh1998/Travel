@@ -32,3 +32,45 @@ export const getComment = (limit) => {
       });
   };
 };
+
+export const addCommentStart = () => {
+  return {
+    type: actionTypes.ADDCOMMENT_START,
+  };
+};
+export const addCommentSuccess = () => {
+  return {
+    type: actionTypes.ADDTOUR_SUCCESS,
+  };
+};
+export const addCommentFail = (error) => {
+  return {
+    type: actionTypes.ADDTOUR_FAIL,
+    error: error,
+  };
+};
+export const addComment= (
+  name,
+  title,
+  image,
+  comment
+) => {
+  return (dispatch) => {
+    dispatch(addCommentStart());
+    const data = {
+      name: name,
+  title:title,
+  image:image,
+  comment:comment,
+    };
+    axios
+      .post("/comment", data)
+      .then((res) => {
+        dispatch(addCommentSuccess());
+        // dispatch(checkAuthTimeout(res.data.expiresIn));
+      })
+      .catch((err) => {
+        dispatch(addCommentFail(err));
+      });
+  };
+};

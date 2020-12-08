@@ -52,6 +52,7 @@ class App extends Component {
     }
   }
   initState() {
+    console.log("ajsjdjsajdjas");
     if (localStorage.getItem("token")) {
       let role = jwt_decode(localStorage.getItem("token")).user_id.role;
       let name = jwt_decode(localStorage.getItem("token")).user_id.name;
@@ -68,7 +69,7 @@ class App extends Component {
         <Route path="/login" exact component={Login} />
         <Route path="/register" component={Register} />
         <Route path="/about" component={About} />
-        <Route path="/review" component={Review} />
+        <Route path="/review" render={() => <Review role = {this.state.role} user_id ={this.state.user_id}/>} />
         <Route path="/travel" component={Travel} />
         <Route path="/tourDetail/:tour_id" render={() => <TourDetail role = {this.state.role} user_id ={this.state.user_id}/>}/>
         <Route path="/companyDetail/:company_id" component={CompanyDetail} />

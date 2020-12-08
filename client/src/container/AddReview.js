@@ -1,8 +1,83 @@
 import React, { Component } from 'react';
 import NavBar from '../Component/NavBar';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
+import { storage } from '../firebase';
+import { addComment, addCommentStart } from '../store/actions/comment';
 
 class AddReview extends Component {
+  constructor() {
+    super();
+    this.handleChange = this.handleChange.bind(this)
+    this.handleChangeImage = this.handleChangeImage.bind(this)
+    this.handleUpload = this.handleUpload.bind(this)
+    this.submit = this.submit.bind(this)
+    this.state = {
+      image:"",
+     name:"",
+     title:"",
+     avatar:"",
+     comment:"",
+    }
+  }
+  componentDidMount(){
+    this.props.addCommentStart()
+    
+  }
+  componentWillReceiveProps(nextProps){
+    if(nextProps.status === "success"){
+      this.props.history.push(`/review`)
+    }
+  }
+  handleChange(e) {
+    e.preventDefault();
+    this.setState({
+      [e.target.id]: e.target.value,
+    });
+  }
+  handleChangeImage = (e) => {
+    if (e.target.files[0]) {
+      this.setState({ image: e.target.files[0] }, () => {
+        this.handleUpload();
+      });
+    }
+  };
+  handleUpload() {
+    const uploadTask = storage
+      .ref(`images/${this.state.image.name}`)
+      .put(this.state.image);
+    uploadTask.on(
+      "state_changed",
+      (snapshot) => {
+        const progress = Math.round(
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+        );
+        this.setState({ progress: progress });
+      },
+      (error) => {
+        console.log(error);
+      },
+      () => {
+        storage
+          .ref("images")
+          .child(this.state.image.name)
+          .getDownloadURL()
+          .then((url) => {
+            this.setState({ avatar: url });
+          });
+      }
+    );
+  }
+  submit(){
+    this.props.addReview(
+      this.state.name,
+      this.state.title,
+      this.state.avatar,
+      this.state.comment)
+      this.props.history.push(`/review`)
+  }
     render() {
+      console.log("sshss",this.props.status);
         return (
             <div>
                 <NavBar />
@@ -27,7 +102,18 @@ class AddReview extends Component {
                     id="name"
                     aria-describedby="name"
                     placeholder="Nhập tên"
-                    //onChange={(e) => this.handleChange(e)}
+                    onChange={(e) => this.handleChange(e)}
+                  />
+                </div>
+                <div className="form-group">
+                  <label>Tiêu đề</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="title"
+                    aria-describedby="title"
+                    placeholder="Nhập tên"
+                    onChange={(e) => this.handleChange(e)}
                   />
                 </div>
                 <div className="form-group">
@@ -37,25 +123,30 @@ class AddReview extends Component {
                       <input
                         type="file"
                         className="form-control-file"
-                        id="exampleFormControlFile1"
+                        id="image"
+                        onChange={(e) => this.handleChangeImage(e)}
                       />
+                    </div>
+                    <div className="form-group">
+                      <process value={process} max="100"></process>
+                      <img src={this.state.avatar} alt="" />
                     </div>
                     <div className="form-group">
                       <label >Đánh giá</label>
                       <textarea
                         type="text"
                         className="form-control"
-                        id="required"
-                        aria-describedby="required"
+                        id="comment"
+                        aria-describedby="comment"
                         placeholder="Thêm đánh giá"
-                        //onChange={(e) => this.handleChange(e)}
+                        onChange={(e) => this.handleChange(e)}
                       />
                     </div>
                 <div
                   className="container-login100-form-btn"
                   style={{ marginTop: "40px" }}
                 >
-                  <button type="button" className="login100-form-btn">
+                  <button type="button" className="login100-form-btn" onClick = {this.submit}>
                     Thêm đánh giá
                   </button>
                 </div>
@@ -67,5 +158,17 @@ class AddReview extends Component {
         );
     }
 }
+function mapStateProps(state) {
+  return {
+    status: state.comment.loadingcomment,
+  };
+}
+function mapDispatchToProps(dispatch) {
+  return {
+    addCommentStart:()=>dispatch(addCommentStart()),
+    addReview:(name,title,image,comment) => dispatch(addComment(name,title,image,comment))
+  };
+}
 
-export default AddReview;
+
+export default withRouter(connect(mapStateProps, mapDispatchToProps)(AddReview));
