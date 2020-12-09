@@ -68,7 +68,7 @@ class ChangeProfileCustomer extends Component {
                   <NavBar />
                 <div
           className="limiter"
-          style={{ backgroundImage: `url('assets/images/travel5.jpg')` }}
+          style={{ backgroundImage: `url('assets/images/travel5.jpg')`,backgroundRepeat:"round" }}
         >
           <div className="container-login100">
             <div className="wrap-login100">

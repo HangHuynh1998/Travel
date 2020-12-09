@@ -90,9 +90,15 @@ class App extends Component {
             <TourDetail role={this.state.role} user_id={this.state.user_id} />
           )}
         />
-        <Route path="/companyDetail/:company_id"  render={() => (
-              <CompanyDetail role={this.state.role} user_id={this.state.user_id} />
-            )} />
+        <Route
+          path="/companyDetail/:company_id"
+          render={() => (
+            <CompanyDetail
+              role={this.state.role}
+              user_id={this.state.user_id}
+            />
+          )}
+        />
         {this.state.role !== null && (
           <Route
             path="/changePass/:_id"
@@ -108,7 +114,10 @@ class App extends Component {
             <Route
               path="/managerCustomer/:_id"
               render={() => (
-                <ManagerTourCustomer role={this.state.role} user_id={this.state.user_id} />
+                <ManagerTourCustomer
+                  role={this.state.role}
+                  user_id={this.state.user_id}
+                />
               )}
             />
             <Route

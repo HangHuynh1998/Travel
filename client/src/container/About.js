@@ -9,7 +9,7 @@ class About extends Component {
     return (
       <div>
         <NavBar />
-        <Modal
+        {/* <Modal
           visible={this.state.showModal}
           title={null}
           footer={null}
@@ -22,7 +22,7 @@ class About extends Component {
               email của bạn trong thời gian sớm nhất.
             </p>
           </div>
-        </Modal>
+        </Modal> */}
         <div className="wrapper">
           <div className="container" style={{ marginTop: "120px" }}>
             <div className="row justify-content-center">
@@ -94,7 +94,7 @@ class About extends Component {
                 </div>
               </div>
               <div className="col-sm-6">
-                <div className="form-wrapper iw-contact-form-7 contact-map">
+                {/* <div className="form-wrapper iw-contact-form-7 contact-map">
                   <div className="title">
                     <h3>GỬI LIÊN HỆ</h3>
                   </div>
@@ -163,7 +163,8 @@ class About extends Component {
                       defaultValue="Gửi"
                     />
                   </div>
-                </div>
+                </div> */}
+                <img src ="assets/images/login.jpg" style = {{height:"800px"}}/>
               </div>
             </div>
           </div>

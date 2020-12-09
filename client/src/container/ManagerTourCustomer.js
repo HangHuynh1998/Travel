@@ -150,11 +150,10 @@ class ManagerTourCustomer extends Component {
           </div>
           {/* <!-- End Hot Sales Content --> */}
         </section>
-        <section
+        {/* <section
           className="sales"
           style={{ marginTop: "20px", marginBottom: "20px" }}
         >
-          {/* <!-- Title --> */}
           <div className="title-wrap">
             <div className="container">
               <div className="travel-title float-left">
@@ -162,12 +161,9 @@ class ManagerTourCustomer extends Component {
               </div>
             </div>
           </div>
-          {/* <!-- End Title -->
-            <!-- Hot Sales Content --> */}
           <div className="container">
             <div className="sales-cn">
               <div className="row">
-                {/* <!-- HostSales Item --> */}
                 <NavLink className="col-xs-6 col-md-3" to="/tourDetail/1">
                   <div className="sales-item">
                     <figure className="home-sales-img">
@@ -209,8 +205,7 @@ class ManagerTourCustomer extends Component {
               </div>
             </div>
           </div>
-          {/* <!-- End Hot Sales Content --> */}
-        </section>
+        </section> */}
         <section
           className="sales"
           style={{ marginTop: "20px", marginBottom: "20px" }}

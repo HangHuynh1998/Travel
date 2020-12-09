@@ -18,21 +18,21 @@ export const bookTourStart = () => {
       error: error,
     };
   };
-  export const bookTour = (name,address,phone,email,requirement,userId,tourId,nameTour) => {
+  export const bookTour = (tour_id,emailcompany,nameCompany,nameTour,nameCustomer,emailCustomer,address,phone,required) => {
     return (dispatch) => {
       dispatch(bookTourStart());
       const data = {
-        name:name,
-        email: email,
-        address:address,
-        phone:phone,
-        requirement: requirement,
-        userId:userId,
-        tourId:tourId,
-        nameTour:nameTour,
-      };
-      axios
-        .post("/booktour", data)
+      tour_id:tour_id,
+      emailcompany:emailcompany,
+      nameCompany:nameCompany,
+      nameTour:nameTour,
+      nameCustomer:nameCustomer,
+      emailCustomer:emailCustomer,
+      address:address,
+      phone:phone,
+      required: required,
+    }
+    axios.post('/contact/send-refer-friend', data)
         .then((res) => {
           console.log(res);
           dispatch(bookTourSuccess());

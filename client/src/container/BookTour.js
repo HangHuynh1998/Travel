@@ -1,31 +1,75 @@
-import React, { Component } from 'react';
-import NavBar from '../Component/NavBar';
-import { bookTour } from '../store/actions/bookTour';
-import { connect } from 'react-redux';
-import internalApi from '../config/internalApi';
-import axios from "../axios-travel";
+import React, { Component } from "react";
+import NavBar from "../Component/NavBar";
+import { bookTour, bookTourStart } from "../store/actions/bookTour";
+import { connect } from "react-redux";
+import { getOneTour, getOneTourStart } from "../store/actions/tourdetail";
+import { withRouter } from "react-router-dom";
 class BookTour extends Component {
   constructor() {
     super();
     this.submit = this.submit.bind(this);
+    this.initState = this.initState.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.state = {
+      tour_id: "",
+      emailcompany: "",
+      nameCompany: "",
+      nameTour: "",
+      nameCustomer: "",
+      emailCustomer: "",
+      address: "",
+      phone: "",
+      required: "",
+    };
+  }
+  componentDidMount() {
+    this.initState();
+    this.props.getTourStart();
+    this.props.getTourDetail(this.props.history.location.pathname.slice(10));
+  }
+  componentWillReceiveProps(nextProps) {
+    this.props.getTourStart();
+    if (nextProps.loading === "success") {
+      this.initState();
+    }
+    this.props.bookTourStart();
+    if (nextProps.loadingBooktour === "success") {
+      this.props.history.push(`/`);
+    }
+  }
+  initState() {
+    this.setState({
+      tour_id: this.props.tourdetail?._id,
+      emailcompany: this.props.tourdetail?.company_id.user_id.email,
+      nameCompany: this.props.tourdetail?.company_id.user_id.name,
+      nameTour: this.props.tourdetail?.name,
+    });
+  }
+  handleChange(e) {
+    e.preventDefault();
+    this.setState({
+      [e.target.id]: e.target.value,
+    });
+  }
+  submit() {
+    this.props.bookTour(
+      this.state.tour_id,
+      this.state.emailcompany,
+      this.state.nameCompany,
+      this.state.nameTour,
+      this.state.nameCustomer,
+      this.state.emailCustomer,
+      this.state.address,
+      this.state.phone,
+      this.state.required
+    );
   }
 
-  submit(){
-    const data = {
-      email: "ngockhanh.2197+8@gmail.com",
-      subject: "this.state.subject",
-      content: "this.state.content"
-  }
-  internalApi.post('contact/send-refer-friend', data)
-  
-    // this.props.bookTour("Customer","address","01234456789","custom@gmail.com","requirement","5fc715216acdcf15a9aa3774","5fc7d25993d3bc3add0c5e50","Du lịch Đà Nẵng")
-  }
-
-    render() {
-        return (
-            <div>
-                <NavBar />
-                <div
+  render() {
+    return (
+      <div>
+        <NavBar />
+        <div
           className="limiter"
           style={{ backgroundImage: `url('assets/images/travel5.jpg')` }}
         >
@@ -35,18 +79,16 @@ class BookTour extends Component {
                 className="login-form validate-form"
                 style={{ background: "white" }}
               >
-                    <span className="login100-form-title p-b-43">
-                      Tên Tour
-                    </span>
-                    <div className="form-group">
+                <span className="login100-form-title p-b-43">Tên Tour</span>
+                <div className="form-group">
                   <label>Họ tên</label>
                   <input
                     type="text"
                     className="form-control"
-                    id="name"
-                    aria-describedby="name"
+                    id="nameCustomer"
+                    aria-describedby="nameCustomer"
                     placeholder="Nhập họ tên"
-                    //onChange={(e) => this.handleChange(e)}
+                    onChange={(e) => this.handleChange(e)}
                   />
                 </div>
                 <div className="form-group">
@@ -54,50 +96,54 @@ class BookTour extends Component {
                   <input
                     type="email"
                     className="form-control"
-                    id="email"
-                    aria-describedby="email"
+                    id="emailCustomer"
+                    aria-describedby="emailCustomer"
                     placeholder="Email"
-                    //onChange={(e) => this.handleChange(e)}
+                    onChange={(e) => this.handleChange(e)}
                   />
                 </div>
-                    <div className="form-group">
-                      <label>Địa chỉ </label>
-                      <input
-                        type="text"
-                        className="form-control"
-                        id="address"
-                        aria-describedby="address"
-                        placeholder="Nhập địa chỉ"
-                        //onChange={(e) => this.handleChange(e)}
-                      />
-                    </div>
-                    <div className="form-group">
-                      <label>Điện thoại</label>
-                      <input
-                        type="text"
-                        className="form-control"
-                        id="phone"
-                        aria-describedby="phone"
-                        placeholder="Số điện thoại"
-                        //onChange={(e) => this.handleChange(e)}
-                      />
-                    </div>
-                    <div className="form-group">
-                      <label >Yêu cầu thêm</label>
-                      <textarea
-                        type="text"
-                        className="form-control"
-                        id="required"
-                        aria-describedby="required"
-                        placeholder="Yêu cầu thêm"
-                        //onChange={(e) => this.handleChange(e)}
-                      />
-                    </div>
+                <div className="form-group">
+                  <label>Địa chỉ </label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="address"
+                    aria-describedby="address"
+                    placeholder="Nhập địa chỉ"
+                    onChange={(e) => this.handleChange(e)}
+                  />
+                </div>
+                <div className="form-group">
+                  <label>Điện thoại</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="phone"
+                    aria-describedby="phone"
+                    placeholder="Số điện thoại"
+                    onChange={(e) => this.handleChange(e)}
+                  />
+                </div>
+                <div className="form-group">
+                  <label>Yêu cầu thêm</label>
+                  <textarea
+                    type="text"
+                    className="form-control"
+                    id="required"
+                    aria-describedby="required"
+                    placeholder="Yêu cầu thêm"
+                    onChange={(e) => this.handleChange(e)}
+                  />
+                </div>
                 <div
                   className="container-login100-form-btn"
                   style={{ marginTop: "40px" }}
                 >
-                  <button type="button" className="login100-form-btn" onClick = {this.submit}>
+                  <button
+                    type="button"
+                    className="login100-form-btn"
+                    onClick={this.submit}
+                  >
                     Đăt tour
                   </button>
                 </div>
@@ -106,20 +152,46 @@ class BookTour extends Component {
           </div>
         </div>
       </div>
-        );
-    }
+    );
+  }
 }
 
 function mapStateProps(state) {
   return {
-    loading: state.auth.loading,
-    error: state.auth.error,
-    // token: state.auth.token,
+    tourdetail: state.tourdetail.tourdetail,
+    loading: state.tourdetail.loading,
+    loadingBooktour: state.bookTour.loading,
   };
 }
 function mapDispatchToProps(dispatch) {
   return {
-    bookTour:(name,address,phone,email,requirement,userId,tourId,nameTour)=>dispatch(bookTour(name,address,phone,email,requirement,userId,tourId,nameTour))
+    bookTour: (
+      tour_id,
+      emailcompany,
+      nameCompany,
+      nameTour,
+      nameCustomer,
+      emailCustomer,
+      address,
+      phone,
+      required
+    ) =>
+      dispatch(
+        bookTour(
+          tour_id,
+          emailcompany,
+          nameCompany,
+          nameTour,
+          nameCustomer,
+          emailCustomer,
+          address,
+          phone,
+          required
+        )
+      ),
+    bookTourStart: () => dispatch(bookTourStart()),
+    getTourStart: () => dispatch(getOneTourStart()),
+    getTourDetail: (id) => dispatch(getOneTour(id)),
   };
 }
-export default connect(mapStateProps, mapDispatchToProps)(BookTour);
+export default withRouter(connect(mapStateProps, mapDispatchToProps)(BookTour));

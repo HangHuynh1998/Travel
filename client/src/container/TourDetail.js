@@ -96,7 +96,7 @@ class TourDetail extends Component {
                   >
                     {" "}
                     <NavLink
-                      to={`/booktour/${this.props.history.location.pathname.slice(12)}`}
+                      to={`/booktour/${this.props.tourdetail?._id}`}
                       style={{ color: "white" }}
                     >
                       Đặt tour

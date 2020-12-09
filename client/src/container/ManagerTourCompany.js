@@ -154,7 +154,7 @@ class ManagerTourCompany extends Component {
             </div>
           </div>
         </section>
-        <section
+        {/* <section
           className="sales"
           style={{ marginTop: "20px", marginBottom: "20px" }}
         >
@@ -209,7 +209,7 @@ class ManagerTourCompany extends Component {
               </div>
             </div>
           </div>
-        </section>
+        </section> */}
       </div>
     );
   }

@@ -117,7 +117,7 @@ class NavBar extends Component {
                     </NavLink>
                   </li>
                 )}
-                {this.props.isAuthenticated && (
+                {/* {this.props.isAuthenticated && (
                   <li className="dropdown show-on-hover">
                     <a
                       className="dropdown-toggle"
@@ -148,7 +148,7 @@ class NavBar extends Component {
                       </li>
                     </ul>
                   </li>
-                )}
+                )} */}
 
                 {!this.props.isAuthenticated ? (
                   <li>
