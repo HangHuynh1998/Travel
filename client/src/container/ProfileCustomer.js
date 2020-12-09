@@ -58,7 +58,7 @@ class ProfileCustomer extends Component {
                     Thay đổi thông tin
                   </button>
                   </NavLink>
-                  <NavLink to ="/changePass">
+                  <NavLink to ="/changePass/1">
                   <button type="button" className="login100-form-btn" style = {{width:"170px"}}>
                     Thay đổi mật khẩu
                   </button>

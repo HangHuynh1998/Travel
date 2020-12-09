@@ -94,7 +94,7 @@ class App extends Component {
           <Route
             path="/changePass/:_id"
             render={() => (
-              <ChangePass name={this.state.name} user_id={this.state.user_id} />
+              <ChangePass role={this.state.role} user_id={this.state.user_id} />
             )}
           />
         )}

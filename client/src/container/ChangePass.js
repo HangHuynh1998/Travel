@@ -18,7 +18,13 @@ class ChangePass extends Component {
   componentWillReceiveProps(nextProps) {
     this.props.changePassStart()
     if(nextProps.loading === "success"){
-      this.props.history.push(`/profileCompany/${this.props.user_id}`)
+      if(this.props.role === "customer"){
+        this.props.history.push(`/profileCustomer/${this.props.user_id}`)
+      }else{
+        if(this.props.role === "company"){
+          this.props.history.push(`/profileCompany/${this.props.user_id}`)
+        }
+      }
     }
   }
   handleChange(e) {
