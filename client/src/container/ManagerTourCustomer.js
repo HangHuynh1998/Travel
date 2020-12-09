@@ -7,29 +7,46 @@ import {
   togglesaveTourStart,
   toggleSaveTour,
 } from "../store/actions/saveTour";
+import { getCompanyFollow } from "../store/actions/companyFollow";
+import { toggleFollow, toggleFollowStart } from "../store/actions/company";
 
 class ManagerTourCustomer extends Component {
   constructor() {
     super();
     this.toggleSaveTour = this.toggleSaveTour.bind(this);
+    this.toggleFollow = this.toggleFollow.bind(this);
   }
   componentDidMount() {
     this.props.getTourSave(this.props.id);
+    this.props.getCompanyFollow()
   }
   componentWillReceiveProps(nextProps) {
     this.props.toggleSaveTourStart();
     if (nextProps.toggleLoading === "success") {
       this.props.getTourSave(this.props.id);
     }
+    this.props.toggleFollowStart();
+    if (nextProps.toggleFollowloading === "success") {
+      this.props.getCompanyFollow(this.props.id);
+    }
   }
   toggleSaveTour(id) {
     this.props.toggleSaveTour(id);
   }
+  toggleFollow(id){
+    this.props.toggleFollow(id)
+  }
   render() {
     let tours = null;
+    let companyFollow = null;
     if (this.props.toursave) {
       tours = this.props.toursave?.filter(function (tour) {
         return tour.status === "open";
+      });
+    }
+    if (this.props.companyFollow) {
+      companyFollow = this.props.companyFollow?.filter(function (company) {
+        return company.user_id.status === "active";
       });
     }
     return (
@@ -128,7 +145,6 @@ class ManagerTourCustomer extends Component {
                     </div>
                   </div>
                 ))}
-                s
               </div>
             </div>
           </div>
@@ -212,45 +228,58 @@ class ManagerTourCustomer extends Component {
           <div className="container">
             <div className="sales-cn">
               <div className="row">
-                {/* <!-- HostSales Item --> */}
-                <NavLink className="col-xs-6 col-md-3" to="/tourDetail/1">
-                  <div className="sales-item">
-                    <figure className="home-sales-img">
-                      <a href="#void" title="">
-                        <img src="assets/images/traveldalat2.jpg" alt="" />
-                      </a>
-                      <figcaption>
-                        Save <span>30</span>%
-                      </figcaption>
-                    </figure>
-                    <div className="home-sales-text">
-                      <div className="home-sales-name-places">
-                        <div className="home-sales-name">
+              {companyFollow?.map((item, i) => (
+                  <div className="col-xs-6 col-md-3">
+                    <div className="sales-item" style={{ height: "650px" }}>
+                      <NavLink
+                        to={`/tourOfCompany/${item._id}`}
+                        key={i}
+                        style={{ marginBottom: "5px" }}
+                      >
+                        <figure className="home-sales-img">
                           <a href="#void" title="">
-                            Copley Square Hotel
+                            <img src={item.user_id.avatar} alt="" />
                           </a>
+                        </figure>
+                      </NavLink>
+                      <div className="home-sales-text">
+                        <div
+                          className="home-sales-name-places"
+                          style={{ height: "120px" }}
+                        >
+                          <div className="home-sales-name">
+                            <a href="#void" title="">
+                            Công ty: {item.user_id.name}
+                            </a>
+                          </div>
+                          <div className="home-sales-places">
+                            <a href="#void" title="">
+                              {item.user_id.description}
+                            </a>
+                          </div>
                         </div>
-                        <div className="home-sales-places">
-                          <a href="#void" title="">
-                            Boston
-                          </a>
-                          <a href="#void" title="">
-                            Massachusetts
-                          </a>
+                        <hr className="hr" />
+                        <div
+                          style={{
+                            display: "flex",
+                            marginTop: "40px",
+                            justifyContent: "space-around",
+                          }}
+                        >
+                          <button
+                            type="button"
+                            className="login100-form-btn"
+                            style={{ width: "200px" }}
+                            onClick={() => this.toggleFollow(item._id)}
+                          >
+                            {" "}
+                            Hủy theo dõi công ty
+                          </button>
                         </div>
-                      </div>
-                      <hr className="hr" />
-                      <div className="price-box">
-                        <span className="price old-price">
-                          From <del>$269</del>
-                        </span>
-                        <span className="price special-price">
-                          $175<small>/night</small>
-                        </span>
                       </div>
                     </div>
                   </div>
-                </NavLink>
+                ))}
               </div>
             </div>
           </div>
@@ -265,6 +294,9 @@ function mapStateProps(state) {
     toursave: state.saveTour.data,
     loading: state.saveTour.loading,
     toggleLoading: state.saveTour.loadingToggle,
+    companyFollow: state.companyFollow.data,
+    followloading: state.companyFollow.loading,
+    toggleFollowloading: state.company.loadingFollow
   };
 }
 function mapDispatchToProps(dispatch) {
@@ -272,6 +304,9 @@ function mapDispatchToProps(dispatch) {
     getTourSave: (id) => dispatch(getTourSave(id)),
     toggleSaveTourStart: () => dispatch(togglesaveTourStart()),
     toggleSaveTour: (id) => dispatch(toggleSaveTour(id)),
+    getCompanyFollow:()=> dispatch(getCompanyFollow()),
+    toggleFollowStart:() => dispatch(toggleFollowStart()),
+    toggleFollow:(id) => dispatch(toggleFollow(id)),
   };
 }
 export default withRouter(

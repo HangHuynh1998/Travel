@@ -22,6 +22,7 @@ import ChangeProfileCustomer from "./container/ChangeProfileCustomer";
 import { Component } from "react";
 import jwt_decode from "jwt-decode";
 import { authStart } from "./store/actions";
+import TourOfCompany from "./container/TourOfCompany";
 function NotFound() {
   return (
     <div>
@@ -114,6 +115,15 @@ class App extends Component {
               path="/changeProfileCustomer"
               render={() => (
                 <ChangeProfileCustomer
+                  name={this.state.name}
+                  user_id={this.state.user_id}
+                />
+              )}
+            />
+            <Route
+              path="/tourOfCompany/:id"
+              render={() => (
+                <TourOfCompany
                   name={this.state.name}
                   user_id={this.state.user_id}
                 />
