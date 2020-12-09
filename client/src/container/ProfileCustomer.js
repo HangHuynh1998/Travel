@@ -1,8 +1,14 @@
 import React, { Component } from 'react';
 import NavBar from '../Component/NavBar';
-import { NavLink } from 'react-router-dom';
+import { NavLink, withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { getUser } from '../store/actions/user';
 
 class ProfileCustomer extends Component {
+
+  componentDidMount(){
+    this.props.getUser()
+  }
     render() {
         return (
             <div>
@@ -21,49 +27,38 @@ class ProfileCustomer extends Component {
                   className="login100-form-title p-b-43"
                   style={{ marginLeft: "10px", marginTop:"50px" }}
                 >
-                  Xin chào ThuHang
+                  Xin chào {this.props.user?.name}
                 </span>
-                <img
-                  src="assets/images/login.jpg"
-                  alt="..."
-                  className="round-circle"
-                  style={{
-                    width: "100px",
-                    height: "100px",
-                    top: "180px",
-                    left: "400px",
-                  }}
-                ></img>
                 <div className="form-group" style = {{marginTop:"10px"}}>
                   <span>Đia chỉ: </span>
-                  <span>54 Nguyễn Lương Bằng</span>
+                  <span>{this.props.user?.address}</span>
                 </div>
                 <div className="form-group">
                   <span>Số điện thoại: </span>
-                  <span>0123456789</span>
+                  <span>0{this.props.user?.phone}</span>
                 </div>
                 <div className="form-group">
                   <span>Email: </span>
-                  <span>travel@gmai.com</span>
+                  <span>{this.props.user?.email}</span>
                 </div>
                 <div className="form-group">
                   <span>Birthday: </span>
-                  <span>11/09/1998</span>
+                  <span>{this.props.user?.birthday?.slice(0,10)}</span>
                 </div>
                 <div className="form-group">
                   <span>Giới tính: </span>
-                  <span>Nữ</span>
+                  {!this.props.user?.gender? <span>Nữ</span> :<span>Nam</span>}
                 </div>
                 <div
                   className="container-login100-form-btn"
                   style={{ marginTop: "70px",justifyContent:"space-around" }}
                 >
-                  <NavLink to= "/changeProfileCustomer/1">
+                  <NavLink to= "/changeProfileCustomer">
                   <button type="button" className="login100-form-btn" style = {{width:"170px"}} >
                     Thay đổi thông tin
                   </button>
                   </NavLink>
-                  <NavLink to ="/changePass/1">
+                  <NavLink to ="/changePass">
                   <button type="button" className="login100-form-btn" style = {{width:"170px"}}>
                     Thay đổi mật khẩu
                   </button>
@@ -78,5 +73,15 @@ class ProfileCustomer extends Component {
         );
     }
 }
-
-export default ProfileCustomer;
+function mapStateProps(state) {
+  return {
+    loading: state.user.loading,
+    user: state.user.data
+  };
+}
+function mapDispatchToProps(dispatch) {
+  return {
+     getUser:() => dispatch(getUser())
+  };
+}
+export default withRouter(connect(mapStateProps, mapDispatchToProps)(ProfileCustomer));

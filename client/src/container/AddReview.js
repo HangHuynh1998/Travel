@@ -25,6 +25,7 @@ class AddReview extends Component {
     
   }
   componentWillReceiveProps(nextProps){
+    this.props.addCommentStart()
     if(nextProps.status === "success"){
       this.props.history.push(`/review`)
     }

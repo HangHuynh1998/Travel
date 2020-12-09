@@ -101,14 +101,19 @@ class App extends Component {
         {this.state.role === "customer" && (
           <>
             <Route path="/booktour/:tour_id" component={BookTour} />
-            <Route path="/profileCustomer/:_id" component={ProfileCustomer} />
+            <Route path="/profileCustomer" component={ProfileCustomer} />
             <Route
               path="/managerCustomer/:_id"
               component={ManagerTourCustomer}
             />
             <Route
-              path="/changeProfileCustomer/:_id"
-              component={ChangeProfileCustomer}
+              path="/changeProfileCustomer"
+              render={() => (
+                <ChangeProfileCustomer
+                  name={this.state.name}
+                  user_id={this.state.user_id}
+                />
+              )}
             />
             <Route path="/addReview" component={AddReview} />
           </>
@@ -168,7 +173,7 @@ const mapStateProps = (state) => {
 };
 const mapDispatchToProps = (dispatch) => {
   return {
-    authStart:() => dispatch(authStart())
+    authStart: () => dispatch(authStart()),
   };
 };
 export default connect(mapStateProps, mapDispatchToProps)(App);

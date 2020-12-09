@@ -168,9 +168,9 @@ class ChangeProfileCompany extends Component {
                   />
                 </div>
                 <div className="form-group">
-                  <process value={process} max="100"></process>
-                  <img src={this.state.avatar} alt="" />
-                </div>
+                      <process value={process} max="100"></process>
+                      <img src={this.state.avatar} alt="" />
+                    </div>
                 <div className="form-group">
                   <label>Giới thiệu về công ty</label>
                   <textarea
@@ -212,8 +212,8 @@ function mapStateProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     getUserStart: () => dispatch(getUserStart()),
-    editUser: (name, email, address, phone, avatar, description) =>
-      dispatch(editUser(name, email, address, phone, avatar, description)),
+    editUser: (name, email, address, phone, avatar, description,birthday, gender) =>
+      dispatch(editUser(name, email, address, phone, avatar, description,birthday, gender)),
     editUserStart:()=> dispatch(editUserStart()),
     getUser: () => dispatch(getUser()),
   };

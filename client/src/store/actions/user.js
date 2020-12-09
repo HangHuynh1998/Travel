@@ -50,17 +50,30 @@ export const editUserFail = (error) => {
     error: error,
   };
 };
-export const editUser = (name, email, address, phone, avatar, description) => {
+export const editUser = (name, email, address, phone, avatar, description,birthday,gender) => {
   return (dispatch) => {
     dispatch(editUserStart());
-    const data = {
-      name: name,
-      email: email,
-      address: address,
-      phone: phone,
-      avatar: avatar,
-      description: description,
-    };
+    let data = null
+    if(avatar === null){
+      data= {
+        name: name,
+        email: email,
+        address: address,
+        phone: phone,
+        birthday: birthday,
+        gender: gender,
+      };
+    }else{
+      data= {
+        name: name,
+        email: email,
+        address: address,
+        phone: phone,
+        avatar: avatar,
+        description: description,
+      };
+    }
+
     axios
       .put(`/users/update`, data)
       .then((res) => {

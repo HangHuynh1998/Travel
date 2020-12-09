@@ -1,7 +1,67 @@
 import React, { Component } from 'react';
 import NavBar from '../Component/NavBar';
+import { getUser, editUserStart, getUserStart, editUser } from '../store/actions/user';
+import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 class ChangeProfileCustomer extends Component {
+  constructor() {
+    super();
+    this.initState = this.initState.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.submit = this.submit.bind(this);
+    this.state = {
+      name: "",
+      email: "",
+      address: "",
+      phone: "",
+      birthday: "",
+      gender:""
+    };
+  }
+  componentDidMount() {
+    this.props.getUser();
+    this.initState();
+  }
+  componentWillReceiveProps(nextProps) {
+    this.props.getUserStart();
+    if (nextProps.loading === "success") {
+      this.initState();
+    }
+    this.props.editUserStart()
+    if(nextProps.loading === "success"){
+      this.props.history.push(`/profileCustomer`)
+    }
+  }
+  initState() {
+    this.setState({
+      name: this.props.user?.name,
+      email: this.props.user?.email,
+      address: this.props.user?.address,
+      phone: this.props.user?.phone,
+      birthday: this.props.user?.birthday,
+      gender: this.props.user?.gender
+    });
+  }
+  handleChange(e) {
+    e.preventDefault();
+    this.setState({
+      [e.target.id]: e.target.value,
+    });
+  }
+  submit() {
+    console.log("háhshss", this.state);
+    this.props.editUser(
+      this.state.name,
+      this.state.email,
+      this.state.address,
+      this.state.phone,
+      null,
+      null,
+      this.state.birthday,
+      this.state.gender
+    );
+  }
     render() {
         return (
             <div>
@@ -26,21 +86,10 @@ class ChangeProfileCustomer extends Component {
                         className="form-control"
                         id="name"
                         aria-describedby="name"
-                        placeholder="Tên công ty"
-                        //onChange={(e) => this.handleChange(e)}
+                        placeholder={this.props.user?.name}
+                        onChange={(e) => this.handleChange(e)}
                       />
-                    </div>
-                    <div className="form-group">
-                      <label style = {{marginBottom:"5px"}}>
-                        Avartar
-                      </label>
-                      <input
-                        type="file"
-                        className="form-control-file"
-                        id="exampleFormControlFile1"
-                      />
-                    </div>
-                    
+                    </div>                    
                     <div className="form-group ">
                       <label
                         className="col-2 col-form-label"
@@ -51,8 +100,9 @@ class ChangeProfileCustomer extends Component {
                         <input
                           className="form-control"
                           type="date"
-                          value="2011-08-19"
-                          id="example-date-input"
+                          value={this.props.user?.birthday}
+                          id="birthday"
+                          onChange={(e) => this.handleChange(e)}
                         />
                       </div>
                     </div>
@@ -74,7 +124,8 @@ class ChangeProfileCustomer extends Component {
                             name="exampleRadios"
                             id="exampleRadios1"
                             value="option1"
-                            checked
+                            defaultChecked={this.props.user?.gender}
+                            onClick={() => this.setState({ gender: true })}
                           />
                           <label
                             className="form-check-label"
@@ -90,6 +141,8 @@ class ChangeProfileCustomer extends Component {
                             name="exampleRadios"
                             id="exampleRadios2"
                             value="option2"
+                            defaultChecked={!this.props.user?.gender}
+                            onClick={() => this.setState({ gender: false })}
                           />
                           <label
                             className="form-check-label"
@@ -107,8 +160,8 @@ class ChangeProfileCustomer extends Component {
                     className="form-control"
                     id="email"
                     aria-describedby="email"
-                    placeholder="Email"
-                    //onChange={(e) => this.handleChange(e)}
+                    placeholder={this.props.user?.email}
+                    onChange={(e) => this.handleChange(e)}
                   />
                 </div>
                
@@ -119,8 +172,8 @@ class ChangeProfileCustomer extends Component {
                         className="form-control"
                         id="address"
                         aria-describedby="address"
-                        placeholder="Địa chỉ công ty"
-                        //onChange={(e) => this.handleChange(e)}
+                        placeholder={this.props.user?.address}
+                        onChange={(e) => this.handleChange(e)}
                       />
                     </div>
                     <div className="form-group">
@@ -130,8 +183,8 @@ class ChangeProfileCustomer extends Component {
                         className="form-control"
                         id="phone"
                         aria-describedby="phone"
-                        placeholder="Số điện thoại"
-                        //onChange={(e) => this.handleChange(e)}
+                        placeholder={`0${this.props.user?.phone}`}
+                        onChange={(e) => this.handleChange(e)}
                       />
                     </div>
                     
@@ -140,7 +193,7 @@ class ChangeProfileCustomer extends Component {
                   className="container-login100-form-btn"
                   style={{ marginTop: "40px" }}
                 >
-                  <button type="button" className="login100-form-btn">
+                  <button type="button" className="login100-form-btn" onClick ={this.submit}>
                     Lưu
                   </button>
                 </div>
@@ -152,5 +205,21 @@ class ChangeProfileCustomer extends Component {
         );
     }
 }
-
-export default ChangeProfileCustomer;
+function mapStateProps(state) {
+  return {
+    loading: state.user.loadingChange,
+    user: state.user.data,
+  };
+}
+function mapDispatchToProps(dispatch) {
+  return {
+    getUserStart: () => dispatch(getUserStart()),
+    editUser: (name, email, address, phone,avatar, description,birthday,gender) =>
+      dispatch(editUser(name, email,address,phone, avatar, description, birthday,gender)),
+    editUserStart:()=> dispatch(editUserStart()),
+    getUser: () => dispatch(getUser()),
+  };
+}
+export default withRouter(
+  connect(mapStateProps, mapDispatchToProps)(ChangeProfileCustomer)
+);
