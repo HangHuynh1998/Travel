@@ -89,7 +89,9 @@ class App extends Component {
             <TourDetail role={this.state.role} user_id={this.state.user_id} />
           )}
         />
-        <Route path="/companyDetail/:company_id" component={CompanyDetail} />
+        <Route path="/companyDetail/:company_id"  render={() => (
+              <CompanyDetail role={this.state.role} user_id={this.state.user_id} />
+            )} />
         {this.state.role !== null && (
           <Route
             path="/changePass/:_id"
