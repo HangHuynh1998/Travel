@@ -17,6 +17,7 @@ import tourOfCompanyReducer from './store/reducers/tourofcompany'
 import tourSaleReducer from './store/reducers/toursale'
 import userReducer from './store/reducers/user'
 import changePassReducer from './store/reducers/changePass'
+import saveTourReducer from './store/reducers/saveTour'
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 // const store = createStore(
 //   reducer,
@@ -32,7 +33,8 @@ const rootReducer = combineReducers({
   tourOfCompany:tourOfCompanyReducer,
   toursale:tourSaleReducer,
   user:userReducer,
-  changePass:changePassReducer
+  changePass:changePassReducer,
+  saveTour: saveTourReducer
 });
 
 const store = createStore(

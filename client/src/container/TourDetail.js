@@ -3,10 +3,23 @@ import NavBar from '../Component/NavBar';
 import { NavLink, withRouter } from 'react-router-dom';
 import { getOneTour } from '../store/actions/tourdetail';
 import { connect } from 'react-redux';
+import { toggleSaveTour, togglesaveTourStart } from '../store/actions/saveTour';
 
 class TourDetail extends Component {
+  constructor() {
+    super();
+    this.toggleSaveTour = this.toggleSaveTour.bind(this);
+  }
     componentDidMount(){
       this.props.getTourDetail(this.props.history.location.pathname.slice(12));
+    }
+    toggleSaveTour(){
+      this.props.toggleSaveTour(this.props.history.location.pathname.slice(12))
+    }
+    componentWillReceiveProps(nextProps) {
+      this.props.toggleSaveTourStart()
+      if(nextProps.toggleLoading === "success"){
+          this.props.history.push(`/managerCustomer/${this.props.user_id}`)}
     }
     render() {
         return (
@@ -17,7 +30,7 @@ class TourDetail extends Component {
             <div className="wrap-login100" style = {{minHeight:"800px"}}>
             <div
                 className="login100-more"
-                style={{ backgroundImage: `url(${this.props.tourdetail?.image})` }}
+                style={{ backgroundImage: `url(${this.props.tourdetail?.image})`}}
               ></div>
               <form className="login100-form validate-form">
                 <span className="login100-form-title p-b-43">
@@ -48,7 +61,7 @@ class TourDetail extends Component {
                   <span>{this.props.tourdetail?.price}</span>
                 </div>
                 {this.props.tourdetail?.sale &&<div className="form-group">
-                <span>Giảm giá: </span>
+                <span>Giảm giá(%): </span>
                   <span>{this.props.tourdetail?.sale}</span>
                 </div>}
                 <div className="form-group">
@@ -70,15 +83,11 @@ class TourDetail extends Component {
                 >
                   <button
                     className="login100-form-btn"
-                    style={{ width: "100px", marginRight: "20px" }}
+                    style={{ width: "220px", marginRight: "20px" }}
                     type="button"
+                    onClick={this.toggleSaveTour}
                   >
-                    <NavLink
-                      to="/"
-                      style={{ color: "white" }}
-                    >
-                      Lưu
-                    </NavLink>
+                     Chuyển đổi lưu/ bỏ lưu 
                   </button>
                   <button
                     className="login100-form-btn"
@@ -87,7 +96,7 @@ class TourDetail extends Component {
                   >
                     {" "}
                     <NavLink
-                      to="/booktour/1"
+                      to={`/booktour/${this.props.history.location.pathname.slice(12)}`}
                       style={{ color: "white" }}
                     >
                       Đặt tour
@@ -169,12 +178,15 @@ class TourDetail extends Component {
 function mapStateProps(state) {
   return {
     tourdetail:state.tourdetail.tourdetail,
-    loading:state.tourdetail.loading
+    loading:state.tourdetail.loading,
+    toggleLoading: state.saveTour.loadingToggle
   };
 }
 function mapDispatchToProps(dispatch) {
   return {
-   getTourDetail:(id)=>dispatch(getOneTour(id))
+   getTourDetail:(id)=>dispatch(getOneTour(id)),
+   toggleSaveTourStart:()=>dispatch(togglesaveTourStart()),
+   toggleSaveTour:(id)=>dispatch(toggleSaveTour(id))
   };
 }
 export default  withRouter(connect(mapStateProps, mapDispatchToProps)(TourDetail));

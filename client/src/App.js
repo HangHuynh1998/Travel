@@ -104,7 +104,9 @@ class App extends Component {
             <Route path="/profileCustomer" component={ProfileCustomer} />
             <Route
               path="/managerCustomer/:_id"
-              component={ManagerTourCustomer}
+              render={() => (
+                <ManagerTourCustomer role={this.state.role} user_id={this.state.user_id} />
+              )}
             />
             <Route
               path="/changeProfileCustomer"

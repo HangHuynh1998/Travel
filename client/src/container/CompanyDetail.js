@@ -50,7 +50,7 @@ class CompanyDetail extends Component {
                     style={{ width: "150px", marginRight: "20px" }}
                     type="button"
                   >
-                      Hủy theo dõi 
+                      Theo dõi/ Hủy theo dõi
                   </button>
                 </div>
               </form>
