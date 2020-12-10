@@ -34,3 +34,35 @@ export const getCustomerStart = () => {
         });
     };
   };
+
+  export const deleteCustomerStart = () => {
+    return {
+      type: actionTypes.DELETECUSTOMER_START,
+    };
+  };
+  export const deleteCustomerSuccess = () => {
+    return {
+      type: actionTypes.DELETECUSTOMER_SUCCESS,
+    };
+  };
+  export const deleteCustomerFail = (error) => {
+    return {
+      type: actionTypes.DELETECUSTOMER_FAIL,
+      error: error,
+    };
+  };
+  export const deleteCustomer= (id) => {
+    return (dispatch) => {
+      dispatch(deleteCustomerStart());
+      axios
+        .delete(`/customer/${id}`)
+        .then((res) => {
+          dispatch(deleteCustomerSuccess(res.data.data));
+          // dispatch(checkAuthTimeout(res.data.expiresIn));
+        })
+        .catch((err) => {
+          console.log(err);
+          dispatch(deleteCustomerFail(err));
+        });
+    };
+  };

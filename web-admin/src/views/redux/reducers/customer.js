@@ -3,6 +3,7 @@ import * as actionTypes from "../actions/actionType";
 const initialState = {
   loading: "loading",
   data: null,
+  deleteloading: "loading"
 };
 
   const getCustomerStart = (state, action) => {
@@ -23,6 +24,23 @@ const initialState = {
       loadin: "error",
     };
   };
+  const deleteCustomerStart = (state, action) => {
+    return { ...state, error: null, deleteloading: "loading" };
+  };
+  const deleteCustomerSuccess = (state, action) => {
+    return {
+      ...state,
+      error: null,
+      deleteloading: "success",
+    };
+  };
+  const deleteCustomerFail = (state, action) => {
+    return {
+      ...state,
+      error: action.error,
+      deleteloading: "error",
+    };
+  };
   
   const reducer = (state = initialState, action) => {
     switch (action.type) {
@@ -32,6 +50,13 @@ const initialState = {
             return getCustomerSuccess(state, action);
           case actionTypes.GETCUSTOMER_FAIL:
             return getCustomerFail(state, action);
+            case actionTypes.DELETECUSTOMER_START:
+            return deleteCustomerStart(state, action);
+          case actionTypes.DELETECUSTOMER_SUCCESS:
+            return deleteCustomerSuccess(state, action);
+          case actionTypes.DELETECUSTOMER_FAIL:
+            return deleteCustomerFail(state, action);
+            
             default:
                 return state;
             }

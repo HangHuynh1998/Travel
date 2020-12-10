@@ -17,6 +17,8 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
+import { deleteComment } from "views/redux/actions/comment";
+import { deleteCommentStart } from "views/redux/actions/comment";
 // core components
 // import styles from "assets/jss/material-dashboard-react/components/tableStyle.js";
 
@@ -52,11 +54,18 @@ const styles = {
 
 const useStyles = makeStyles(styles);
 
-function ManagerComment({ loading, getComment, comment }) {
+function ManagerComment({ loading, getComment, comment,deleteComment ,deleteloading}) {
   const classes = useStyles();
   useEffect(() => {
     getComment();
   }, []);
+  useEffect(() => {
+    getComment();
+  }, [deleteloading === "success"]);
+  const deleteCommentID = (id) =>{
+    deleteComment(id)
+    getComment()
+  }
   const tableHead = ["Tiêu đề", "Người viết", "Nội dung", "Hành động"];
   return (
     <GridContainer>
@@ -97,7 +106,7 @@ function ManagerComment({ loading, getComment, comment }) {
                         <TableCell className={classes.tableCell} style = {{maxWidth:"300px"}}>
                           {prop.comment}
                         </TableCell>
-                        <TableCell className={classes.tableCell} style= {{color:"red",paddingLeft:"30px"}}>
+                        <TableCell className={classes.tableCell} style= {{color:"red",paddingLeft:"30px"}} onClick = {()=>deleteCommentID(prop._id)}>
                           delete
                         </TableCell>
                       </TableRow>
@@ -116,11 +125,14 @@ function mapStateProps(state) {
   return {
     loading: state.comment.loading,
     comment: state.comment.data,
+    deleteloading: state.comment.deleteloading
   };
 }
 function mapDispatchToProps(dispatch) {
   return {
     getComment: () => dispatch(getComment()),
+    deleteCommentStart:() => dispatch(deleteCommentStart()),
+    deleteComment:(id) => dispatch(deleteComment(id))
   };
 }
 export default withRouter(

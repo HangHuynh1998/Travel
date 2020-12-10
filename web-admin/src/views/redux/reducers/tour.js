@@ -3,6 +3,7 @@ import * as actionTypes from "../actions/actionType";
 const initialState = {
   loading: "loading",
   data: null,
+  deleteloading: "loading"
 };
 
   const getTourStart = (state, action) => {
@@ -23,6 +24,23 @@ const initialState = {
       loadin: "error",
     };
   };
+  const deleteTourStart = (state, action) => {
+    return { ...state, error: null};
+  };
+  const deleteTourSuccess = (state, action) => {
+    return {
+      ...state,
+      error: null,
+      deleteloading: "success",
+    };
+  };
+  const deleteTourFail = (state, action) => {
+    return {
+      ...state,
+      error: action.error,
+      deleteloading: "error",
+    };
+  };
   
   const reducer = (state = initialState, action) => {
     switch (action.type) {
@@ -32,6 +50,12 @@ const initialState = {
             return getTourSuccess(state, action);
           case actionTypes.GETTOUR_FAIL:
             return getTourFail(state, action);
+            case actionTypes.DELETETOUR_START:
+            return deleteTourStart(state, action);
+          case actionTypes.DELETETOUR_SUCCESS:
+            return deleteTourSuccess(state, action);
+          case actionTypes.DELETETOUR_FAIL:
+            return deleteTourFail(state, action);
             default:
                 return state;
             }

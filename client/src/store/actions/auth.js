@@ -73,6 +73,7 @@ export const auth = (email, password) => {
        // dispatch(checkAuthTimeout(res.data.expiresIn));
       })
       .catch((err) => {
+        console.log("err",err);
         dispatch(authFail(err));
       });
   };
@@ -115,6 +116,7 @@ export const registerCompany = (name,address,phone,avatar,email, password,descri
     axios
       .post("/auth/register/company", data)
       .then((res) => {
+        console.log("res",res);
         dispatch(authSuccess());
        // dispatch(checkAuthTimeout(res.data.expiresIn));
       })

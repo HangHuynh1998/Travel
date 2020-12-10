@@ -37,13 +37,13 @@ class ManagerTourCompany extends Component {
             className="container"
             style={{ position: "fixed", zIndex: "100" }}
           >
-            <NavLink
+            <a
               className="awe-btn awe-btn-5 arrow-right awe-btn-lager text-uppercase float-right"
               style={{ backgroundColor: "#25ab4b", color: "#ffffff" }}
-              to="/addTour"
+              href="/addTour"
             >
               Thêm Tour
-            </NavLink>
+            </a>
           </div>
         </div>
         <section className="sales" style={{ marginTop: "0px" }}>
@@ -64,8 +64,8 @@ class ManagerTourCompany extends Component {
                 {tours?.map((item, i) => (
                   <div className="col-xs-6 col-md-3">
                     <div className="sales-item" style={{ height: "650px" }}>
-                      <NavLink
-                        to={`/tourDetail/${item._id}`}
+                      <a
+                        href={`/tourDetail/${item._id}`}
                         key={i}
                         style={{ marginBottom: "5px" }}
                       >
@@ -79,7 +79,7 @@ class ManagerTourCompany extends Component {
                             </figcaption>
                           )}
                         </figure>
-                      </NavLink>
+                      </a>
                       <div className="home-sales-text">
                         <div
                           className="home-sales-name-places"
@@ -126,7 +126,7 @@ class ManagerTourCompany extends Component {
                             justifyContent: "space-around",
                           }}
                         >
-                          <NavLink to={`/edittour/${item._id}`}>
+                          <a href={`/edittour/${item._id}`}>
                             <button
                               type="button"
                               className="login100-form-btn"
@@ -135,7 +135,7 @@ class ManagerTourCompany extends Component {
                               {" "}
                               Sữa chữa
                             </button>
-                          </NavLink>
+                          </a>
                           <button
                             type="button"
                             className="login100-form-btn"

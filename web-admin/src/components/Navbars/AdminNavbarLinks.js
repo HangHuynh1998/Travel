@@ -44,10 +44,14 @@ export default function AdminNavbarLinks() {
   };
   const handleCloseProfile = () => {
     setOpenProfile(null);
-    window.location.href = "/dashboard"
-  };
+     window.location.href = "/admin/user"
+    console.log("hhshshshsh");
+    };
   const logout =()=>{
-    console.log("logout");
+      localStorage.removeItem("token");
+      localStorage.removeItem("expirationTime");
+      localStorage.removeItem("userId");
+      window.location.href = "/login"
   }
   return (
     <div>

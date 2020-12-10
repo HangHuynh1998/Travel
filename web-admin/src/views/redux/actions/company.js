@@ -34,3 +34,35 @@ export const getCompanyStart = () => {
         });
     };
   };
+
+  export const deleteCompanyStart = () => {
+    return {
+      type: actionTypes.DELETECOMPANY_START,
+    };
+  };
+  export const deleteCompanySuccess = () => {
+    return {
+      type: actionTypes.DELETECOMPANY_SUCCESS,
+    };
+  };
+  export const deleteCompanyFail = (error) => {
+    return {
+      type: actionTypes.DELETECOMPANY_FAIL,
+      error: error,
+    };
+  };
+  export const deleteCompany= (id) => {
+    return (dispatch) => {
+      dispatch(deleteCompanyStart());
+      axios
+        .delete(`/company/${id}`)
+        .then((res) => {
+          dispatch(deleteCompanySuccess(res.data.data));
+          // dispatch(checkAuthTimeout(res.data.expiresIn));
+        })
+        .catch((err) => {
+          console.log(err);
+          dispatch(deleteCompanyFail(err));
+        });
+    };
+  };

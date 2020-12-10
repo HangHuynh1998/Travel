@@ -18,6 +18,8 @@ import TableRow from "@material-ui/core/TableRow";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 import { getTour } from "views/redux/actions/tour";
+import { deleteTourStart } from "views/redux/actions/tour";
+import { deleteTour } from "views/redux/actions/tour";
 // core components
 // import styles from "assets/jss/material-dashboard-react/components/tableStyle.js";
 
@@ -53,11 +55,18 @@ const styles = {
 
 const useStyles = makeStyles(styles);
 
-function ManagerTour({ loading, getTour, tour }) {
+function ManagerTour({ loading, getTour, tour ,deleteTour ,deleteloading}) {
   const classes = useStyles();
   useEffect(() => {
     getTour();
   }, []);
+  useEffect(() => {
+    getTour();
+  }, [deleteloading === "success"]);
+  const deleteCommentID = (id) =>{
+    deleteTour(id)
+    getTour();
+  }
   const tableHead = ["Tên tour", "Tên công ty", "Mô tả", "Giá tiền", "Hành động"];
   return (
     <GridContainer>
@@ -101,7 +110,7 @@ function ManagerTour({ loading, getTour, tour }) {
                         <TableCell className={classes.tableCell} style = {{maxWidth:"100px"}}>
                           {prop.price}
                         </TableCell>
-                        <TableCell className={classes.tableCell} style= {{color:"red",paddingLeft:"30px"}}>
+                        <TableCell className={classes.tableCell} style= {{color:"red",paddingLeft:"30px"}} onClick = {()=>deleteCommentID(prop._id)}>
                           delete
                         </TableCell>
                       </TableRow>
@@ -120,11 +129,14 @@ function mapStateProps(state) {
   return {
     loading: state.tour.loading,
     tour: state.tour.data,
+    deleteloading: state.comment.deleteloading
   };
 }
 function mapDispatchToProps(dispatch) {
   return {
     getTour: () => dispatch(getTour()),
+    deleteTourStart:() => dispatch(deleteTourStart()),
+    deleteTour:(id) => dispatch(deleteTour(id))
   };
 }
 export default withRouter(

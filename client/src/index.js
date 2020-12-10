@@ -21,6 +21,8 @@ import saveTourReducer from './store/reducers/saveTour'
 import companyReducer from './store/reducers/company'
 import companyFollowReducer from './store/reducers/companyFollow'
 import bookTourReducer from './store/reducers/bookTour'
+import { createHashHistory } from "history";
+const history = createHashHistory()
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 // const store = createStore(
 //   reducer,
@@ -49,7 +51,7 @@ const store = createStore(
 );
 const app = (
   <Provider store={store}>
-    <BrowserRouter>
+    <BrowserRouter history = {history}>
       <App />
     </BrowserRouter>
   </Provider>

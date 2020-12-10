@@ -88,14 +88,14 @@ class NavBar extends Component {
                 {this.props.isAuthenticated && (
                   <li>
                     {this.state.role === "company" && (
-                      <NavLink to={`/profileCompany/${this.state.userId}`}>
+                      <a href={`/profileCompany/${this.state.userId}`}>
                         Quản lý thông tin
-                      </NavLink>
+                      </a>
                     )}
                     {this.state.role === "customer" && (
-                      <NavLink to={`/profileCustomer/${this.state.userId}`}>
+                      <a href={`/profileCustomer/${this.state.userId}`}>
                         Quản lý thông tin
-                      </NavLink>
+                      </a>
                     )}
                   </li>
                 )}
@@ -156,7 +156,7 @@ class NavBar extends Component {
                   </li>
                 ) : (
                   <li>
-                    <a href="#void" onClick={this.logOut}>
+                    <a href="/" onClick={this.logOut}>
                       Đăng xuất
                     </a>
                   </li>

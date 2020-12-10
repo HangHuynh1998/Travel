@@ -26,13 +26,13 @@ class Review extends Component {
           className="container"
           style={{ position: "fixed", zIndex: "100" }}
         >
-          <NavLink
+          <a
             className="awe-btn awe-btn-5 arrow-right awe-btn-lager text-uppercase float-right"
             style={{ backgroundColor: "#25ab4b", color: "#ffffff" }}
-            to={this.props.role === "customer" ?"/addReview" :"/login"}
+            href={this.props.role === "customer" ?"/addReview" :"/login"}
           >
             Thêm đánh giá
-          </NavLink>
+          </a>
         </div>
           }
           

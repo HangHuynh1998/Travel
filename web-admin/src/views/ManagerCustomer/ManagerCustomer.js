@@ -20,6 +20,8 @@ import TableCell from "@material-ui/core/TableCell";
 import ManagerTour from "views/ManageTour/ManagerTour";
 import { getCompany } from "views/redux/actions/company";
 import { getCustomer } from "views/redux/actions/customer";
+import { deleteCustomerStart } from "views/redux/actions/customer";
+import { deleteCustomer } from "views/redux/actions/customer";
 // core components
 // import styles from "assets/jss/material-dashboard-react/components/tableStyle.js";
 
@@ -55,11 +57,18 @@ const styles = {
 
 const useStyles = makeStyles(styles);
 
-function ManagerCustomer({ loading, getCustomer, customer }) {
+function ManagerCustomer({ loading, getCustomer, customer,deleteCustomer ,deleteloading }) {
   const classes = useStyles();
   useEffect(() => {
     getCustomer();
   }, []);
+  useEffect(() => {
+    getCustomer();
+  }, [deleteloading === "success"]);
+  const deleteCommentID = (id) =>{
+    deleteCustomer(id)
+    getCustomer()
+  }
   const tableHead = ["Tên khách hàng", "email", "Địa chỉ", "Số điện thoại", "Hành động"];
   return (
     <GridContainer>
@@ -104,7 +113,7 @@ function ManagerCustomer({ loading, getCustomer, customer }) {
                         <TableCell className={classes.tableCell} style = {{maxWidth:"100px"}}>
                           0{prop.user_id?.phone}
                         </TableCell>
-                        <TableCell className={classes.tableCell} style= {{color:"red",paddingLeft:"30px"}}>
+                        <TableCell className={classes.tableCell} style= {{color:"red",paddingLeft:"30px"}} onClick = {()=>deleteCommentID(prop._id)}>
                           delete
                         </TableCell>
                       </TableRow>
@@ -123,11 +132,14 @@ function mapStateProps(state) {
   return {
     loading: state.customer.loading,
     customer: state.customer.data,
+    deleteloading: state.comment.deleteloading
   };
 }
 function mapDispatchToProps(dispatch) {
   return {
     getCustomer: () => dispatch(getCustomer()),
+    deleteCustomerStart:() => dispatch(deleteCustomerStart()),
+    deleteCustomer:(id) => dispatch(deleteCustomer(id))
   };
 }
 export default withRouter(

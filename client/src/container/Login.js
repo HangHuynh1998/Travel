@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import NavBar from "../Component/NavBar";
 import { connect } from "react-redux";
-import { NavLink } from "react-router-dom";
-import { auth } from "../store/actions/auth";
+import { NavLink, Redirect, withRouter } from "react-router-dom";
+import { auth, authStart } from "../store/actions/auth";
 import jwt_decode from "jwt-decode";
 class Login extends Component {
   constructor() {
@@ -31,8 +31,10 @@ class Login extends Component {
         this.setState({message: "Tài khoản của bạn đã bị khóa"})
       }else{
         this.props.history.push('/')
+        //return <Redirect from='/login' to='/'/>
       }
     }
+    this.props.authStart()
     if(nextPros.loading === "error"){
       this.setState({message: "Email hoặc mật khẩu không đúng"})
     }
@@ -165,15 +167,17 @@ class Login extends Component {
 
 
 function mapStateProps (state){
+  console.log("login", state.auth.loadingauth);
   return {
-    loading: state.auth.loading,
+    loading: state.auth.loadingauth,
     error: state.auth.error,
     // token: state.auth.token,
   };
 };
 function mapDispatchToProps ( dispatch ) {
   return{
+    authStart:()=>dispatch(authStart()),
     auth:(email,password)=>dispatch(auth(email,password))
   }
 };
-export default connect(mapStateProps, mapDispatchToProps)(Login);
+export default withRouter(connect(mapStateProps, mapDispatchToProps)(Login));

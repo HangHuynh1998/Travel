@@ -19,6 +19,8 @@ import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 import ManagerTour from "views/ManageTour/ManagerTour";
 import { getCompany } from "views/redux/actions/company";
+import { deleteCompanyStart } from "views/redux/actions/company";
+import { deleteCompany } from "views/redux/actions/company";
 // core components
 // import styles from "assets/jss/material-dashboard-react/components/tableStyle.js";
 
@@ -54,11 +56,18 @@ const styles = {
 
 const useStyles = makeStyles(styles);
 
-function ManagerCompany({ loading, getCompany, company }) {
+function ManagerCompany({ loading, getCompany, company,deleteCompany ,deleteloading }) {
   const classes = useStyles();
   useEffect(() => {
     getCompany();
   }, []);
+  useEffect(() => {
+    getCompany();
+  }, [deleteloading === "success"]);
+  const deleteCommentID = (id) =>{
+    deleteCompany(id)
+    getCompany()
+  }
   const tableHead = ["Tên công ty", "email", "Địa chỉ", "Số điện thoại", "Mô tả","Hành động"];
   return (
     <GridContainer>
@@ -105,7 +114,7 @@ function ManagerCompany({ loading, getCompany, company }) {
                         <TableCell className={classes.tableCell} style = {{maxWidth:"200px"}}>
                           {prop.user_id?.description}
                         </TableCell>
-                        <TableCell className={classes.tableCell} style= {{color:"red",paddingLeft:"30px"}}>
+                        <TableCell className={classes.tableCell} style= {{color:"red",paddingLeft:"30px"}} onClick = {()=>deleteCommentID(prop._id)}>
                           delete
                         </TableCell>
                       </TableRow>
@@ -124,11 +133,14 @@ function mapStateProps(state) {
   return {
     loading: state.company.loading,
     company: state.company.data,
+    deleteloading: state.comment.deleteloading
   };
 }
 function mapDispatchToProps(dispatch) {
   return {
     getCompany: () => dispatch(getCompany()),
+    deleteCompanyStart:() => dispatch(deleteCompanyStart()),
+    deleteCompany:(id) => dispatch(deleteCompany(id))
   };
 }
 export default withRouter(

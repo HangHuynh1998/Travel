@@ -95,12 +95,12 @@ class TourDetail extends Component {
                     type="button"
                   >
                     {" "}
-                    <NavLink
-                      to={`/booktour/${this.props.tourdetail?._id}`}
+                    <a
+                      href={`/booktour/${this.props.tourdetail?._id}`}
                       style={{ color: "white" }}
                     >
                       Đặt tour
-                    </NavLink>
+                    </a>
                     </button>
                     <button
                     className="login100-form-btn"

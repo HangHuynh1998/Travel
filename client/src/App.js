@@ -45,28 +45,30 @@ class App extends Component {
   componentDidMount() {
     this.initState();
   }
-  componentDidUpdate(prevProps) {
-    if (
-      prevProps.loading !== this.props.loading ||
-      this.props.loading === "sucess"
-    ) {
-      this.initState();
-    }
-  }
-  // componentWillReceiveProps(nextProps) {
-  //   this.props.authStart()
-  //   if(nextProps.loading === "success"){
-  //     this.initState()
+  // componentDidUpdate(prevProps) {
+  //   if (
+  //     prevProps.loading !== this.props.loading ||
+  //     this.props.loading === "sucess"
+  //   ) {
+  //     this.initState();
   //   }
   // }
+  componentWillReceiveProps(nextProps) {
+    this.props.authStart()
+    if(nextProps.loading === "success"){
+      this.initState()
+    }
+  }
   initState() {
-    console.log("ajsjdjsajdjas");
     if (localStorage.getItem("token")) {
+      console.log("initState");
       let role = jwt_decode(localStorage.getItem("token")).user_id.role;
       let name = jwt_decode(localStorage.getItem("token")).user_id.name;
       let user_id = jwt_decode(localStorage.getItem("token")).user_id._id;
       let id = jwt_decode(localStorage.getItem("token"))._id;
-      this.setState({ role: role, name: name, user_id: user_id, id: id });
+      this.setState({ role: role, name: name, user_id: user_id, id: id },() => {
+        console.log("hahah",this.state.role);
+      });
     }
   }
   render() {
@@ -173,7 +175,7 @@ class App extends Component {
             <Route
               path="/addtour"
               render={() => (
-                <AddTour name={this.state.name} user_id={this.state.user_id} />
+                <AddTour name={this.state.name} user_id={this.state.user_id} loken = {localStorage.getItem("token")}/>
               )}
             />
           </>
@@ -190,7 +192,7 @@ class App extends Component {
 }
 const mapStateProps = (state) => {
   return {
-    loading: state.auth.loading,
+    loading: state.auth.loadingauth,
     isAuthenticated: localStorage.getItem("token") !== null,
   };
 };

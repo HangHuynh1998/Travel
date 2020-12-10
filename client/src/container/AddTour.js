@@ -252,7 +252,8 @@ function mapStateProps(state) {
     loading: state.auth.loading,
     error: state.auth.error,
     categorydata: state.category.data,
-    addTourStatus:state.tour.loading
+    addTourStatus:state.tour.loading,
+    isAuthenticated: localStorage.getItem("token") !== null,
   };
 }
 function mapDispatchToProps(dispatch) {

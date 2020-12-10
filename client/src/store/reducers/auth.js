@@ -5,6 +5,7 @@ const initialState = {
   userId: null,
   error: null,
   loading: "loading",
+  loadingauth:"loading"
 };
 const authStart = (state, action) => {
   return {...state, error: null, loading: "loading" };
@@ -15,13 +16,13 @@ const authSuccess = (state, action) => {
     token: action.token,
     userId: action.userId,
     error: null,
-    loading: "success",
+    loadingauth: "success",
 }};
 const authFail = (state, action) => {
   return{
     ...state,
     error: action.error,
-    loading: "error",
+    loadingauth: "error",
   }
 };
 const authLogout = (state, action) => {
