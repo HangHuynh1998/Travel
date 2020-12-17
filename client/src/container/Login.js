@@ -26,13 +26,18 @@ class Login extends Component {
   }
   componentWillReceiveProps(nextPros){
     if(nextPros.loading === "success"){
-      let status = jwt_decode(localStorage.getItem("token")).user_id.status
-      if(status === "blocked"){
-        this.setState({message: "Tài khoản của bạn đã bị khóa"})
-      }else{
-        this.props.history.push('/')
-        //return <Redirect from='/login' to='/'/>
+      try{
+        let status = jwt_decode(localStorage.getItem("token")).user_id.status
+        if(status === "blocked"){
+          this.setState({message: "Tài khoản của bạn đã bị khóa"})
+        }else{
+          this.props.history.push('/')
+          //return <Redirect from='/login' to='/'/>
+        }
+      }catch(e){
+          console.log("err",e);
       }
+      
     }
     this.props.authStart()
     if(nextPros.loading === "error"){

@@ -23,6 +23,7 @@ import { Component } from "react";
 import jwt_decode from "jwt-decode";
 import { authStart } from "./store/actions";
 import TourOfCompany from "./container/TourOfCompany";
+import Modala from "./Component/Modala";
 function NotFound() {
   return (
     <div>
@@ -62,13 +63,18 @@ class App extends Component {
   initState() {
     if (localStorage.getItem("token")) {
       console.log("initState");
-      let role = jwt_decode(localStorage.getItem("token")).user_id.role;
-      let name = jwt_decode(localStorage.getItem("token")).user_id.name;
-      let user_id = jwt_decode(localStorage.getItem("token")).user_id._id;
-      let id = jwt_decode(localStorage.getItem("token"))._id;
-      this.setState({ role: role, name: name, user_id: user_id, id: id },() => {
-        console.log("hahah",this.state.role);
-      });
+      try{
+        let role = jwt_decode(localStorage.getItem("token")).user_id.role;
+        let name = jwt_decode(localStorage.getItem("token")).user_id.name;
+        let user_id = jwt_decode(localStorage.getItem("token")).user_id._id;
+        let id = jwt_decode(localStorage.getItem("token"))._id;
+        this.setState({ role: role, name: name, user_id: user_id, id: id },() => {
+          console.log("hahah",this.state.role);
+        });
+      }catch(e){
+       console.log(e);
+      }
+      
     }
   }
   render() {
@@ -76,6 +82,7 @@ class App extends Component {
     let routes = (
       <Switch>
         <Route exact path="/" component={Home} />
+        <Route exact path="/modal" component={Modala} />
         <Route path="/login" exact component={Login} />
         <Route path="/register" component={Register} />
         <Route path="/about" component={About} />

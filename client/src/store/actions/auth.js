@@ -80,7 +80,7 @@ export const auth = (email, password) => {
 };
 export const registerCustomer = (name,address,phone,birthday,gender,email, password) => {
   return (dispatch) => {
-    dispatch(authStart());
+    dispatch(registerStart());
     const data = {
       name:name,
       email: email,
@@ -93,17 +93,17 @@ export const registerCustomer = (name,address,phone,birthday,gender,email, passw
     axios
       .post("/auth/register/customer", data)
       .then((res) => {
-        dispatch(authSuccess());
+        dispatch(registerSuccess());
        // dispatch(checkAuthTimeout(res.data.expiresIn));
       })
       .catch((err) => {
-        dispatch(authFail(err));
+        dispatch(registerFail(err));
       });
   };
 };
 export const registerCompany = (name,address,phone,avatar,email, password,description) => {
   return (dispatch) => {
-    dispatch(authStart());
+    dispatch(registerStart());
     const data = {
       name:name,
       email: email,
@@ -117,11 +117,11 @@ export const registerCompany = (name,address,phone,avatar,email, password,descri
       .post("/auth/register/company", data)
       .then((res) => {
         console.log("res",res);
-        dispatch(authSuccess());
+        dispatch(registerSuccess());
        // dispatch(checkAuthTimeout(res.data.expiresIn));
       })
       .catch((err) => {
-        dispatch(authFail(err));
+        dispatch(registerFail(err));
       });
   };
 };

@@ -104,10 +104,11 @@ class Register extends Component {
     );
   }
   async submit() {
-    await this.validation()
-    if (this.state.validation === true) {
-      return;
-    } else {
+    // console.log("hshhshssh");
+    // await this.validation()
+    // if (this.state.validation === true) {
+    //   return;
+    // } else {
       if (this.state.customer === true) {
         this.props.registerCustomer(
           this.state.name,
@@ -130,7 +131,7 @@ class Register extends Component {
           this.state.description
         );
       }
-    }
+    //}
   }
   validation() {
     this.setState(

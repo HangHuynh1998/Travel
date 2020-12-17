@@ -16,9 +16,15 @@ class NavBar extends Component {
   }
   componentDidMount() {
     if (localStorage.getItem("token")) {
-      const role = jwt_decode(localStorage.getItem("token")).user_id.role;
-      const userId = jwt_decode(localStorage.getItem("token")).user_id._id;
-      this.setState({ role: role, userId: userId });
+      console.log("nav");
+      try{
+        const role = jwt_decode(localStorage.getItem("token")).user_id.role;
+        const userId = jwt_decode(localStorage.getItem("token")).user_id._id;
+        this.setState({ role: role, userId: userId });
+      }catch(e){
+        console.log(e);
+      }
+     
     }
     this.props.getCategory();
   }

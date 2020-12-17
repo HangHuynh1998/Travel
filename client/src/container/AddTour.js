@@ -3,6 +3,7 @@ import NavBar from "../Component/NavBar";
 import { addtour, getCategory, addTourStart } from "../store/actions";
 import { connect } from "react-redux";
 import { storage } from "../firebase/index";
+import { PayPalButton } from "react-paypal-button-v2";
 import { Redirect, withRouter } from "react-router-dom";
 class AddTour extends Component {
   constructor() {

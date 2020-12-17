@@ -8,7 +8,7 @@ const initialState = {
   loadingauth:"loading"
 };
 const authStart = (state, action) => {
-  return {...state, error: null, loading: "loading" };
+  return {...state, error: null};
 };
 const authSuccess = (state, action) => {
   return{
@@ -39,7 +39,7 @@ const setAuthRedirectPath = (state, action) => {
   }
 };
 const registerStart = (state, action) => {
-  return {...state, error: null, loading: "loading" };
+  return {...state, error: null };
 };
 const registerSuccess = (state, action) => {
   return{

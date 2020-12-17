@@ -52,6 +52,7 @@ class BookTour extends Component {
     });
   }
   submit() {
+    console.log("jajajajaa",this.state);
     this.props.bookTour(
       this.state.tour_id,
       this.state.emailcompany,
@@ -157,6 +158,7 @@ class BookTour extends Component {
 }
 
 function mapStateProps(state) {
+  console.log("tourdetail",state.tourdetail.tourdetail);
   return {
     tourdetail: state.tourdetail.tourdetail,
     loading: state.tourdetail.loading,
