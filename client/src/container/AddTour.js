@@ -8,32 +8,32 @@ import { Redirect, withRouter } from "react-router-dom";
 class AddTour extends Component {
   constructor() {
     super();
-    this.handleChange = this.handleChange.bind(this)
-    this.handleChangeImage = this.handleChangeImage.bind(this)
-    this.handleUpload = this.handleUpload.bind(this)
-    this.submit = this.submit.bind(this)
+    this.handleChange = this.handleChange.bind(this);
+    this.handleChangeImage = this.handleChangeImage.bind(this);
+    this.handleUpload = this.handleUpload.bind(this);
+    this.submit = this.submit.bind(this);
     this.state = {
-      image:"",
-     name:"",
-     category_id:"5fc7ca6a93d3bc3add0c5e4d",
-     place:"",
-     numberpeople:"",
-     price:"",
-     avatar:"",
-     startDate:null,
-     endDate:null,
-     description:"",
-     contactInformation:"",
-    }
+      image: "",
+      name: "",
+      category_id: "5fc7ca6a93d3bc3add0c5e4d",
+      place: "",
+      numberpeople: "",
+      price: "",
+      avatar: "",
+      startDate: null,
+      endDate: null,
+      description: "",
+      contactInformation: "",
+      enable:true,
+    };
   }
-  componentDidMount(){
-    this.props.getCategory()
-    this.props.addTourStart()
-    
+  componentDidMount() {
+    this.props.getCategory();
+    this.props.addTourStart();
   }
-  componentWillReceiveProps(nextProps){
-    if(nextProps.addTourStatus === "success"){
-      this.props.history.push(`/managerCompany/${this.props.user_id}`)
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.addTourStatus === "success") {
+      this.props.history.push(`/managerCompany/${this.props.user_id}`);
     }
   }
   handleChange(e) {
@@ -75,8 +75,9 @@ class AddTour extends Component {
       }
     );
   }
-  submit(){
-    this.props.addTour(this.state.name,
+  submit() {
+    this.props.addTour(
+      this.state.name,
       this.state.category_id,
       this.state.place,
       this.state.numberpeople,
@@ -85,22 +86,29 @@ class AddTour extends Component {
       this.state.startDate,
       this.state.endDate,
       this.state.contactInformation,
-      this.state.description)
+      this.state.description
+    );
   }
   render() {
     return (
       <div>
         <NavBar />
-        <div
-          className="limiter"
-        >
+        <div className="limiter">
           <div className="container-login100">
-            <div className="wrap-login100" style = {{backgroundImage: `url('assets/images/travelhalong.jpg')`,backgroundRepeat:"round"}}>
+            <div
+              className="wrap-login100"
+              style={{
+                backgroundImage: `url('assets/images/travelhalong.jpg')`,
+                backgroundRepeat: "round",
+              }}
+            >
               <form
                 className="login-form validate-form"
                 style={{ background: "white" }}
               >
                 <span className="login100-form-title ">Thêm Tour</span>
+                <span className="login100-form-title p-b-43"
+                  style={{ fontSize: "15px",paddingBottom:"10px",color:"red"}}>*Bạn sẽ phải trả 10% số tiền của tour cho phí dịch vụ*</span>
                 <span
                   className="login100-form-title p-b-43"
                   style={{ fontSize: "24px", marginTop: "10px" }}
@@ -119,12 +127,20 @@ class AddTour extends Component {
                   />
                 </div>
                 <div className="form-group">
-                  <label >Loại hình du lịch</label>
-                  <select className="form-control" id="category_id" onChange={(e) => this.handleChange(e)} value = {this.state.category_id}>
-                    {this.props.categorydata?.map((item,i)=>{
-                      return <option key = {i} value = {item._id}>{item.name}</option>
+                  <label>Loại hình du lịch</label>
+                  <select
+                    className="form-control"
+                    id="category_id"
+                    onChange={(e) => this.handleChange(e)}
+                    value={this.state.category_id}
+                  >
+                    {this.props.categorydata?.map((item, i) => {
+                      return (
+                        <option key={i} value={item._id}>
+                          {item.name}
+                        </option>
+                      );
                     })}
-                    
                   </select>
                 </div>
                 <div className="form-group">
@@ -161,11 +177,7 @@ class AddTour extends Component {
                   />
                 </div>
                 <div className="form-group">
-                  <label
-                    style={{ marginBottom: "5px" }}
-                  >
-                    Hình ảnh tour
-                  </label>
+                  <label style={{ marginBottom: "5px" }}>Hình ảnh tour</label>
                   <input
                     type="file"
                     className="form-control-file"
@@ -175,42 +187,34 @@ class AddTour extends Component {
                 </div>
 
                 <div className="form-group">
-                      <process value={process} max="100"></process>
-                      <img src={this.state.avatar} alt="" />
-                    </div>
+                  <process value={process} max="100"></process>
+                  <img src={this.state.avatar} alt="" />
+                </div>
                 <div className="form-group ">
-                      <label
-                        className="col-2 col-form-label"
-                      >
-                        Ngày bắt đầu
-                      </label>
-                      <div className="col-10">
-                        <input
-                          className="form-control"
-                          type="date"
-                          id="startDate"
-                          value={this.state.startDate}
-                          onChange={(e) => this.handleChange(e)}
-                        />
-                      </div>
-                    </div>
-                    <div className="form-group ">
-                      <label
-                        className="col-2 col-form-label"
-                      >
-                        Ngày kết thúc
-                      </label>
-                      <div className="col-10">
-                        <input
-                          className="form-control"
-                          type="date"
-                          id="endDate"
-                          value={this.state.endDate}
-                          onChange={(e) => this.handleChange(e)}
-                        />
-                      </div>
-                    </div>
-                  <div className="form-group">
+                  <label className="col-2 col-form-label">Ngày bắt đầu</label>
+                  <div className="col-10">
+                    <input
+                      className="form-control"
+                      type="date"
+                      id="startDate"
+                      value={this.state.startDate}
+                      onChange={(e) => this.handleChange(e)}
+                    />
+                  </div>
+                </div>
+                <div className="form-group ">
+                  <label className="col-2 col-form-label">Ngày kết thúc</label>
+                  <div className="col-10">
+                    <input
+                      className="form-control"
+                      type="date"
+                      id="endDate"
+                      value={this.state.endDate}
+                      onChange={(e) => this.handleChange(e)}
+                    />
+                  </div>
+                </div>
+                <div className="form-group">
                   <label>Thông tin liên hệ</label>
                   <textarea
                     type="text"
@@ -232,12 +236,39 @@ class AddTour extends Component {
                     onChange={(e) => this.handleChange(e)}
                   />
                 </div>
+                {this.state.enable &&
+                <div style = {{marginTop:"30px"}}>
+                <span style = {{color:"red"}}> Vui lòng thanh toán phí dịch vụ</span>
+                <PayPalButton
+                  amount={Math.ceil((this.state.price*10/2200000))}
+                  onSuccess={(details, data) => {
+                    alert(
+                      "Transaction completed by " +
+                        details.payer.name.given_name
+                    );
+                    this.setState({enable:false})
+                    return fetch("/paypal-transaction-complete", {
+                      method: "post",
+                      body: JSON.stringify({
+                        orderID: data.orderID,
+                      }),
+                    });
+                  }}
+                />
+                </div>
+                }
+                
                 <div
                   className="container-login100-form-btn"
                   style={{ marginTop: "40px" }}
                 >
-                  <button type="button" className="login100-form-btn" onClick = {this.submit}>
-                   Thêm tour
+                  <button
+                    type="button"
+                    className="login100-form-btn"
+                    onClick={this.submit}
+                    disabled = {this.state.enable}
+                  >
+                    Thêm tour
                   </button>
                 </div>
               </form>
@@ -253,7 +284,7 @@ function mapStateProps(state) {
     loading: state.auth.loading,
     error: state.auth.error,
     categorydata: state.category.data,
-    addTourStatus:state.tour.loading,
+    addTourStatus: state.tour.loading,
     isAuthenticated: localStorage.getItem("token") !== null,
   };
 }
@@ -285,10 +316,9 @@ function mapDispatchToProps(dispatch) {
           description
         )
       ),
-      addTourStart:()=>dispatch (addTourStart()),
-    getCategory:()=>dispatch(getCategory())
+    addTourStart: () => dispatch(addTourStart()),
+    getCategory: () => dispatch(getCategory()),
   };
 }
-
 
 export default withRouter(connect(mapStateProps, mapDispatchToProps)(AddTour));
