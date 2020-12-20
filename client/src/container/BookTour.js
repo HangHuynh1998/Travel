@@ -4,6 +4,8 @@ import { bookTour, bookTourStart } from "../store/actions/bookTour";
 import { connect } from "react-redux";
 import { getOneTour, getOneTourStart } from "../store/actions/tourdetail";
 import { withRouter } from "react-router-dom";
+import {NotificationContainer, NotificationManager} from 'react-notifications';
+import 'react-notifications/lib/notifications.css';
 class BookTour extends Component {
   constructor() {
     super();
@@ -34,7 +36,15 @@ class BookTour extends Component {
     }
     this.props.bookTourStart();
     if (nextProps.loadingBooktour === "success") {
-      this.props.history.push(`/`);
+      NotificationManager.success('Đặt tour thành công',"Success",setTimeout(
+        () =>  this.props.history.push(`/`),
+        3000
+      ),()=>{
+        this.props.history.push(`/`);
+      });
+    }
+    if (nextProps.loadingBooktour === "error") {
+      NotificationManager.error('Đặt tour thất bại',"Error",3000);
     }
   }
   initState() {
@@ -52,7 +62,6 @@ class BookTour extends Component {
     });
   }
   submit() {
-    console.log("jajajajaa",this.state);
     this.props.bookTour(
       this.state.tour_id,
       this.state.emailcompany,
@@ -65,11 +74,11 @@ class BookTour extends Component {
       this.state.required
     );
   }
-
   render() {
     return (
       <div>
         <NavBar />
+        <NotificationContainer/>
         <div
           className="limiter"
           style={{ backgroundImage: `url('assets/images/travel5.jpg')` }}
@@ -144,6 +153,7 @@ class BookTour extends Component {
                     type="button"
                     className="login100-form-btn"
                     onClick={this.submit}
+                    //onClick={this.createNotification('success')}
                   >
                     Đăt tour
                   </button>
@@ -158,7 +168,6 @@ class BookTour extends Component {
 }
 
 function mapStateProps(state) {
-  console.log("tourdetail",state.tourdetail.tourdetail);
   return {
     tourdetail: state.tourdetail.tourdetail,
     loading: state.tourdetail.loading,

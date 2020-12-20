@@ -151,3 +151,6 @@ button.ant-btn.ant-btn-primary {
     text-align: center;
     background: #364d79;
 }
+.col-xs-6.col-md-3 {
+    border-right: 1px dotted gray !important;
+}
