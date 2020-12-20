@@ -93,7 +93,7 @@ class About extends Component {
                   </div>
                 </div>
               </div>
-              <div className="col-sm-6">
+              <div className="col-sm-6" style = {{marginTop:"100px"}}>
                 {/* <div className="form-wrapper iw-contact-form-7 contact-map">
                   <div className="title">
                     <h3>GỬI LIÊN HỆ</h3>

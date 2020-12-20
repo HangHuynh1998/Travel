@@ -175,7 +175,7 @@ class Home extends Component {
                 <div className="form-cn form-hotel tab-pane active in">
                   <div className="content-text">
                     {this.state.index === 0 ? (
-                      <h2>Where would you like to go?</h2>
+                      <h2>Bạn muốn đi đâu?</h2>
                     ) : (
                       ""
                     )}
@@ -532,7 +532,7 @@ class Home extends Component {
                 <div className="col-lg-6" style={{ marginBottom: "10px" }}>
                   <div className="magazine-thum" id="magazine-thum">
                     {this.props.commentdata?.map((item,i)=>(
-                      <NavLink to={`/reviews`} key = {i}>
+                      <NavLink to={`/review`} key = {i}>
                       <div className="thumnail-item clearfix">
                         <figure className="float-left">
                           <img src={item.image} alt="" />

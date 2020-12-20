@@ -112,3 +112,42 @@
 button.ant-modal-close {
     box-shadow: none;
 }
+.destinations-name {
+    height: 100px;
+}
+a.col-xs-6.col-sm-4.col-md-6.col-lg-4 {
+    border-bottom: 2px solid #00000017;
+}
+.image-detail {
+    width: 100vw;
+    text-align: center;
+}
+span.login100-form-title.p-b-43 {
+    margin-top: 95px;
+}
+img.image {
+    width: 85rem;
+}
+.ant-steps-item-icon {
+    background: #4db74f !important;
+    border-color: #4db74f !important;
+}
+button.ant-btn.ant-btn-primary {
+    background: #4db74f !important;
+    border-color: #4db74f !important;
+}
+.image-tour{
+    width: calc(100% - 600px);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    z-index: 1;
+}
+.contentStyle{
+    height: 160px;
+    color: #fff;
+    line-height: 160px;
+    text-align: center;
+    background: #364d79;
+}

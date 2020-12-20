@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import { storage } from "../firebase/index";
 import { PayPalButton } from "react-paypal-button-v2";
 import { Redirect, withRouter } from "react-router-dom";
+import { getCustomer } from "../store/actions/customer";
 class AddTour extends Component {
   constructor() {
     super();
@@ -25,11 +26,14 @@ class AddTour extends Component {
       description: "",
       contactInformation: "",
       enable:true,
+      customer_id:null
     };
   }
   componentDidMount() {
     this.props.getCategory();
     this.props.addTourStart();
+    this.props.getCustomer(this.props.user_id)
+
   }
   componentWillReceiveProps(nextProps) {
     if (nextProps.addTourStatus === "success") {
@@ -185,7 +189,6 @@ class AddTour extends Component {
                     onChange={(e) => this.handleChangeImage(e)}
                   />
                 </div>
-
                 <div className="form-group">
                   <process value={process} max="100"></process>
                   <img src={this.state.avatar} alt="" />
@@ -286,6 +289,7 @@ function mapStateProps(state) {
     categorydata: state.category.data,
     addTourStatus: state.tour.loading,
     isAuthenticated: localStorage.getItem("token") !== null,
+    customer: state.customer.data
   };
 }
 function mapDispatchToProps(dispatch) {
@@ -318,6 +322,7 @@ function mapDispatchToProps(dispatch) {
       ),
     addTourStart: () => dispatch(addTourStart()),
     getCategory: () => dispatch(getCategory()),
+    getCustomer: (id) => dispatch(getCustomer(id))
   };
 }
 

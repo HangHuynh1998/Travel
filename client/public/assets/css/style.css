@@ -776,6 +776,8 @@ blockquote:before {
   width: 100%;
   background-color: #fff;
   padding: 40px 0;
+  border-bottom: 0.001px solid #80808052;
+    border-top: 0.001px solid #80808052;
 }
 .title-wrap .travel-title h2 {
   display: inline-block;

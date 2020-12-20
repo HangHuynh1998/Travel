@@ -24,12 +24,7 @@ import bookTourReducer from './store/reducers/bookTour'
 import { createHashHistory } from "history";
 const history = createHashHistory()
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-// const store = createStore(
-//   reducer,
-//   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-// );
 const rootReducer = combineReducers({
-  // burgerBuilder: burgerBuilderReducer,
   tour: tourReducer,
   auth: authReducer,
   category: categoryReducer,

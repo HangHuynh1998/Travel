@@ -66,6 +66,7 @@ export const auth = (email, password) => {
           new Date().getTime() + res.data.expiresIn * 1000
         );
         localStorage.setItem("token", res.data.data.token);
+        localStorage.getItem("refreshToken",res.data.data.token)
         const userId = jwt_decode(res.data.data.token).user_id._id
         localStorage.setItem("expirationDate", expirationDate);
         localStorage.setItem("userId", userId);

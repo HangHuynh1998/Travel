@@ -86,6 +86,7 @@ class App extends Component {
         <Route path="/login" exact component={Login} />
         <Route path="/register" component={Register} />
         <Route path="/about" component={About} />
+        <Route path="/booktour/:tour_id" component={BookTour} />
         <Route
           path="/review"
           render={() => (
@@ -118,7 +119,6 @@ class App extends Component {
         )}
         {this.state.role === "customer" && (
           <>
-            <Route path="/booktour/:tour_id" component={BookTour} />
             <Route path="/profileCustomer" component={ProfileCustomer} />
             <Route
               path="/managerCustomer/:_id"
