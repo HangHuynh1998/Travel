@@ -164,3 +164,9 @@ span {
 p{
    font-size: 18px;
 }
+.notFound{
+    position: absolute;
+    top:40%;
+    left: 40%;
+    font-size: 25px;
+}

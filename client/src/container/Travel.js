@@ -60,7 +60,10 @@ class Travel extends Component {
     }
   }
   render() {
-    console.log("this.props.history.location.search",this.props.history.location.search);
+    console.log(
+      "this.props.history.location.search",
+      this.props.history.location.search
+    );
     let tours = null;
     if (this.props.toursdata) {
       tours = this.props.toursdata?.filter(function (tour) {
@@ -104,6 +107,7 @@ class Travel extends Component {
           <div className="container">
             <div className="sales-cn">
               <div className="row">
+                {console.log("tourrrrrrrrrr", tours)}
                 {/* <!-- HostSales Item --> */}
                 {tours?.map((item, i) => (
                   <NavLink
@@ -168,6 +172,18 @@ class Travel extends Component {
                     </div>
                   </NavLink>
                 ))}
+                {tours.length === 0 && (
+                  <div
+                    style={{
+                      backgroundImage: `url('assets/images/notfound.jpg')`,
+                      height: "100vh",
+                      textAlign: "center",
+                      position:"relative"
+                    }}
+                  >
+                    <span className = "notFound">Không có tour để hiển thị!!!</span>
+                  </div>
+                )}
               </div>
             </div>
           </div>
