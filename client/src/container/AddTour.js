@@ -13,26 +13,36 @@ class AddTour extends Component {
     this.handleChangeImage = this.handleChangeImage.bind(this);
     this.handleUpload = this.handleUpload.bind(this);
     this.submit = this.submit.bind(this);
+    this.validation = this.validation.bind(this)
     this.state = {
       image: "",
       name: "",
       category_id: "5fc7ca6a93d3bc3add0c5e4d",
       place: "",
-      numberpeople: "",
-      price: "",
+      numberpeople: 0,
+      price: 0,
       avatar: "",
       startDate: null,
       endDate: null,
       description: "",
       contactInformation: "",
       enable:true,
-      customer_id:null
+      validation: false,
+      valiname: "",
+      valiplace: "",
+      valinumberPeople: "",
+      valiprice: "",
+      valiimage: "",
+      validateend: "",
+      validatestart: "",
+      valicontactInfor: "",
+      validescription: "",
     };
   }
   componentDidMount() {
     this.props.getCategory();
     this.props.addTourStart();
-    this.props.getCustomer(this.props.user_id)
+    //this.props.getCustomer(this.props.user_id)
 
   }
   componentWillReceiveProps(nextProps) {
@@ -76,6 +86,97 @@ class AddTour extends Component {
           .then((url) => {
             this.setState({ avatar: url });
           });
+      }
+    );
+  }
+  validation() {
+    this.setState(
+      {
+        validation: false,
+        valiname: "",
+        valiplace: "",
+        valinumberPeople: "",
+        valiprice: "",
+        valiimage: "",
+        validateend: "",
+        validatestart: "",
+        valicontactInfor: "",
+        validescription: "",
+      },
+      () => {
+        if (this.state.name === "") {
+          this.setState({
+            valiname: "Tên chưa được nhập",
+            validation: true,
+          });
+        }
+        if (this.state.place === "") {
+          this.setState({
+            valiplace: "Điểm đến chưa được nhập",
+            validation: true,
+          });
+        }
+        if (this.state.image === "") {
+          this.setState({
+            valiimage: "Hình ảnh chưa có",
+            validation: true,
+          });
+        }
+        if (this.state.startDate === null) {
+          this.setState({
+            validatestart: "Ngày bắt đầu chưa được nhập",
+            validation: true,
+          });
+        }
+        if (this.state.endDate === null) {
+          this.setState({
+            validateend: "Ngày kết thúc chưa được nhập",
+            validation: true,
+          });
+        }
+        if (this.state.contactInformation === "") {
+          this.setState({
+            valicontactInfor: "Liên hệ chưa được nhập",
+            validation: true,
+          });
+        }
+        if (this.state.numberpeople === 0) {
+          this.setState({
+            valinumberPeople: "Nhập số lượng người",
+            validation: true,
+          });
+        }
+        if (this.state.numberpeople) {
+          var numberpeople = new RegExp(/^[0-9\b]+$/);
+          if (!numberpeople.test(this.state.numberpeople)) {
+            this.setState({
+              valinumberPeople: "Không đúng định dạng",
+              validation: true,
+            });
+          } 
+        }
+        if (this.state.price === 0) {
+          this.setState({
+            valiprice: "Nhập giá",
+            validation: true,
+          });
+        }
+        if (this.state.price) {
+          var price = new RegExp(/^[0-9\b]+$/);
+          if (!price.test(this.state.price)) {
+            this.setState({
+              valiprice: "Không đúng định dạng",
+              validation: true,
+            });
+          } 
+        }
+          if (this.state.description === "") {
+            this.setState({
+              validescription: "Nhập giới thiệu, mô tả về công ty",
+              validation: true,
+            });
+          }
+        
       }
     );
   }
@@ -129,6 +230,7 @@ class AddTour extends Component {
                     placeholder="Nhập tên tour"
                     onChange={(e) => this.handleChange(e)}
                   />
+                  <span class="text-danger">{this.state.valiname}</span>
                 </div>
                 <div className="form-group">
                   <label>Loại hình du lịch</label>
@@ -157,6 +259,7 @@ class AddTour extends Component {
                     placeholder="Nhập các điểm đến"
                     onChange={(e) => this.handleChange(e)}
                   />
+                  <span class="text-danger">{this.state.valiplace}</span>
                 </div>
                 <div className="form-group">
                   <label>Số lượng người</label>
@@ -168,6 +271,7 @@ class AddTour extends Component {
                     placeholder="Nhập các điểm đến"
                     onChange={(e) => this.handleChange(e)}
                   />
+                  <span class="text-danger">{this.state.valinumberPeople}</span>
                 </div>
                 <div className="form-group">
                   <label>Giá(VNĐ)</label>
@@ -179,6 +283,7 @@ class AddTour extends Component {
                     placeholder="Nhập giá tiền"
                     onChange={(e) => this.handleChange(e)}
                   />
+                  <span class="text-danger">{this.state.valiprice}</span>
                 </div>
                 <div className="form-group">
                   <label style={{ marginBottom: "5px" }}>Hình ảnh tour</label>
@@ -188,6 +293,7 @@ class AddTour extends Component {
                     id="image"
                     onChange={(e) => this.handleChangeImage(e)}
                   />
+                  <span class="text-danger">{this.state.valiimage}</span>
                 </div>
                 <div className="form-group">
                   <process value={process} max="100"></process>
@@ -203,6 +309,7 @@ class AddTour extends Component {
                       value={this.state.startDate}
                       onChange={(e) => this.handleChange(e)}
                     />
+                    <span class="text-danger">{this.state.validatestart}</span>
                   </div>
                 </div>
                 <div className="form-group ">
@@ -215,7 +322,8 @@ class AddTour extends Component {
                       value={this.state.endDate}
                       onChange={(e) => this.handleChange(e)}
                     />
-                  </div>
+                    <span class="text-danger">{this.state.validateend}</span>
+                  </div>         
                 </div>
                 <div className="form-group">
                   <label>Thông tin liên hệ</label>
@@ -227,6 +335,7 @@ class AddTour extends Component {
                     placeholder="Nhập thông tin liên hệ"
                     onChange={(e) => this.handleChange(e)}
                   />
+                  <span class="text-danger">{this.state.valicontactInfor}</span>
                 </div>
                 <div className="form-group">
                   <label>Mô tả chuyến đi</label>
@@ -235,9 +344,10 @@ class AddTour extends Component {
                     className="form-control"
                     id="description"
                     aria-describedby="description"
-                    placeholder="Giới thiệu về công ty"
+                    placeholder="Mô tả chuyến đi"
                     onChange={(e) => this.handleChange(e)}
                   />
+                  <span class="text-danger">{this.state.validescription}</span>
                 </div>
                 {this.state.enable &&
                 <div style = {{marginTop:"30px"}}>
@@ -257,6 +367,7 @@ class AddTour extends Component {
                       }),
                     });
                   }}
+                  onClick = {this.validation}
                 />
                 </div>
                 }
@@ -289,7 +400,7 @@ function mapStateProps(state) {
     categorydata: state.category.data,
     addTourStatus: state.tour.loading,
     isAuthenticated: localStorage.getItem("token") !== null,
-    customer: state.customer.data
+    //customer: state.customer.data
   };
 }
 function mapDispatchToProps(dispatch) {
@@ -322,7 +433,7 @@ function mapDispatchToProps(dispatch) {
       ),
     addTourStart: () => dispatch(addTourStart()),
     getCategory: () => dispatch(getCategory()),
-    getCustomer: (id) => dispatch(getCustomer(id))
+    //getCustomer: (id) => dispatch(getCustomer(id))
   };
 }
 

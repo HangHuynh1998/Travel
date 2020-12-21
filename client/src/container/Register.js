@@ -3,6 +3,8 @@ import NavBar from "../Component/NavBar";
 import { storage } from "../firebase/index";
 import { connect } from "react-redux";
 import { registerCompany, registerCustomer } from "../store/actions/auth";
+import Modala from "../Component/Modala";
+import { Checkbox } from "antd";
 
 class Register extends Component {
   constructor() {
@@ -13,7 +15,10 @@ class Register extends Component {
     this.handleChangeImage = this.handleChangeImage.bind(this);
     this.submit = this.submit.bind(this);
     this.validation = this.validation.bind(this);
-
+    this.showModal = this.showModal.bind(this);
+    this.handleCancel = this.handleCancel.bind(this);
+    this.handleOk = this.handleOk.bind(this);
+    this.handleCheck = this.handleCheck.bind(this);
     this.state = {
       customer: false,
       image: null,
@@ -40,6 +45,8 @@ class Register extends Component {
       valibirthday: "",
       valigender: "",
       validescription: "",
+      isModalVisible: false,
+      check: false,
     };
   }
   componentDidMount() {
@@ -50,10 +57,15 @@ class Register extends Component {
   componentWillReceiveProps(nextProps) {
     this.isCustomer();
     if (nextProps.loading === "success") {
-      this.props.history.push("/login");
+      this.props.history.push({
+        pathname: "/login",
+        state: {
+          from: this.props.location.pathname,
+        },
+      });
     }
     if (nextProps.loading === "error") {
-      this.setState({ message: "Email hoặc mật khẩu đã tồn tại" });
+      this.setState({ message: "Email đã tồn tại" });
     }
   }
   isCustomer() {
@@ -103,8 +115,8 @@ class Register extends Component {
       }
     );
   }
-  submit = async ()=> {
-    await this.validation()
+  submit = async () => {
+    await this.validation();
     if (this.state.validation === true) {
       return;
     } else {
@@ -130,8 +142,8 @@ class Register extends Component {
           this.state.description
         );
       }
-   }
-  }
+    }
+  };
   validation() {
     this.setState(
       {
@@ -168,7 +180,7 @@ class Register extends Component {
             validation: true,
           });
         }
-        if(this.state.password?.length < 6){
+        if (this.state.password?.length < 6) {
           this.setState({
             valipassword: "Mật khẩu phải dài ít nhất 6 kí tự",
             validation: true,
@@ -246,6 +258,18 @@ class Register extends Component {
       }
     );
   }
+  showModal() {
+    this.setState({ isModalVisible: true });
+  }
+  handleCancel() {
+    this.setState({ isModalVisible: false });
+  }
+  handleOk() {
+    this.setState({ isModalVisible: false });
+  }
+  handleCheck() {
+    this.setState({ check: !this.state.check });
+  }
   render() {
     //const { match, location, history } = this.props
     return (
@@ -259,7 +283,7 @@ class Register extends Component {
             <div className="wrap-login100">
               <form
                 className="login-form validate-form"
-                style={{ background: "white",paddingTop:"0" }}
+                style={{ background: "white", paddingTop: "0" }}
               >
                 {this.state.customer ? (
                   <>
@@ -473,10 +497,19 @@ class Register extends Component {
                   className="container-login100-form-btn"
                   style={{ marginTop: "40px" }}
                 >
+                  {!this.state.customer && (
+                    <>
+                    <Checkbox onClick={this.handleCheck}>
+                      <a onClick = {this.showModal}>ĐÔng ý với điều khoản đăng ký của chúng tôi</a>
+                    </Checkbox>
+                    <Modala isModalVisible = {this.state.isModalVisible} handleCancel = {this.handleCancel} handleOk = {this.handleOk} />
+                    </>
+                  )}
                   <button
                     type="button"
                     className="login100-form-btn"
                     onClick={this.submit}
+                    disabled = {!this.state.check}
                   >
                     Đăng kí
                   </button>

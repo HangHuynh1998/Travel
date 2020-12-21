@@ -25,6 +25,7 @@ class Login extends Component {
     this.props.auth(this.state.email,this.state.password)
   }
   componentWillReceiveProps(nextPros){
+    this.props.authStart()
     if(nextPros.loading === "success"){
 
       try{
@@ -32,16 +33,19 @@ class Login extends Component {
         if(status === "blocked"){
           this.setState({message: "Tài khoản của bạn đã bị khóa"})
         }else{
-          //this.props.history.push('/')
-          //return <Redirect from='/login' to='/'/>
-          this.props.history.goBack()
+          console.log("gggg",this.props.history);
+          if(this.props.history.location.state?.from === "/register"){
+            this.props.history.push("/");
+          }else{
+            this.props.history.goBack()
+          }
+         
         }
       }catch(e){
           console.log("err",e);
       }
       
     }
-    this.props.authStart()
     if(nextPros.loading === "error"){
       this.setState({message: "Email hoặc mật khẩu không đúng"})
     }

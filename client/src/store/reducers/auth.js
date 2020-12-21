@@ -8,7 +8,7 @@ const initialState = {
   loadingauth:"loading"
 };
 const authStart = (state, action) => {
-  return {...state, error: null};
+  return {...state, error: null,loading:"loading"};
 };
 const authSuccess = (state, action) => {
   return{
