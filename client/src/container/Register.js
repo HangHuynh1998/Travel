@@ -103,12 +103,11 @@ class Register extends Component {
       }
     );
   }
-  async submit() {
-    // console.log("hshhshssh");
-    // await this.validation()
-    // if (this.state.validation === true) {
-    //   return;
-    // } else {
+  submit = async ()=> {
+    await this.validation()
+    if (this.state.validation === true) {
+      return;
+    } else {
       if (this.state.customer === true) {
         this.props.registerCustomer(
           this.state.name,
@@ -131,7 +130,7 @@ class Register extends Component {
           this.state.description
         );
       }
-    //}
+   }
   }
   validation() {
     this.setState(
@@ -169,7 +168,7 @@ class Register extends Component {
             validation: true,
           });
         }
-        if(this.state.password?.length <=6){
+        if(this.state.password?.length < 6){
           this.setState({
             valipassword: "Mật khẩu phải dài ít nhất 6 kí tự",
             validation: true,
@@ -260,7 +259,7 @@ class Register extends Component {
             <div className="wrap-login100">
               <form
                 className="login-form validate-form"
-                style={{ background: "white" }}
+                style={{ background: "white",paddingTop:"0" }}
               >
                 {this.state.customer ? (
                   <>

@@ -225,6 +225,7 @@ iframe {
   align-items: stretch;
   flex-direction: row-reverse;
   background-image: url('../images/travelhalong.jpg');
+  background-repeat: round;
 
 }
 

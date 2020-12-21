@@ -55,31 +55,31 @@ class Login extends Component {
             <div className="wrap-login100">
               <form className="login100-form validate-form">
                 <span className="login100-form-title p-b-43">
-                  Login to continue
+                  Đăng nhập để tiếp tục
                 </span>
                 <div className="form-group">
-                  <label>Email address</label>
+                  <label>Địa chỉ email</label>
                   <input
                     type="email"
                     className="form-control"
                     id="email"
                     aria-describedby="email"
-                    placeholder="Enter email"
+                    placeholder="Nhập email"
                     onChange={(e) => this.handleChange(e)}
                   />
                 </div>
                 <div className="form-group">
-                  <label>Password</label>
+                  <label>Mật khẩu</label>
                   <input
                     type="password"
                     className="form-control"
                     id="password"
-                    placeholder="Password"
+                    placeholder="Nhập mật khẩu"
                     onChange={(e) => this.handleChange(e)}
                   />
                 </div>
                 {this.props.loading === "error" && <span class="text-danger">{this.state.message}</span>}
-                <div className="flex-sb-m w-full p-t-3 p-b-32">
+                {/* <div className="flex-sb-m w-full p-t-3 p-b-32">
                   <div className="contact100-form-checkbox">
                     <input
                       className="input-checkbox100"
@@ -94,20 +94,20 @@ class Login extends Component {
                       Forgot Password?
                     </a>
                   </div>
-                </div>
-                <div className="container-login100-form-btn">
+                </div> */}
+                <div className="container-login100-form-btn" style = {{marginTop:"40px"}}>
                   <button
                     type="button"
                     className="login100-form-btn"
                     onClick={this.handleSubmit}
                   >
-                    Login
+                    Đăng nhập
                   </button>
                 </div>
-                <div className="text-center p-t-46 p-b-20">
+                {/* <div className="text-center p-t-46 p-b-20">
                   <span className="txt2">or sign up using</span>
-                </div>
-                <div className="login100-form-social flex-c-m">
+                </div> */}
+                {/* <div className="login100-form-social flex-c-m">
                   <a
                     href="#void"
                     className="login100-form-social-item flex-c-m bg1 m-r-5"
@@ -120,18 +120,18 @@ class Login extends Component {
                   >
                     <i className="fa fa-google" aria-hidden="true"></i>
                   </a>
-                </div>
+                </div> */}
                 <div>
                   <span
                     className="login100-form-title p-b-43"
-                    style={{ marginTop: "20px" }}
+                    style={{ marginTop: "70px", fontSize:"15px", paddingBottom:"0px"}}
                   >
-                    Sign In
+                    Nếu bạn chưa có tài khoản hãy đăng kí với chúng tôi!
                   </span>
                 </div>
                 <div
                   className="container-login100-form-btn"
-                  style={{ display: "flex" }}
+                  style={{ display: "flex",paddingTop:"5px"}}
                 >
                   <button
                     className="login100-form-btn"
