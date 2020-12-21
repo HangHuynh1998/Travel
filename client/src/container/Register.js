@@ -503,9 +503,7 @@ class Register extends Component {
                       <a onClick = {this.showModal}>ĐÔng ý với điều khoản đăng ký của chúng tôi</a>
                     </Checkbox>
                     <Modala isModalVisible = {this.state.isModalVisible} handleCancel = {this.handleCancel} handleOk = {this.handleOk} />
-                    </>
-                  )}
-                  <button
+                    <button
                     type="button"
                     className="login100-form-btn"
                     onClick={this.submit}
@@ -513,6 +511,15 @@ class Register extends Component {
                   >
                     Đăng kí
                   </button>
+                    </>
+                  )}
+                  {this.state.customer && <button
+                    type="button"
+                    className="login100-form-btn"
+                    onClick={this.submit}
+                  >
+                    Đăng kí
+                  </button>}
                 </div>
               </form>
             </div>

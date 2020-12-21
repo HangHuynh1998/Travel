@@ -77,7 +77,7 @@ class NavBar extends Component {
                   <ul className="dropdown-menu">
                     <li>
                       {this.props.categorydata?.map((item, i) => (
-                        <NavLink to={`/travel?category_id=${item._id}`} key={i}>
+                        <NavLink to={`/travel?category_id=${item._id}`} key={i} style = {{fontSize:"18px",fontWeight:"400"}}>
                           {item.name}
                         </NavLink>
                       ))}

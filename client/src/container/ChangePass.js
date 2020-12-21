@@ -9,10 +9,15 @@ class ChangePass extends Component {
     super();
     this.handleChange = this.handleChange.bind(this);
     this.submit = this.submit.bind(this);
+    this.validation = this.validation.bind(this)
     this.state = {
       old_pass:"",
       new_pass:"",
-      new_pass_retype:""
+      new_pass_retype:"",
+      validation: false,
+      valiold_pass:"",
+      valinew_pass:"",
+      valinew_pass_retype:""
     };
   }
   componentWillReceiveProps(nextProps) {
@@ -26,6 +31,9 @@ class ChangePass extends Component {
         }
       }
     }
+    if(nextProps.loading === "error"){
+      this.setState({valiold_pass: "Mật khẩu cũ chưa đúng",})
+    }
   }
   handleChange(e) {
     e.preventDefault();
@@ -33,12 +41,58 @@ class ChangePass extends Component {
       [e.target.id]: e.target.value,
     });
   }
-  submit() {
+  validation() {
+    this.setState(
+      {
+        validation: false,
+        valiold_pass:"",
+        valinew_pass:"",
+        valinew_pass_retype:""
+      },
+      () => {
+        if (this.state.old_pass === "") {
+          this.setState({
+            valiold_pass: "Mật khẩu chưa được nhập",
+            validation: true,
+          });
+        } 
+        if (this.state.new_pass === "") {
+          this.setState({
+            valinew_pass: "Mật khẩu chưa được nhập",
+            validation: true,
+          });
+        }
+        if (this.state.new_pass?.length < 6) {
+          this.setState({
+            valinew_pass: "Mật khẩu phải dài ít nhất 6 kí tự",
+            validation: true,
+          });
+        }
+        if (this.state.new_pass_retype === "") {
+          this.setState({
+            valinew_pass_retype: "Nhập lại mật khẩu chưa được nhập",
+            validation: true,
+          });
+        }
+        if (this.state.new_pass !== this.state.new_pass_retype) {
+          this.setState({
+            valinew_pass_retype: "Không trùng với mật khẩu",
+            validation: true,
+          });
+        }
+      }
+    )
+  }
+  submit= async() => {
+    await this.validation();
+    if (this.state.validation === true) {
+      return;
+    } else {
     this.props.changePass(
       this.state.old_pass,
       this.state.new_pass,
       this.state.new_pass_retype
-    );
+    );}
   }
   render() {
     return (
@@ -68,6 +122,7 @@ class ChangePass extends Component {
                     placeholder="Mật khẩu cũ"
                     onChange={(e) => this.handleChange(e)}
                   />
+                   <span class="text-danger">{this.state.valiold_pass}</span>
                 </div>
                 <div className="form-group">
                   <label>Mật khẩu mới</label>
@@ -79,6 +134,7 @@ class ChangePass extends Component {
                     placeholder="Mật khẩu mới"
                     onChange={(e) => this.handleChange(e)}
                   />
+                   <span class="text-danger">{this.state.valinew_pass}</span>
                 </div>
                 <div className="form-group">
                   <label>Nhập lại mật khẩu mới</label>
@@ -90,6 +146,7 @@ class ChangePass extends Component {
                     placeholder="Nhập lại mật khẩu mới"
                     onChange={(e) => this.handleChange(e)}
                   />
+                   <span class="text-danger">{this.state.valinew_pass_retype}</span>
                 </div>
                 {this.props.data?.message && <span class="text-danger">{this.props.data?.message}</span>}
                 <div

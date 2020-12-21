@@ -10,13 +10,25 @@ class ChangeProfileCustomer extends Component {
     this.initState = this.initState.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.submit = this.submit.bind(this);
+    this.validation = this.validation.bind(this)
     this.state = {
       name: "",
       email: "",
       address: "",
       phone: "",
       birthday: "",
-      gender:""
+      gender:"",
+      validation: false,
+      valiname: "",
+      valiemail: "",
+      valiaddress: "",
+      valipassword: "",
+      valirepass: "",
+      valiphone: "",
+      valiavatar: "",
+      valibirthday: "",
+      valigender: "",
+      validescription: "",
     };
   }
   componentDidMount() {
@@ -49,8 +61,121 @@ class ChangeProfileCustomer extends Component {
       [e.target.id]: e.target.value,
     });
   }
+  validation() {
+    this.setState(
+      {
+        validation: false,
+        valiname: "",
+        valiemail: "",
+        valiaddress: "",
+        valipassword: "",
+        valirepass: "",
+        valiphone: "",
+        valiavatar: "",
+        valibirthday: "",
+        valigender: "",
+        validescription: "",
+      },
+      () => {
+        if (this.state.name === "") {
+          this.setState({
+            valiname: "Tên chưa được nhập",
+            validation: true,
+          });
+        }
+        if (this.state.address === "") {
+          this.setState({
+            valiaddress: "Địa chỉ chưa được nhập",
+
+            validation: true,
+          });
+        }
+
+        if (this.state.password === "") {
+          this.setState({
+            valipassword: "Mật khẩu chưa được nhập",
+            validation: true,
+          });
+        }
+        if (this.state.password?.length < 6) {
+          this.setState({
+            valipassword: "Mật khẩu phải dài ít nhất 6 kí tự",
+            validation: true,
+          });
+        }
+        if (this.state.repass === "") {
+          this.setState({
+            valirepass: "Nhập lại mật khẩu chưa được nhập",
+            validation: true,
+          });
+        }
+        if (this.state.password !== this.state.repass) {
+          this.setState({
+            valirepass: "Không trùng với mật khẩu",
+            validation: true,
+          });
+        }
+        if (this.state.phone === 0) {
+          this.setState({
+            valiphone: "Nhập số điện thoại",
+            validation: true,
+          });
+        }
+        if (this.state.phone) {
+          var phone = new RegExp(/^[0-9\b]+$/);
+          if (!phone.test(this.state.phone)) {
+            this.setState({
+              valiphone: "Không đúng định dạng",
+              validation: true,
+            });
+          } else if (this.state.phone.length !== 10) {
+            this.setState({
+              valiphone: "Số điện thoại phải đủ 10 chữ số",
+              validation: true,
+            });
+          }
+        }
+        if (this.state.email === "") {
+          this.setState({
+            valiemail: "Email chưa được nhập",
+            validation: true,
+          });
+        }
+        if (this.state.email) {
+          const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+          if (!re.test(this.state.email)) {
+            this.setState({
+              valiemail: "Không đúng định dạng example@example.com",
+              validation: true,
+            });
+          }
+        }
+        if (this.state.customer === true) {
+          if (this.state.birthday === null) {
+            this.setState({
+              valibirthday: "Nhập ngày sinh",
+              validation: true,
+            });
+          }
+        }
+        if (this.state.customer === false) {
+          if (this.state.avatar === "") {
+            this.setState({
+              valiavatar: "Tải hình ảnh của công ty",
+              validation: true,
+            });
+          }
+          if (this.state.description === "") {
+            this.setState({
+              validescription: "Nhập giới thiệu, mô tả về công ty",
+              validation: true,
+            });
+          }
+        }
+      }
+    );
+  }
   submit() {
-    console.log("háhshss", this.state);
     this.props.editUser(
       this.state.name,
       this.state.email,

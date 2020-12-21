@@ -63,7 +63,7 @@ class ManagerTourCompany extends Component {
                 {/* <!-- HostSales Item --> */}
                 {tours?.map((item, i) => (
                   <div className="col-xs-6 col-md-3">
-                    <div className="sales-item" style={{ height: "650px" }}>
+                    <div className="sales-item" style={{ height: "700px" }}>
                       <a
                         href={`/tourDetail/${item._id}`}
                         key={i}
@@ -83,7 +83,7 @@ class ManagerTourCompany extends Component {
                       <div className="home-sales-text">
                         <div
                           className="home-sales-name-places"
-                          style={{ height: "120px" }}
+                          style={{ height: "140px" }}
                         >
                           <div className="home-sales-name">
                             <a href="#void" title="">

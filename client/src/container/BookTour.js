@@ -12,6 +12,7 @@ class BookTour extends Component {
     this.submit = this.submit.bind(this);
     this.initState = this.initState.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.validation = this.validation.bind(this)
     this.state = {
       tour_id: "",
       emailcompany: "",
@@ -20,8 +21,13 @@ class BookTour extends Component {
       nameCustomer: "",
       emailCustomer: "",
       address: "",
-      phone: "",
+      phone: 0,
       required: "",
+      validation: false,
+      valinameCustomer: "",
+      valiemailCustomer: "",
+      valiaddress: "",
+      valiphone: "",
     };
   }
   componentDidMount() {
@@ -61,7 +67,61 @@ class BookTour extends Component {
       [e.target.id]: e.target.value,
     });
   }
-  submit() {
+  validation() {
+    this.setState(
+      {
+        validation: false,
+        valinameCustomer: "",
+        valiemailCustomer: "",
+        valiaddress: "",
+        valiphone: "",
+      },
+      () => {
+        if (this.state.nameCustomer === "") {
+          this.setState({
+            valinameCustomer: "Tên chưa được nhập",
+            validation: true,
+          });
+        }
+        if (this.state.emailCustomer === "") {
+          this.setState({
+            valiemailCustomer: "Email chưa được nhập",
+            validation: true,
+          });
+        }
+        if (this.state.address === "") {
+          this.setState({
+            valiaddress: "Địa chỉ chưa được nhập",
+            validation: true,
+          });
+        }
+        if (this.state.phone === 0) {
+          this.setState({
+            valiphone: "Nhập số điện thoại",
+            validation: true,
+          });
+        }
+        if (this.state.phone) {
+          var phone = new RegExp(/^[0-9\b]+$/);
+          if (!phone.test(this.state.phone)) {
+            this.setState({
+              valiphone: "Không đúng định dạng",
+              validation: true,
+            });
+          } else if (this.state.phone.length !== 10) {
+            this.setState({
+              valiphone: "Số điện thoại phải đủ 10 chữ số",
+              validation: true,
+            });
+          }
+        }
+      })
+  }
+  submit= async () => {
+    await this.validation();
+    if (this.state.validation === true) {
+      return;
+    } else {
     this.props.bookTour(
       this.state.tour_id,
       this.state.emailcompany,
@@ -72,7 +132,7 @@ class BookTour extends Component {
       this.state.address,
       this.state.phone,
       this.state.required
-    );
+    );}
   }
   render() {
     return (
@@ -89,7 +149,7 @@ class BookTour extends Component {
                 className="login-form validate-form"
                 style={{ background: "white" }}
               >
-                <span className="login100-form-title p-b-43">Tên Tour</span>
+                <span className="login100-form-title p-b-43">{this.props.tourdetail?.name}</span>
                 <div className="form-group">
                   <label>Họ tên</label>
                   <input
@@ -100,6 +160,7 @@ class BookTour extends Component {
                     placeholder="Nhập họ tên"
                     onChange={(e) => this.handleChange(e)}
                   />
+                  <span class="text-danger">{this.state.valinameCustomer}</span>
                 </div>
                 <div className="form-group">
                   <label>Email</label>
@@ -111,6 +172,7 @@ class BookTour extends Component {
                     placeholder="Email"
                     onChange={(e) => this.handleChange(e)}
                   />
+                  <span class="text-danger">{this.state.valiemailCustomer}</span>
                 </div>
                 <div className="form-group">
                   <label>Địa chỉ </label>
@@ -122,6 +184,7 @@ class BookTour extends Component {
                     placeholder="Nhập địa chỉ"
                     onChange={(e) => this.handleChange(e)}
                   />
+                  <span class="text-danger">{this.state.valiaddress}</span>
                 </div>
                 <div className="form-group">
                   <label>Điện thoại</label>
@@ -133,6 +196,7 @@ class BookTour extends Component {
                     placeholder="Số điện thoại"
                     onChange={(e) => this.handleChange(e)}
                   />
+                  <span class="text-danger">{this.state.valiphone}</span>
                 </div>
                 <div className="form-group">
                   <label>Yêu cầu thêm</label>

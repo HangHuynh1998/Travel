@@ -14,6 +14,7 @@ class EditTour extends Component {
     this.handleChangeImage = this.handleChangeImage.bind(this)
     this.handleUpload = this.handleUpload.bind(this)
     this.submit = this.submit.bind(this)
+    this.validation = this.validation.bind(this)
     this.state = {
      image:"",
      name:"",
@@ -26,7 +27,17 @@ class EditTour extends Component {
      endDate:null,
      description:"",
      contactInformation:"",
-     sale:""
+     sale:"",
+     validation: false,
+      valiname: "",
+      valiplace: "",
+      valinumberPeople: "",
+      valiprice: "",
+      valiimage: "",
+      validateend: "",
+      validatestart: "",
+      valicontactInfor: "",
+      validescription: "",
     }
   }
   componentDidMount(){
@@ -100,8 +111,102 @@ class EditTour extends Component {
       }
     );
   }
-  submit(){
-    console.log("háhshss",this.state);
+  validation() {
+    this.setState(
+      {
+        validation: false,
+        valiname: "",
+        valiplace: "",
+        valinumberPeople: "",
+        valiprice: "",
+        valiimage: "",
+        validateend: "",
+        validatestart: "",
+        valicontactInfor: "",
+        validescription: "",
+      },
+      () => {
+        if (this.state.name === "") {
+          this.setState({
+            valiname: "Tên chưa được nhập",
+            validation: true,
+          });
+        }
+        if (this.state.place === "") {
+          this.setState({
+            valiplace: "Điểm đến chưa được nhập",
+            validation: true,
+          });
+        }
+        if (this.state.image === "") {
+          this.setState({
+            valiimage: "Hình ảnh chưa có",
+            validation: true,
+          });
+        }
+        if (this.state.startDate === null) {
+          this.setState({
+            validatestart: "Ngày bắt đầu chưa được nhập",
+            validation: true,
+          });
+        }
+        if (this.state.endDate === null) {
+          this.setState({
+            validateend: "Ngày kết thúc chưa được nhập",
+            validation: true,
+          });
+        }
+        if (this.state.contactInformation === "") {
+          this.setState({
+            valicontactInfor: "Liên hệ chưa được nhập",
+            validation: true,
+          });
+        }
+        if (this.state.numberpeople === 0) {
+          this.setState({
+            valinumberPeople: "Nhập số lượng người",
+            validation: true,
+          });
+        }
+        if (this.state.numberpeople) {
+          var numberpeople = new RegExp(/^[0-9\b]+$/);
+          if (!numberpeople.test(this.state.numberpeople)) {
+            this.setState({
+              valinumberPeople: "Không đúng định dạng",
+              validation: true,
+            });
+          } 
+        }
+        if (this.state.price === 0) {
+          this.setState({
+            valiprice: "Nhập giá",
+            validation: true,
+          });
+        }
+        if (this.state.price) {
+          var price = new RegExp(/^[0-9\b]+$/);
+          if (!price.test(this.state.price)) {
+            this.setState({
+              valiprice: "Không đúng định dạng",
+              validation: true,
+            });
+          } 
+        }
+          if (this.state.description === "") {
+            this.setState({
+              validescription: "Nhập giới thiệu, mô tả về công ty",
+              validation: true,
+            });
+          }
+        
+      }
+    );
+  }
+  submit= async() => {
+    await this.validation();
+    if (this.state.validation === true) {
+      return;
+    } else {
     this.props.editTour(
       this.props.history.location.pathname.slice(10),
       this.state.name,
@@ -115,7 +220,7 @@ class EditTour extends Component {
       this.state.contactInformation,
       this.state.description,
       this.state.sale)
-  }
+  }}
     render() {
         return (
             <div>

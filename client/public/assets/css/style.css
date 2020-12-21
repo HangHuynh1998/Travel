@@ -2087,7 +2087,7 @@ blockquote:before {
   overflow: hidden;
   min-height: 300px;
   /* max-height: 200px; */
-  height: 350px;
+  height: 315px;
   object-fit: contain;
 }
 .sales-item .home-sales-img:after {
@@ -2513,7 +2513,7 @@ blockquote:before {
 }
 .thumnail-item .thumnail-text h4 {
   color: #111111;
-  font-size: 18px;
+  font-size: 25px;
   margin: 0;
   line-height: 27px;
   font-weight: 300;
@@ -8535,6 +8535,8 @@ footer .copyright {
   }
   .form-cn .form-search {
     margin-top: 15px;
+    width: 1025px;
+    margin-left: -56px;
   }
   .form-cn .form-search .form-field {
     font-size: 16px;
@@ -8638,11 +8640,11 @@ footer .copyright {
     font-size: 40px;
     line-height: 40px;
   }
-  .magazine-thum {
+  /* .magazine-thum {
     padding-left: 25px;
     padding-right: 25px;
     overflow: hidden;
-  }
+  } */
   .thumnail-item {
     width: 25%;
     float: left;

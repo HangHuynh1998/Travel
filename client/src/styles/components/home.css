@@ -154,3 +154,13 @@ button.ant-btn.ant-btn-primary {
 .col-xs-6.col-md-3 {
     border-right: 1px dotted gray !important;
 }
+a {
+    font-size: 18px;
+    font-weight: 600;
+}
+span {
+    font-size: 18px;
+}
+p{
+   font-size: 18px;
+}

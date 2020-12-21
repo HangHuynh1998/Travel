@@ -12,12 +12,19 @@ class AddReview extends Component {
     this.handleChangeImage = this.handleChangeImage.bind(this)
     this.handleUpload = this.handleUpload.bind(this)
     this.submit = this.submit.bind(this)
+    this.validation = this.validation.bind(this)
     this.state = {
       image:"",
      name:"",
      title:"",
      avatar:"",
      comment:"",
+     validation: false,
+     valiname: "",
+     valititle: "",
+     valiavatar: "",
+     valicomment: "",
+
     }
   }
   componentDidMount(){
@@ -69,13 +76,54 @@ class AddReview extends Component {
       }
     );
   }
-  submit(){
+  validation() {
+    this.setState(
+      {
+        validation: false,
+        valiname: "",
+        valititle: "",
+        valiavatar: "",
+        valicomment: "",
+      },
+      () => {
+        if (this.state.name === "") {
+          this.setState({
+            valiname: "Tên chưa được nhập",
+            validation: true,
+          });
+        }
+        if (this.state.title === "") {
+          this.setState({
+            valititle: "Tiêu đề chưa được nhập",
+            validation: true,
+          });
+        }
+        if (this.state.avatar === "") {
+          this.setState({
+            valiavatar: "Hình ảnh chưa có",
+            validation: true,
+          });
+        }
+        if (this.state.comment === "") {
+          this.setState({
+            valicomment: "Đánh giá chưa được nhập",
+            validation: true,
+          });
+        }
+      }
+    )
+  }
+  submit = async() => {
+    await this.validation();
+    if (this.state.validation === true) {
+      return;
+    } else {
     this.props.addReview(
       this.state.name,
       this.state.title,
       this.state.avatar,
       this.state.comment)
-      this.props.history.push(`/review`)
+      this.props.history.push(`/review`)}
   }
     render() {
       console.log("sshss",this.props.status);
@@ -105,6 +153,7 @@ class AddReview extends Component {
                     placeholder="Nhập tên"
                     onChange={(e) => this.handleChange(e)}
                   />
+                   <span class="text-danger">{this.state.valiname}</span>
                 </div>
                 <div className="form-group">
                   <label>Tiêu đề</label>
@@ -116,6 +165,7 @@ class AddReview extends Component {
                     placeholder="Nhập tên"
                     onChange={(e) => this.handleChange(e)}
                   />
+                   <span class="text-danger">{this.state.title}</span>
                 </div>
                 <div className="form-group">
                       <label  style = {{marginBottom:"5px"}}>
@@ -127,6 +177,7 @@ class AddReview extends Component {
                         id="image"
                         onChange={(e) => this.handleChangeImage(e)}
                       />
+                       <span class="text-danger">{this.state.valiavatar}</span>
                     </div>
                     <div className="form-group">
                       <process value={process} max="100"></process>
@@ -142,6 +193,7 @@ class AddReview extends Component {
                         placeholder="Thêm đánh giá"
                         onChange={(e) => this.handleChange(e)}
                       />
+                       <span class="text-danger">{this.state.valicomment}</span>
                     </div>
                 <div
                   className="container-login100-form-btn"

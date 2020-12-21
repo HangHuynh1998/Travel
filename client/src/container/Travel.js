@@ -126,7 +126,7 @@ class Travel extends Component {
                       <div className="home-sales-text">
                         <div
                           className="home-sales-name-places"
-                          style={{ height: "120px" }}
+                          style={{ height: "140px" }}
                         >
                           <div className="home-sales-name">
                             <a href="#void" title="">

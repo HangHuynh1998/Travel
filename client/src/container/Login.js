@@ -33,7 +33,6 @@ class Login extends Component {
         if(status === "blocked"){
           this.setState({message: "Tài khoản của bạn đã bị khóa"})
         }else{
-          console.log("gggg",this.props.history);
           if(this.props.history.location.state?.from === "/register"){
             this.props.history.push("/");
           }else{
@@ -144,7 +143,7 @@ class Login extends Component {
                   >
                     <NavLink
                       to="/register?customer"
-                      style={{ color: "white" }}
+                      style={{ color: "white", fontWeight:"300", fontSize:"15px" }}
                     >
                       Khách hàng
                     </NavLink>
@@ -157,7 +156,7 @@ class Login extends Component {
                     {" "}
                     <NavLink
                       to="/register?company"
-                      style={{ color: "white" }}
+                      style={{ color: "white",fontWeight:"300", fontSize:"15px"}}
                     >
                       Nhà cung cấp
                     </NavLink>
