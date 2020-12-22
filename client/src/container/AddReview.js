@@ -165,7 +165,7 @@ class AddReview extends Component {
                     placeholder="Nhập tên"
                     onChange={(e) => this.handleChange(e)}
                   />
-                   <span class="text-danger">{this.state.title}</span>
+                   <span class="text-danger">{this.state.valititle}</span>
                 </div>
                 <div className="form-group">
                       <label  style = {{marginBottom:"5px"}}>

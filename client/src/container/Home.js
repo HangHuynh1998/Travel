@@ -281,7 +281,7 @@ class Home extends Component {
                           <img src={item.image} alt="" />
                         </a>
                         <figcaption>
-                          Save <span>{item.sale}</span>%
+                          Giảm <span>{item.sale}</span>%
                         </figcaption>
                       </figure>
                       <div className="home-sales-text">

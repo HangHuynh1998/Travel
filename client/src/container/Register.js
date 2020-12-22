@@ -283,7 +283,7 @@ class Register extends Component {
             <div className="wrap-login100">
               <form
                 className="login-form validate-form"
-                style={{ background: "white", paddingTop: "0" }}
+                style={{ background: "white", paddingTop: "100px" }}
               >
                 {this.state.customer ? (
                   <>
@@ -369,7 +369,9 @@ class Register extends Component {
                   </>
                 ) : (
                   <>
-                    <span className="login100-form-title p-b-43">Công ty</span>
+                   <span className="login100-form-title p-b-43">
+                      Công ty
+                    </span>
                     {this.props.loading === "error" && (
                       <span class="text-danger">{this.state.message}</span>
                     )}
@@ -500,7 +502,7 @@ class Register extends Component {
                   {!this.state.customer && (
                     <>
                     <Checkbox onClick={this.handleCheck}>
-                      <a onClick = {this.showModal}>ĐÔng ý với điều khoản đăng ký của chúng tôi</a>
+                      <a onClick = {this.showModal}>Đồng ý với điều khoản đăng ký của chúng tôi</a>
                     </Checkbox>
                     <Modala isModalVisible = {this.state.isModalVisible} handleCancel = {this.handleCancel} handleOk = {this.handleOk} />
                     <button

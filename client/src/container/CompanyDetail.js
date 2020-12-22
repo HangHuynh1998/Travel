@@ -19,7 +19,12 @@ class CompanyDetail extends Component {
         this.props.history.push(`/managerCustomer/${this.props.user_id}`)}
   }
   toggleFollow(){
-    this.props.toggleFollow(this.props.history.location.pathname.slice(15))
+    if (this.props.role !== "customer") {
+      this.props.history.push("/login");
+    } else {
+      this.props.toggleFollow(this.props.history.location.pathname.slice(15))
+    }
+   
   }
     render() {
         return (
@@ -49,6 +54,10 @@ class CompanyDetail extends Component {
                 <div className="form-group">
                 <span>Email:  </span>
                   <span>{this.props.company?.user_id.email}</span>
+                </div>
+                <div className="form-group">
+                <span>Số điện thoại:  </span>
+                  <span>0{this.props.company?.user_id.phone}</span>
                 </div>
                 <div className="form-group">
                 <span>Mô tả: </span>

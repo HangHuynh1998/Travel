@@ -69,11 +69,11 @@ class About extends Component {
                                 </p>
                                 <p>Tel: 0123456789</p>
                                 <p>Website:&nbsp;travel.com</p>
-                                <p>
+                                {/* <p>
                                   Giấy chứng nhận đăng ký kinh doanh số
                                   0401809246 của Sở Kế hoạch Đầu tư thành phố Đà
                                   Nẵng.
-                                </p>
+                                </p> */}
                               </div>
                             </div>
                             <div className="mt-20">
@@ -93,7 +93,7 @@ class About extends Component {
                   </div>
                 </div>
               </div>
-              <div className="col-sm-6" style = {{marginTop:"100px"}}>
+              <div className="col-sm-6" style = {{marginTop:"50px"}}>
                 {/* <div className="form-wrapper iw-contact-form-7 contact-map">
                   <div className="title">
                     <h3>GỬI LIÊN HỆ</h3>

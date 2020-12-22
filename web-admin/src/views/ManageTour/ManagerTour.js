@@ -67,7 +67,7 @@ function ManagerTour({ loading, getTour, tour ,deleteTour ,deleteloading}) {
     deleteTour(id)
     getTour();
   }
-  const tableHead = ["Tên tour", "Tên công ty", "Mô tả", "Giá tiền", "Hành động"];
+  const tableHead = ["Tên tour", "Tên công ty", "Mô tả", "Giá tiền","Hình ảnh", "Hành động"];
   return (
     <GridContainer>
       <GridItem xs={12} sm={12} md={12}>
@@ -109,6 +109,9 @@ function ManagerTour({ loading, getTour, tour ,deleteTour ,deleteloading}) {
                         </TableCell>
                         <TableCell className={classes.tableCell} style = {{maxWidth:"100px"}}>
                           {prop.price}
+                        </TableCell>
+                        <TableCell className={classes.tableCell} style = {{maxWidth:"100px"}}>
+                          <img style = {{width:"100px"}} src ={prop.image}   ></img>
                         </TableCell>
                         <TableCell className={classes.tableCell} style= {{color:"red",paddingLeft:"30px"}} onClick = {()=>deleteCommentID(prop._id)}>
                           delete

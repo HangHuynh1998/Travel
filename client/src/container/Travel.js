@@ -123,7 +123,7 @@ class Travel extends Component {
                         </a>
                         {item.sale && (
                           <figcaption>
-                            Save <span>{item.sale}</span>%
+                            Giảm <span>{item.sale}</span>%
                           </figcaption>
                         )}
                       </figure>

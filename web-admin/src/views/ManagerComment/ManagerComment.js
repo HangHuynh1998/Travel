@@ -66,7 +66,7 @@ function ManagerComment({ loading, getComment, comment,deleteComment ,deleteload
     deleteComment(id)
     getComment()
   }
-  const tableHead = ["Tiêu đề", "Người viết", "Nội dung", "Hành động"];
+  const tableHead = ["Tiêu đề", "Người viết", "Nội dung","Hình ảnh", "Hành động"];
   return (
     <GridContainer>
       <GridItem xs={12} sm={12} md={12}>
@@ -105,6 +105,9 @@ function ManagerComment({ loading, getComment, comment,deleteComment ,deleteload
                         </TableCell>
                         <TableCell className={classes.tableCell} style = {{maxWidth:"300px"}}>
                           {prop.comment}
+                        </TableCell>
+                        <TableCell className={classes.tableCell} style = {{maxWidth:"300px"}}>
+                        <img style = {{width:"100px"}} src ={prop.image}   ></img>
                         </TableCell>
                         <TableCell className={classes.tableCell} style= {{color:"red",paddingLeft:"30px"}} onClick = {()=>deleteCommentID(prop._id)}>
                           delete
